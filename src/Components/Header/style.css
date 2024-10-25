@@ -1,0 +1,25 @@
+header{
+    padding: 0;
+    margin: 0;
+}
+
+div{
+    color: purple;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 8px;
+    margin: 8px;
+}
+
+.icon{
+    background: purple;
+}
+
+.navigation{
+    display: flex;
+}
+
+nav{
+    margin: 20px;
+}
+
