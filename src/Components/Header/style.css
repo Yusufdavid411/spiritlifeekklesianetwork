@@ -12,10 +12,16 @@ header{
 
 /* ..........Logo.......... */
 
+.logo{
+    background-color: var(--bg-color);
+    
+}
+
 .logo img {
-    width: 150px;
-    /* mix-blend-mode: luminosity; */
-    /* filter: contrast(200%); */
+    width: 200px;
+    mix-blend-mode: multiply;
+    filter: contrast(120%);
+    /* -webkit-filter: grayscale(100%); */
 }
 
 
