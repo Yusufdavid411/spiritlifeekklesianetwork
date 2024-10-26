@@ -15,7 +15,7 @@ const Header = () => {
 
       </div>
 
-      <p className="vision" id="vision">The Vision Notes Study Notes Study Notes Study Notes Study Notes</p>
+      <p className="vision" id="vision"><span>VISION STATEMENT:</span> A Ministry with a vision to be, and raise men in whom God can entrust his counsel in all sphere of life as ordained and not suffer lost</p>
 
     </header>
   );

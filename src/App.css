@@ -6,7 +6,8 @@ body {
 :root {
     --text-color: white;
     --bg-color: linear-gradient(90deg, rgb(82, 9, 124),rgb(171, 30, 17),rgb(82, 9, 124));;
-    --font: .8rem;    
+    --sm-font: .5rem;
+    --font: .8rem;
     --big-font: 2.5rem;
 }
 

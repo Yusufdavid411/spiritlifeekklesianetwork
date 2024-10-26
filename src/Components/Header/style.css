@@ -12,7 +12,11 @@ header{
 
 /* ..........Logo.......... */
 
-
+.logo img {
+    width: 150px;
+    /* mix-blend-mode: luminosity; */
+    /* filter: contrast(200%); */
+}
 
 
 /* ..........Navbar.......... */
@@ -35,4 +39,8 @@ nav ul li a {
     color: var(--text-color);
 }
 
+.vision{
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 5px;
+}
 
