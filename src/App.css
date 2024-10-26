@@ -5,15 +5,15 @@ body {
 
 :root {
     --text-color: white;
-    --bg-color:purple;
-    --font: 2rem;    
+    --bg-color: linear-gradient(90deg, rgb(82, 9, 124),rgb(171, 30, 17),rgb(82, 9, 124));;
+    --font: .8rem;    
     --big-font: 2.5rem;
 }
 
 .content {
     width: 100%;
     height: 100vh;
-    margin: 0 auto;
+    font-size: var(--font);
     background: var(--bg-color);
 }
 
