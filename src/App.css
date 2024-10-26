@@ -1,9 +1,23 @@
-body{
+body {
     padding: 0;
     margin: 0;
 }
 
-div{
+:root {
+    --text-color: white;
+    --bg-color:purple;
+    --font: 2rem;    
+    --big-font: 2.5rem;
+}
+
+.content {
+    width: 100%;
+    height: 100vh;
+    margin: 0 auto;
+    background: var(--bg-color);
+}
+
+/* div{
     color: purple;
     font-size: 20px;
     font-weight: 600;
@@ -13,4 +27,4 @@ div{
 
 .icon{
     background: purple;
-}
+} */

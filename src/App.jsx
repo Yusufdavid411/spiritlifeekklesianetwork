@@ -29,7 +29,7 @@ function App() {
             <img src="" alt="map" />
           </div>
 
-          <p>The Vision Notes Study Notes Study Notes Study Notes Study Notes</p>
+          <p>The Vision Notes Study Notes Study Notes Study Notes Study Notes Study Notes Study Notes Study Notes Study Notes</p>
 
         </footer>
 
