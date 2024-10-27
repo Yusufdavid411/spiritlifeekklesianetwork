@@ -45,8 +45,25 @@ nav ul li a {
     color: var(--text-color);
 }
 
-.vision{
+
+
+/* ..........Vision.......... */
+
+.vision {
     background-color: rgba(0, 0, 0, 0.2);
-    padding: 5px;
+    padding: 8px;
+    display: flex;
 }
+
+.vision span {
+    white-space: nowrap;
+    padding: 0 6px 0 0;
+}
+
+.vision marquee {
+}
+
+
+
+
 
