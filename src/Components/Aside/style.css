@@ -1,8 +1,26 @@
-aside .slide {
-    width: 100%;
+aside div:first-child {
+    margin: 0 auto;
+    /* max-width: 100px; */
 }
 
-aside div {
-    /* width: 50%; */
-    height: ;
+aside {
+    width: 95%;
+    margin: 10px auto;
+}
+
+
+
+aside .items {
+    width: 100%;
+    margin: 10px;
+}
+
+aside img {
+    width: 500px;
+    max-width: 100px;
+    margin: 10px;
+}
+
+button{
+    display: none;
 }

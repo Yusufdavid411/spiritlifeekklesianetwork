@@ -5,11 +5,11 @@ import './style.css'
 
 
 const items = [
-  {id: 1, title: 'item #1', img: '/img/spiritlife-logo.png'},
-  {id: 2, title: 'item #2', img: '/img/spiritlife-logo.png'},
-  {id: 3, title: 'item #3', img: '/img/spiritlife-logo.png'},
-  {id: 4, title: 'item #4', img: '/img/spiritlife-logo.png'},
-  {id: 5, title: 'item #5', img: '/img/spiritlife-logo.png'}
+  {id: 1, title: 'item #1', img: (<img src='/img/img1.jfif' alt="logo" />)},
+  {id: 2, title: 'item #2', img: (<img src='/img/img2.jfif' alt="logo" />)},
+  {id: 3, title: 'item #3', img: (<img src='/img/img3.jfif' alt="logo" />)},
+  {id: 4, title: 'item #4', img: (<img src='/img/img4.jpg' alt="logo" />)},
+  {id: 5, title: 'item #5', img: (<img src='/img/spiritlife-logo.png' alt="logo" />)}
 ];
 
 
@@ -23,7 +23,7 @@ const Aside = () => {
         <ReactSimplyCarousel
           activeSlideIndex={activeSlideIndex}
           onRequestChange={setActiveSlideIndex}
-          itemsToShow={3}
+          itemsToShow={2}
           itemsToScroll={1}
           className="slide"
           forwardBtnProps={{
@@ -58,7 +58,7 @@ const Aside = () => {
               lineHeight: 1,
               textAlign: 'center',
               width: 30,
-              display: 'none',
+              // display: 'none',
             },
             children: <span>{`<`}</span>,
           }}
@@ -66,14 +66,14 @@ const Aside = () => {
             {
               itemsToShow: 3,
               itemsToScroll: 1,
-              minWidth: 768,
+              minWidth: 350,
             },
           ]}
-          speed={300}
+          speed={200}
           easing="linear"
         >
 
-          {items.map(item => <div key={item.id}><img src={item.img} alt="logo" /></div>)}
+          {items.map(item => <div className="items" key={item.id}>{item.img}</div>)}
 
         </ReactSimplyCarousel>
 
