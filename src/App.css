@@ -5,7 +5,7 @@ body {
 
 :root {
     --text-color: white;
-    --bg-color: linear-gradient(90deg, rgb(82, 9, 124),rgb(171, 30, 17),rgb(82, 9, 124));;
+    --bg-color: linear-gradient(90deg, rgb(82, 9, 124),rgb(171, 30, 17),rgb(82, 9, 124));
     --sm-font: .5rem;
     --font: .7rem;
     --big-font: 2.5rem;
@@ -18,14 +18,44 @@ body {
     background: var(--bg-color);
 }
 
-/* div{
-    color: purple;
-    font-size: 20px;
-    font-weight: 600;
-    padding: 8px;
-    margin: 8px;
+
+
+section{
+    margin: 20px auto;
+    padding: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    color: var(--text-color);
+    flex-wrap: wrap;
 }
 
-.icon{
-    background: purple;
-} */
+section .container {
+    width: 35%;
+    margin: 5px auto;
+    padding: 5px 8px 5px 0px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+section .icon {
+    border-radius: 50%;
+    border: 8px solid #04046f;
+    color: #04046f;
+    background: white;
+    padding: 18px;
+    z-index: 1;
+    box-shadow: 0px 6px 7px 2px #151313;
+}
+
+section .container .text {
+    position: absolute;
+    background: linear-gradient(-45deg, transparent 30px, #04046f 0);
+    padding: 0 18px;
+    left: 32%;
+    box-shadow: -45px 10px 8px -2px #151313;
+}
+
+section .container p {
+    padding: 0 15px 0 6px;
+}

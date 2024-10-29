@@ -1,26 +1,24 @@
-aside div:first-child {
-    margin: 0 auto;
-    /* max-width: 100px; */
-}
-
 aside {
-    width: 95%;
+    width: 100%;
+    padding: 10px 0;
     margin: 10px auto;
+    background-color: rgba(210, 206, 206, 0.2);
 }
-
-
 
 aside .items {
     width: 100%;
-    margin: 10px;
+    padding: 10px;
+    display: flex;
 }
 
 aside img {
-    width: 500px;
+    width: 300px;
     max-width: 100px;
-    margin: 10px;
+    
 }
 
-button{
-    display: none;
+aside video {
+    /* width: 500px; */
+    max-width: 100px;
+    margin: 10px;
 }
