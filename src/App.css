@@ -31,7 +31,7 @@ section{
 
 section .container {
     width: 35%;
-    margin: 5px auto;
+    margin: 5px;
     padding: 5px 8px 5px 0px;
     display: flex;
     align-items: center;
@@ -57,5 +57,5 @@ section .container .text {
 }
 
 section .container p {
-    padding: 0 15px 0 6px;
+    padding: 0 15px 0 10px;
 }
