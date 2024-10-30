@@ -19,7 +19,7 @@ function App() {
 
           <div className="container">
             <div className="icon">
-              <FontAwesomeIcon icon={faPlay} size='2x' />
+              <FontAwesomeIcon icon={faPlay} size='1.2x' />
             </div>
             <div className="text">
               <p>Messages (Audio)</p>
@@ -28,7 +28,7 @@ function App() {
 
           <div className="container">
             <div className="icon">
-              <FontAwesomeIcon icon={faHeadphones} size='2x' />
+              <FontAwesomeIcon icon={faHeadphones} size='1.2x' />
             </div>
             <div className="text">
               <p>Messages (Audio)</p>
@@ -37,7 +37,7 @@ function App() {
 
           <div className="container">
             <div className="icon">
-              <FontAwesomeIcon icon={faBookBible} size='2x' />
+              <FontAwesomeIcon icon={faBookBible} size='1.2x' />
             </div>
             <div className="text">
               <p>Messages (Audio)</p>
@@ -46,7 +46,7 @@ function App() {
 
           <div className="container">
             <div className="icon">
-              <FontAwesomeIcon icon={faFilm} size='2x' />
+              <FontAwesomeIcon icon={faFilm} size='1.2x' />
             </div>
             <div className="text">
               <p>Messages (Audio)</p>
@@ -55,7 +55,7 @@ function App() {
 
           <div className="container">
             <div className="icon">
-              <FontAwesomeIcon icon={faPhone} size='2x' />
+              <FontAwesomeIcon icon={faPhone} size='1.2x' />
             </div>
             <div className="text">
               <p>Messages (Audio)</p>
@@ -64,7 +64,7 @@ function App() {
 
           <div className="container">
             <div className="icon">
-              <FontAwesomeIcon icon={faHandHoldingDollar} size='2x' />
+              <FontAwesomeIcon icon={faHandHoldingDollar} size='1.2x' />
             </div>
             <div className="text">
               <p>Messages (Audio)</p>

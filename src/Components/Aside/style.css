@@ -17,8 +17,8 @@ aside img {
     
 }
 
-aside video {
-    /* width: 500px; */
-    max-width: 100px;
-    margin: 10px;
+aside .video {
+    width: 300px;
+    max-width: 110px;
+    /* margin: 10px; */
 }

@@ -2,17 +2,16 @@ import ReactSimplyCarousel from 'react-simply-carousel';
 import { useState } from 'react';
 import React from 'react'
 import './style.css'
+import ReactPlayer from 'react-player'
 
 
 const items = [
   {id: 1, title: 'item #1', img: (<img src='/img/img1.jfif' alt="logo" />)},
-  {id: 2, title: 'item #2', img: (<img src='/img/img2.jfif' alt="logo" />)},
+  {id: 2, title: 'item #2', img: (<ReactPlayer className="video" url='https://youtube.com/shorts/APUm_UaDjqg?si=Zozt1010PlQ5KIXr' />)},
   {id: 3, title: 'item #3', img: (<img src='/img/img3.jfif' alt="logo" />)},
   {id: 4, title: 'item #4', img: (<img src='/img/img4.jpg' alt="logo" />)},
 ];
 
-{/* <video src="https://youtube.com/shorts/APUm_UaDjqg?si=Zozt1010PlQ5KIXr"></video> */}
-{/* <video ><source src="https://youtube.com/shorts/APUm_UaDjqg?si=Zozt1010PlQ5KIXr"/></video> */}
 
 const Aside = () => {
 
