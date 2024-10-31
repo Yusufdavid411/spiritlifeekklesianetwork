@@ -24,6 +24,8 @@ const Aside = () => {
         onRequestChange={setActiveSlideIndex}
         itemsToShow={2}
         itemsToScroll={1}
+        className="slide"
+        
         forwardBtnProps={{
           //here you can also pass className, or any other button element attributes
           style: {
@@ -64,11 +66,12 @@ const Aside = () => {
           {
             itemsToShow: 3,
             itemsToScroll: 1,
-            minWidth: 350,
+            minWidth: 420,
           },
         ]}
         speed={200}
         easing="linear"
+        width={20}
       >
 
         {items.map(item => <div className="items" key={item.id}>{item.img}</div>)}

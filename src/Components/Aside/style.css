@@ -5,20 +5,31 @@ aside {
     background-color: rgba(210, 206, 206, 0.2);
 }
 
+/* aside .slide {
+    width: 90%;
+} */
+
 aside .items {
     width: 100%;
+    /* height: 200px; */
     padding: 10px;
     display: flex;
+    /* align-items: center; */
+    justify-content: center;
 }
 
 aside img {
     width: 300px;
+
     max-width: 100px;
     
 }
 
 aside .video {
     width: 300px;
-    max-width: 110px;
-    /* margin: 10px; */
+    height: 20px;
+    max-width: 100px;
+    max-height: 150px;
 }
+
+/* aside .  */
