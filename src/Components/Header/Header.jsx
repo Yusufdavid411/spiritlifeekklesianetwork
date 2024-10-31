@@ -1,5 +1,5 @@
 import React from 'react'
-import './header.css'
+import './head.css'
 import Logo from './logo'
 import Navbar from './navbar'
 
