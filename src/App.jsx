@@ -23,7 +23,7 @@ function App() {
         <div className="social" id="social">
 
           <div className="icon">
-            <FontAwesomeIcon icon={faHandHoldingDollar} />
+            <FontAwesomeIcon icon={faPlay} />
           </div>
           <div className="icon">
             <FontAwesomeIcon icon={faHandHoldingDollar} />
