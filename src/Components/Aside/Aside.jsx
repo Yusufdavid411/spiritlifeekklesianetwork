@@ -65,13 +65,12 @@ const Aside = () => {
         responsiveProps={[
           {
             itemsToShow: 3,
-            itemsToScroll: 1,
-            minWidth: 420,
+            itemsToScroll: 0,
+            minWidth: 400,
           },
         ]}
         speed={200}
         easing="linear"
-        width={20}
       >
 
         {items.map(item => <div className="items" key={item.id}>{item.img}</div>)}
