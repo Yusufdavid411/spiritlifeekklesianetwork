@@ -1,7 +1,7 @@
 import ReactSimplyCarousel from 'react-simply-carousel';
 import { useState } from 'react';
 import React from 'react'
-import './style.css'
+import './aside.css'
 import ReactPlayer from 'react-player'
 
 

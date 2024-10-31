@@ -1,0 +1,43 @@
+section{
+    margin: 20px auto;
+    padding: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    color: var(--text-color);
+    flex-wrap: wrap;
+}
+
+section .container {
+    width: 35%;
+    margin: 5px;
+    padding: 5px 8px 5px 0px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    font-size: var(--sm-font);
+}
+
+section .icon {
+    border-radius: 100%;
+    border: 5px solid #04046f;
+    color: #04046f;
+    background: white;
+    padding: 15px;
+    z-index: 1;
+    box-shadow: 0px 4px 7px 2px #221f1f;
+    font-size: 2re;
+}
+
+section .container .text {
+    width: 80px;
+    height: 30px;
+    position: absolute;
+    background: linear-gradient(-45deg, transparent 25px, #04046f 0);
+    padding: 2px 10px;
+    left: 34%;
+    box-shadow: -40px 8px 8px -2px #221f1f;
+}
+
+section .container p {
+    padding: 0 20px 0 10px;
+}

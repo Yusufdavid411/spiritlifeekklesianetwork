@@ -1,7 +1,7 @@
 import React from 'react'
-import './style.css'
-import Logo from './Logo'
-import Navbar from './Navbar'
+import './header.css'
+import Logo from './logo'
+import Navbar from './navbar'
 
 const Header = () => {
   return (

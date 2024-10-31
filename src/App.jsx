@@ -1,6 +1,7 @@
 import './App.css'
-import Aside from './Components/Aside/Aside'
-import Header from './Components/Header/Header'
+import Header from './Components/Header/header'
+import Aside from './Components/Aside/aside'
+import Section from './Components/Section/section'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
 
@@ -15,80 +16,34 @@ function App() {
 
       <Aside />
 
-      <section>
+      <Section/>
 
-        <div className="container">
-          <div className="icon">
-            <FontAwesomeIcon icon={faPlay} size='1.2x' />
-          </div>
-          <div className="text">
-            <p>Messages (Audio)</p>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="icon">
-            <FontAwesomeIcon icon={faHeadphones} size='1.2x' />
-          </div>
-          <div className="text">
-            <p>Messages (Audio)</p>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="icon">
-            <FontAwesomeIcon icon={faBookBible} size='1.2x' />
-          </div>
-          <div className="text">
-            <p>Messages (Audio)</p>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="icon">
-            <FontAwesomeIcon icon={faFilm} size='1.2x' />
-          </div>
-          <div className="text">
-            <p>Messages (Audio)</p>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="icon">
-            <FontAwesomeIcon icon={faPhone} size='1.2x' />
-          </div>
-          <div className="text">
-            <p>Messages (Audio)</p>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="icon">
-            <FontAwesomeIcon icon={faHandHoldingDollar} size='1.2x' />
-          </div>
-          <div className="text">
-            <p>Messages (Audio)</p>
-          </div>
-        </div>
-        
-      </section>
-
-      {/* <footer>
+      <footer>
 
         <div className="social" id="social">
-          <div className="icon"></div>
-          <div className="icon"></div>
-          <div className="icon"></div>
-          <div className="icon"></div>
+
+          <div className="icon">
+            <FontAwesomeIcon icon={faHandHoldingDollar} />
+          </div>
+          <div className="icon">
+            <FontAwesomeIcon icon={faHandHoldingDollar} />
+          </div>
+          <div className="icon">
+            <FontAwesomeIcon icon={faHandHoldingDollar} />
+          </div>
+          <div className="icon">
+            <FontAwesomeIcon icon={faHandHoldingDollar} />
+          </div>
+
         </div>
 
         <div className="map" id="map">
           <img src="" alt="map" />
         </div>
 
-        <p>The Vision Notes Study Notes Study Notes Study Notes Study Notes Study Notes Study Notes Study Notes Study Notes</p>
+        <p>Study Notes Study Notes Study Notes Study Notes</p>
 
-      </footer> */}
+      </footer>
 
     </div>
 
