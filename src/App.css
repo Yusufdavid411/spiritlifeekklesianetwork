@@ -8,7 +8,7 @@ body {
     --bg-color: linear-gradient(90deg, rgb(82, 9, 124),rgb(171, 30, 17),rgb(82, 9, 124));
     --sm-font: .5rem;
     --font: .7rem;
-    --big-font: 2.5rem;
+    --big-font: 1.5rem;
 }
 
 .content {
@@ -40,14 +40,17 @@ section .container {
 }
 
 section .icon {
+    width: 25px;
+    height: 25px;
+    text-align: center;
     border-radius: 100%;
-    border: 4px solid #04046f;
+    border: 3px solid #04046f;
     color: #04046f;
     background: white;
-    padding: 10px;
+    padding: 16px;
     z-index: 1;
     box-shadow: 0px 4px 7px 2px #221f1f;
-    font-size: 1.5rem;
+    font-size: var(--big-font);
 }
 
 section .container .text {
@@ -76,9 +79,14 @@ footer .social {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin:  20px 0 0;
 }
 
 footer .social .icon {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    box-sizing: border-box;
     padding: 5px;
     margin: 5px;
     border-radius: 50%;
@@ -92,10 +100,11 @@ footer .map {
     justify-content: center;
     margin: 15px 10px 6px;
     padding: 5px;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 footer p {
     text-align: center;
+    color: var(--text-color);
 }
 
