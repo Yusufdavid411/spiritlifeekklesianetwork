@@ -1,9 +1,10 @@
 import './App.css';
 import Header from './Components/Header/Header';
 import Aside from './Components/Aside/Aside';
-// import Section from './Components/Section/Section';
+import Section from './Components/Section/Section';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faPhone,  faFilm, faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
+import { faFacebook,  } from '@fortawesome/free-brands-svg-icons';
 
 
 function App() {
@@ -16,17 +17,17 @@ function App() {
 
       <Aside />
 
-      {/* <Section /> */}
+      <Section />
 
       <footer>
 
         <div className="social" id="social">
 
           <div className="icon">
-            <FontAwesomeIcon icon={faPlay} />
+            <FontAwesomeIcon icon={faPhone} />
           </div>
           <div className="icon">
-            <FontAwesomeIcon icon={faHandHoldingDollar} />
+            <FontAwesomeIcon icon={faFacebook} />
           </div>
           <div className="icon">
             <FontAwesomeIcon icon={faHandHoldingDollar} />
