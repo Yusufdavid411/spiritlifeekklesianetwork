@@ -47,7 +47,7 @@ section .icon {
     border: 3px solid #04046f;
     color: #04046f;
     background: white;
-    padding: 16px;
+    padding: 13px;
     z-index: 1;
     box-shadow: 0px 4px 7px 2px #221f1f;
     font-size: var(--big-font);
