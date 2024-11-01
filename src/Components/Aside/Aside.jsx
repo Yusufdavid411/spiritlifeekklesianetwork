@@ -6,8 +6,9 @@ import ReactPlayer from 'react-player'
 
 
 const items = [
-  {id: 1, title: 'item #1', img: (<img src='/img/img1.jfif' alt="logo" />)},
+  {id: 4, title: 'item #4', img: (<img src='/img/img5.jpeg' alt="logo" />)},
   {id: 2, title: 'item #2', img: (<ReactPlayer className="video" url='https://youtube.com/shorts/APUm_UaDjqg?si=Zozt1010PlQ5KIXr' />)},
+  {id: 1, title: 'item #1', img: (<img src='/img/img1.jfif' alt="logo" />)},
   {id: 3, title: 'item #3', img: (<img src='/img/img3.jfif' alt="logo" />)},
   {id: 4, title: 'item #4', img: (<img src='/img/img4.jpg' alt="logo" />)},
 ];
@@ -23,7 +24,7 @@ const Aside = () => {
         activeSlideIndex={activeSlideIndex}
         onRequestChange={setActiveSlideIndex}
         itemsToShow={2}
-        itemsToScroll={1}
+        // itemsToScroll={1}
         className="slide"
         
         forwardBtnProps={{
@@ -65,7 +66,7 @@ const Aside = () => {
         responsiveProps={[
           {
             itemsToShow: 3,
-            itemsToScroll: 0,
+            // itemsToScroll: 0,
             minWidth: 400,
           },
         ]}

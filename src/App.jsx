@@ -93,11 +93,13 @@ function App() {
 
         </div>
 
-        <a href='https://maps.app.goo.gl/D7TuiLhUn7ig83d46' className="map" id="map">
-          <FontAwesomeIcon icon={faLocationDot} bounce style={{color: "red",}} />
-        </a>
+        <div className="map" id="map">
+          <a href='https://maps.app.goo.gl/D7TuiLhUn7ig83d46'>
+            <FontAwesomeIcon icon={faLocationDot} bounce style={{color: "red",}} />
+          </a>
+        </div>
 
-        <p>Study Notes Study Notes Study Notes Study Notes</p>
+        <p>SPIRITLIFE EKKLESIA NETWORK, YUV ACADEMY CHIKA, PHASE 3, ALONG AIRPORT ROAD ABUJA</p>
 
       </footer>
 
