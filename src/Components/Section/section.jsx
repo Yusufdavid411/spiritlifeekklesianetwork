@@ -1,4 +1,4 @@
-import './section.css'
+import './section-style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
 
