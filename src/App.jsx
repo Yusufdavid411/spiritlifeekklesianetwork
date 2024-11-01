@@ -3,8 +3,7 @@ import Header from './Components/Header/Header';
 import Aside from './Components/Aside/Aside';
 import Section from './Components/Section/Section';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay, faPhone,  faFilm, faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
-import { faFacebook, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faYoutube, faTelegram, faInstagram, faLocationDot } from '@fortawesome/free-brands-svg-icons';
 
 
 function App() {
@@ -30,16 +29,16 @@ function App() {
             <FontAwesomeIcon icon={faFacebook} />
           </div>
           <div className="icon">
-            <FontAwesomeIcon icon={faHandHoldingDollar} />
+            <FontAwesomeIcon icon={faTelegram} />
           </div>
           <div className="icon">
-            <FontAwesomeIcon icon={faHandHoldingDollar} />
+            <FontAwesomeIcon icon={faInstagram} />
           </div>
 
         </div>
 
         <div className="map" id="map">
-          <img src="" alt="map" />
+          <FontAwesomeIcon icon={faLocationDot} bounce />
         </div>
 
         <p>Study Notes Study Notes Study Notes Study Notes</p>
