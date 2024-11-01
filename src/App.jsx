@@ -78,18 +78,18 @@ function App() {
 
         <div className="social" id="social">
 
-          <div className="icon">
+          <a href="https://youtube.com/@judezakwoyi?si=scCwEitMSw9Dc7iA" className="icon">
             <FontAwesomeIcon icon={faYoutube} />
-          </div>
-          <div className="icon">
+          </a>
+          <a href="https://www.facebook.com/judejerryzakwoyi/" className="icon">
             <FontAwesomeIcon icon={faFacebook} />
-          </div>
-          <div className="icon">
+          </a>
+          <a href="https://t.me/SpiritLifemessages" className="icon">
             <FontAwesomeIcon icon={faTelegram} />
-          </div>
-          <div className="icon">
+          </a>
+          <a href="https://www.instagram.com/jude_zakwoyi?igsh=dnhoMnd3Y3IybDM3" className="icon">
             <FontAwesomeIcon icon={faInstagram} />
-          </div>
+          </a>
 
         </div>
 
