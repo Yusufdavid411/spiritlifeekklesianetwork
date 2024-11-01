@@ -93,9 +93,9 @@ function App() {
 
         </div>
 
-        <div className="map" id="map">
+        <a href='https://maps.app.goo.gl/D7TuiLhUn7ig83d46' className="map" id="map">
           <FontAwesomeIcon icon={faLocationDot} bounce style={{color: "red",}} />
-        </div>
+        </a>
 
         <p>Study Notes Study Notes Study Notes Study Notes</p>
 
