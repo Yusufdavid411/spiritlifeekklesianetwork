@@ -1,8 +1,8 @@
 import './App.css'
-import Header from './Components/Header/header'
+import Header from './Components/Header/Header'
 import Aside from './Components/Aside/aside'
 import Section from './Components/Section/section'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
 
 
