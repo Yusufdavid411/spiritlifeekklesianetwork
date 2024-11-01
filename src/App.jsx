@@ -4,7 +4,7 @@ import Aside from './Components/Aside/Aside';
 import Section from './Components/Section/Section';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPhone,  faFilm, faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
-import { faFacebook,  } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
         <div className="social" id="social">
 
           <div className="icon">
-            <FontAwesomeIcon icon={faPhone} />
+            <FontAwesomeIcon icon={faYoutube} />
           </div>
           <div className="icon">
             <FontAwesomeIcon icon={faFacebook} />
