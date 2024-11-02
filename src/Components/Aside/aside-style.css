@@ -18,6 +18,11 @@ aside .items {
     /* justify-content: center; */
 }
 
+aside a {
+    width: 100%;
+    display: flex;
+}
+
 aside img {
     width: 300px;
     max-width: 130px;
