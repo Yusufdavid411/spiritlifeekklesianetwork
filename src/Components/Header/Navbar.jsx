@@ -4,14 +4,14 @@ const Navbar = () => {
   return (
     <nav>
       <ul>
-        <li><a href="">Rhema Meditations</a></li>
-        <li><a href="">Bible Reading Plan</a></li>
-        <li><a href="">Assignments</a></li>
-        <li><a href="">Personal Study Notes</a></li>
+        <li><a href="https://t.me/c/1182400329/2961">Rhema Meditations</a></li>
+        <li>Bible Reading Plan</li>
+        <li>Assignments</li>
+        <li>Personal Study Notes</li>
       </ul>
 
       <ul>
-        <li><a href="">Contact: 08066838823</a></li>
+        <li>Contact: +2349094600075</li>
       </ul>
   </nav>
   )

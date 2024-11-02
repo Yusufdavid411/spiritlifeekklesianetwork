@@ -36,6 +36,7 @@ nav ul {
 nav ul li {
     padding: 4px 8px;
     margin: 5px 6px;
+    color: var(--text-color);
     list-style: none;
     background-color: rgb(68, 4, 68);
 }

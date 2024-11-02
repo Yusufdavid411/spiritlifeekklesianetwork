@@ -20,7 +20,9 @@ function App() {
 
         <div className="container">
           <div className="icon">
-            <FontAwesomeIcon icon={faPlay} />
+            <a href="https://t.me/SpiritLifemessages">
+              <FontAwesomeIcon icon={faPlay} />
+            </a>
           </div>
           <div className="text">
             <p>Messages (Audio)</p>
@@ -32,7 +34,7 @@ function App() {
             <FontAwesomeIcon icon={faHeadphones} />
           </div>
           <div className="text">
-            <p>Messages (Audio)</p>
+            <p>Streaming</p>
           </div>
         </div>
 
@@ -41,7 +43,8 @@ function App() {
             <FontAwesomeIcon icon={faBookBible} />
           </div>
           <div className="text">
-            <p>Messages (Audio)</p>
+            <p>Books/Articles
+            Study Materials</p>
           </div>
         </div>
 
@@ -50,7 +53,7 @@ function App() {
             <FontAwesomeIcon icon={faFilm} />
           </div>
           <div className="text">
-            <p>Messages (Audio)</p>
+            <p>Messages Videos Drama Clips Movies</p>
           </div>
         </div>
 
@@ -59,7 +62,7 @@ function App() {
             <FontAwesomeIcon icon={faPhone} />
           </div>
           <div className="text">
-            <p>Messages (Audio)</p>
+            <p>Inquiries & Comments</p>
           </div>
         </div>
 
@@ -68,7 +71,7 @@ function App() {
             <FontAwesomeIcon icon={faHandHoldingDollar} />
           </div>
           <div className="text">
-            <p>Messages (Audio)</p>
+            <p>Donations (Giving)</p>
           </div>
         </div>
 
@@ -95,7 +98,7 @@ function App() {
 
         <div className="map" id="map">
           <a href='https://maps.app.goo.gl/D7TuiLhUn7ig83d46'>
-            <FontAwesomeIcon icon={faLocationDot} bounce style={{color: "red",}} />
+            <FontAwesomeIcon icon={faLocationDot} bounce style={{color: "red"}} />
           </a>
         </div>
 
