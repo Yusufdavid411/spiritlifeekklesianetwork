@@ -19,6 +19,7 @@ body {
     /* height: 100vh; */
     font-size: var(--font);
     background: var(--bg-color);
+    min-width: 335px;
 }
 
 
