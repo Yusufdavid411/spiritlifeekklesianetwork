@@ -25,7 +25,7 @@ function App() {
             </a>
           </div>
           <div className="text">
-            <p>Messages (Audio)</p>
+            <p>Messages (Audio and Videos)</p>
           </div>
         </div>
 
@@ -53,7 +53,7 @@ function App() {
             <FontAwesomeIcon icon={faFilm} />
           </div>
           <div className="text">
-            <p>Messages Videos Drama Clips Movies</p>
+            <p>Drama and Movies</p>
           </div>
         </div>
 
@@ -98,7 +98,7 @@ function App() {
 
         <div className="map" id="map">
           <a href='https://maps.app.goo.gl/D7TuiLhUn7ig83d46'>
-            <FontAwesomeIcon icon={faLocationDot} bounce style={{color: "red"}} />
+            <FontAwesomeIcon icon={faLocationDot} rotation={180} bounce style={{color: "red"}} />
           </a>
         </div>
 

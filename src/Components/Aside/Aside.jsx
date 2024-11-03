@@ -72,7 +72,7 @@ const Aside = () => {
           {
             itemsToShow: 3,
             itemsToScroll: 1,
-            minWidth: 400,
+            minWidth: 500,
           },
         ]}
         speed={200}
