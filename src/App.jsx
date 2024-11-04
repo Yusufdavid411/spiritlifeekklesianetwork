@@ -1,9 +1,10 @@
 import './App.css'
 import Header from './Components/Header/Header'
 import Aside from './Components/Aside/Aside'
+import Section from './Components/Section/Section';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook, faYoutube, faTelegram, faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 
 function App() {
@@ -16,66 +17,7 @@ function App() {
 
       <Aside />
 
-      <section>
-
-        <div className="container">
-          <div className="icon">
-            <a href="https://t.me/SpiritLifemessages">
-              <FontAwesomeIcon icon={faPlay} />
-            </a>
-          </div>
-          <div className="text">
-            <p>Messages (Audio and Videos)</p>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="icon">
-            <FontAwesomeIcon icon={faHeadphones} />
-          </div>
-          <div className="text">
-            <p>Streaming</p>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="icon">
-            <FontAwesomeIcon icon={faBookBible} />
-          </div>
-          <div className="text">
-            <p>Books/Articles
-            Study Materials</p>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="icon">
-            <FontAwesomeIcon icon={faFilm} />
-          </div>
-          <div className="text">
-            <p>Drama and Movies</p>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="icon">
-            <FontAwesomeIcon icon={faPhone} />
-          </div>
-          <div className="text">
-            <p>Inquiries & Comments</p>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="icon">
-            <FontAwesomeIcon icon={faHandHoldingDollar} />
-          </div>
-          <div className="text">
-            <p>Donations (Giving)</p>
-          </div>
-        </div>
-
-      </section>
+      <Section />
 
       <footer>
 
