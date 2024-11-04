@@ -60,7 +60,7 @@ aside .video {
 @media (min-width:360px) {
 
     aside {
-        padding: 25px 0;
+        padding: 20px 0;
         margin: 20px auto;
     }
    
@@ -88,6 +88,11 @@ aside .video {
 
 
 @media (min-width:400px) {
+
+    aside {
+        padding: 25px 0;
+        margin: 20px auto;
+    }
 
     aside .items {
         width: 100%;
