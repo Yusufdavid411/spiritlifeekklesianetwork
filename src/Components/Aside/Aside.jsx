@@ -3,6 +3,8 @@ import { useState } from 'react';
 import React from 'react'
 import './aside-style.css'
 import ReactPlayer from 'react-player'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 // import toast, { Toaster } from 'react-hot-toast';
 
 
@@ -33,40 +35,30 @@ const Aside = () => {
         className="slide"
         
         forwardBtnProps={{
+          className:"btn",
           //here you can also pass className, or any other button element attributes
-          style: {
-            alignSelf: 'center',
-            background: 'black',
-            border: 'none',
-            borderRadius: '50%',
-            color: 'white',
-            cursor: 'pointer',
-            fontSize: '20px',
-            height: 30,
-            lineHeight: 1,
-            textAlign: 'center',
-            width: 30,
-            display: 'none',
-          },
-          children: <span>{`>`}</span>,
+          // style: {
+            
+          // },
+          children: <FontAwesomeIcon icon={faCaretRight} className="icon-btn" fade />,
         }}
         backwardBtnProps={{
+          className:"btn",
           //here you can also pass className, or any other button element attributes
-          style: {
-            alignSelf: 'center',
-            background: 'black',
-            border: 'none',
-            borderRadius: '50%',
-            color: 'white',
-            cursor: 'pointer',
-            fontSize: '20px',
-            height: 30,
-            lineHeight: 1,
-            textAlign: 'center',
-            width: 30,
-            display: 'none',
-          },
-          children: <span>{`<`}</span>,
+          // style: {
+          //   alignSelf: 'center',
+          //   background: 'black',
+          //   border: 'none',
+          //   borderRadius: '50%',
+          //   color: 'white',
+          //   cursor: 'pointer',
+          //   fontSize: '20px',
+          //   height: 30,
+          //   lineHeight: 1,
+          //   textAlign: 'center',
+          //   width: 30,
+          // },
+          children: <FontAwesomeIcon icon={faCaretLeft} className="icon-btn" fade />,
         }}
         responsiveProps={[
           {
