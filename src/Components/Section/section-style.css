@@ -14,7 +14,6 @@ section .container {
     display: flex;
     align-items: center;
     position: relative;
-    font-size: var(--sm-font);
 }
 
 section .icon {
@@ -32,17 +31,14 @@ section .icon {
 }
 
 section a {
+    display: flex;
+    align-self: center;
     text-decoration: none;
     color: #04046f;
 }
 
-section a:hover {
-    text-decoration: none;
-    color: #9e9eb6;
-}
-
 section .container .text {
-    width: 80px;
+    width: 86px;
     height: 34px;
     position: absolute;
     display: flex;
@@ -54,5 +50,75 @@ section .container .text {
 }
 
 section .container p {
-    margin: 0 20px 0 10px;
+    margin: 0 15px 0 8px;
+    font-size: var(--sm-font);
 }
+
+
+@media (min-width:400px) {
+
+
+    section{
+        margin: 20px auto;
+        padding: 5px;
+        justify-content: space-around;
+    }
+
+    section .container {
+        padding: 0;
+    }
+
+
+    section .icon {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100%;
+        border: 5px solid #04046f;
+        color: #04046f;
+        background: white;
+        padding: 12px;
+        z-index: 1;
+        box-shadow: 0px 4px 7px 2px #221f1f;
+        font-size: var(--biger-font);
+    }
+
+    section .container .text {
+        width: 95px;
+        height: 42px;
+        background: linear-gradient(-45deg, transparent 25px, #04046f 0);
+        padding: 2px 10px;
+        left: 30%;
+        box-shadow: -40px 8px 8px -2px #221f1f;
+    }
+
+    section .container p {
+        margin: 0 10px 0 15px;
+        font-size: var(--font);
+    }
+
+
+}
+
+
+
+@media (min-width:500px){
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -34,8 +34,7 @@ const Section = () => {
           <FontAwesomeIcon icon={faBookBible} />
         </div>
         <div className="text">
-          <p>Books/Articles
-          Study Materials</p>
+          <p>Books/Articles Study Materials</p>
         </div>
       </div>
 
@@ -44,7 +43,7 @@ const Section = () => {
           <FontAwesomeIcon icon={faFilm} />
         </div>
         <div className="text">
-          <p>Drama and Movies</p>
+          <p>Drama & Movies</p>
         </div>
       </div>
 
