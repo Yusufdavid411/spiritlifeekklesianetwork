@@ -20,10 +20,8 @@ body {
     /* height: 100vh; */
     font-size: var(--font);
     background: var(--bg-color);
-    min-width: 335px;
+    min-width: 340px;
 }
-
-
 
 footer {
     background-color: rgba(0, 0, 0, 0.2);

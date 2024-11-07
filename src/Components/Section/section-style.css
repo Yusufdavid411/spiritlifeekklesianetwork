@@ -33,6 +33,7 @@ section .icon {
 section a {
     display: flex;
     align-self: center;
+    justify-content: center;
     text-decoration: none;
     color: #04046f;
 }
@@ -55,19 +56,18 @@ section .container p {
 }
 
 
+
+
 @media (min-width:400px) {
 
 
     section{
-        margin: 20px auto;
-        padding: 5px;
+        margin: 25px auto;
         justify-content: space-around;
     }
 
     section .container {
-        padding: 0;
     }
-
 
     section .icon {
         width: 30px;
@@ -77,37 +77,204 @@ section .container p {
         align-items: center;
         border-radius: 100%;
         border: 5px solid #04046f;
-        color: #04046f;
-        background: white;
-        padding: 12px;
+        padding: 13px;
         z-index: 1;
         box-shadow: 0px 4px 7px 2px #221f1f;
         font-size: var(--biger-font);
     }
 
     section .container .text {
-        width: 95px;
-        height: 42px;
-        background: linear-gradient(-45deg, transparent 25px, #04046f 0);
-        padding: 2px 10px;
+        width: 97px;
+        height: 45px;
+        background: linear-gradient(-45deg, transparent 32px, #04046f 0);
+        padding: 2px 13px;
         left: 30%;
-        box-shadow: -40px 8px 8px -2px #221f1f;
+        box-shadow: -45px 8px 8px -2px #221f1f;
     }
 
     section .container p {
-        margin: 0 10px 0 15px;
+        margin: 0 10px 0 11px;
         font-size: var(--font);
     }
 
+}
+
+
+
+@media (min-width:540px) {
+
+    section{
+        margin: 30px auto;
+        justify-content: space-around;
+    }
+
+    section .container {
+    }
+
+    section .icon {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100%;
+        border: 5px solid #04046f;
+        padding: 20px;
+        z-index: 1;
+        box-shadow: 0px 4px 7px 2px #221f1f;
+        font-size: 2.2rem;
+    }
+
+    section .container .text {
+        width: 140px;
+        height: 50px;
+        background: linear-gradient(-45deg, transparent 35px, #04046f 0);
+        padding: 2px 16px;
+        left: 31%;
+        box-shadow: -45px 5px 8px -2px #221f1f;
+    }
+
+    section .container p {
+        margin: 0 15px 0 5px;
+        font-size: .8rem;
+    }
 
 }
 
 
 
-@media (min-width:500px){
+@media (min-width:640px) {
+
+    section{
+        margin: 40px auto;
+        justify-content: space-around;
+    }
+
+    section .container {
+        padding: 8px 0px;
+    }
+
+    section .icon {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100%;
+        border: 5px solid #04046f;
+        padding: 26px;
+        z-index: 1;
+        box-shadow: 0px 4px 7px 2px #221f1f;
+        font-size: 2.7rem;
+    }
+
+    section .container .text {
+        width: 135px;
+        height: 60px;
+        background: linear-gradient(-45deg, transparent 45px, #04046f 0);
+        padding: 4px 22px;
+        left: 31%;
+        box-shadow: -60px 8px 10px -2px #221f1f;
+    }
+
+    section .container p {
+        margin: 0 15px 0 10px;
+        font-size: 1rem;
+    }
 
 }
 
+
+
+@media (min-width:700px) {
+
+    section{
+        margin: 55px auto;
+        justify-content: space-between;
+    }
+
+    section .container {
+        width: 40%;
+        padding: 10px 20px;
+        margin: 10px;
+    }
+
+    section .icon {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100%;
+        border: 6px solid #04046f;
+        padding: 32px;
+        z-index: 1;
+        box-shadow: 0px 6px 7px 2px #221f1f;
+        font-size: 3.7rem;
+    }
+
+    section .container .text {
+        width: 165px;
+        height: 75px;
+        background: linear-gradient(-50deg, transparent 52px, #04046f 0);
+        padding: 4px 25px;
+        left: 30%;
+        box-shadow: -70px 10px 12px -2px #221f1f;
+    }
+
+    section .container p {
+        margin: 0 40px 0 10px;
+        font-size: 1.2rem;
+    }
+
+}
+
+
+
+
+
+@media (min-width:820px) {
+
+    section{
+        margin: 60px auto;
+        justify-content: space-between;
+    }
+
+    section .container {
+        width: 40%;
+        padding: 10px 20px;
+        margin: 10px;
+    }
+
+    section .icon {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100%;
+        border: 8px solid #04046f;
+        padding: 38px;
+        z-index: 1;
+        box-shadow: 0px 6px 7px 2px #221f1f;
+        font-size: 3.7rem;
+    }
+
+    section .container .text {
+        width: 180px;
+        height: 80px;
+        background: linear-gradient(-63deg, transparent 52px, #04046f 0);
+        padding: 4px 25px;
+        left: 30%;
+        box-shadow: -70px 10px 12px -2px #221f1f;
+    }
+
+    section .container p {
+        margin: 0 40px 0 10px;
+        font-size: 1.3rem;
+    }
+
+}
 
 
 
