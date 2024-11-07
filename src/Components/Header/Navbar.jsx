@@ -11,7 +11,7 @@ const Navbar = () => {
       </ul>
 
       <ul>
-        <li>Contact: +2349094600075</li>
+        <li>Contact : +2349094600075</li>
       </ul>
   </nav>
   )

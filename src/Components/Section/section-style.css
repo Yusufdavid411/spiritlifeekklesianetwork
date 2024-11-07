@@ -39,12 +39,12 @@ section a {
 }
 
 section .container .text {
-    width: 86px;
-    height: 34px;
+    width: 88px;
+    height: 38px;
     position: absolute;
     display: flex;
     align-items: center;
-    background: linear-gradient(-45deg, transparent 25px, #04046f 0);
+    background: linear-gradient(-55deg, transparent 25px, #04046f 0);
     padding: 2px 10px;
     left: 34%;
     box-shadow: -40px 8px 8px -2px #221f1f;
@@ -84,16 +84,16 @@ section .container p {
     }
 
     section .container .text {
-        width: 97px;
+        width: 105px;
         height: 45px;
-        background: linear-gradient(-45deg, transparent 32px, #04046f 0);
+        background: linear-gradient(-55deg, transparent 32px, #04046f 0);
         padding: 2px 13px;
         left: 30%;
         box-shadow: -45px 8px 8px -2px #221f1f;
     }
 
     section .container p {
-        margin: 0 10px 0 11px;
+        margin: 0 17px 0 11px;
         font-size: var(--font);
     }
 
@@ -128,7 +128,7 @@ section .container p {
     section .container .text {
         width: 140px;
         height: 50px;
-        background: linear-gradient(-45deg, transparent 35px, #04046f 0);
+        background: linear-gradient(-65deg, transparent 35px, #04046f 0);
         padding: 2px 16px;
         left: 31%;
         box-shadow: -45px 5px 8px -2px #221f1f;
@@ -171,7 +171,7 @@ section .container p {
     section .container .text {
         width: 135px;
         height: 60px;
-        background: linear-gradient(-45deg, transparent 45px, #04046f 0);
+        background: linear-gradient(-55deg, transparent 45px, #04046f 0);
         padding: 4px 22px;
         left: 31%;
         box-shadow: -60px 8px 10px -2px #221f1f;
@@ -216,7 +216,7 @@ section .container p {
     section .container .text {
         width: 165px;
         height: 75px;
-        background: linear-gradient(-50deg, transparent 52px, #04046f 0);
+        background: linear-gradient(-60deg, transparent 52px, #04046f 0);
         padding: 4px 25px;
         left: 30%;
         box-shadow: -70px 10px 12px -2px #221f1f;
@@ -270,7 +270,7 @@ section .container p {
     }
 
     section .container p {
-        margin: 0 40px 0 10px;
+        margin: 0 40px 0 13px;
         font-size: 1.3rem;
     }
 
