@@ -3,11 +3,16 @@ footer {
     padding: 15px;
 }
 
+footer.container{
+    max-width: 1400px;
+
+}
+
 footer .social {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin:  20px auto;
+    margin:  20px auto  30px;
 }
 
 footer .social .icon {
@@ -30,16 +35,19 @@ footer .map {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
     margin: 0 auto;
     padding: 8px;
     font-size: 1.8rem;
 }
 
 footer p {
+    max-width: 300px;
+    margin: 0 auto;
     text-align: center;
     color: var(--text-color);
     font-size: var(--font);
+    padding: 5px;
+    font-weight: 600;
 }
 
 
@@ -47,11 +55,11 @@ footer p {
 @media (min-width: 500px) {
 
     footer {
-        padding: 25px;
+        padding: 30px;
     }
     
     footer .social {
-        margin:  20px auto;
+        margin:  30px auto  50px;
     }
     
     footer .social .icon {
@@ -59,26 +67,106 @@ footer p {
         height: 45px;
         margin: 5px;
         border-radius: 50%;
-        font-size:  2rem;
+        font-size: 2rem;
     }
     
     footer .map {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 28px;
-        margin: 0 auto;
-        padding: 8px;
-        font-size: 2.rem;
+        margin: 20px auto;
+        padding: 10px;
+        font-size: 2.8rem;
     }
     
     footer p {
         max-width: 400px;
+        font-size: var(--midfont);
         margin: 0 auto;
     }
     
     
 }
+
+
+
+
+@media (min-width: 1000px) {
+
+    footer {
+        padding: 70px 0 40px;
+    }
+    
+    footer .social {
+        margin:  40px auto  60px;
+    }
+    
+    footer .social .icon {
+        width: 65px;
+        height: 65px;
+        margin: 10px;
+        border-radius: 50%;
+        font-size: 2.4rem;
+    }
+    
+    footer .map {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px auto;
+        padding: 10px;
+        font-size: 3.2rem;
+    }
+    
+    footer p {
+        max-width: 600px;
+        font-size: var(--big-font);
+        margin: 0 auto;
+    }
+    
+    
+}
+
+
+
+
+@media (min-width: 1300px) {
+
+    footer {
+        padding: 70px 0 40px;
+    }
+    
+    footer .social {
+        margin:  40px auto  60px;
+    }
+    
+    footer .social .icon {
+        width: 80px;
+        height: 80px;
+        margin: 15px;
+        border-radius: 50%;
+        font-size: 3rem;
+    }
+    
+    footer .map {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px auto;
+        padding: 10px;
+        font-size: 3.8rem;
+    }
+    
+    footer p {
+        max-width: 800px;
+        font-size: var(--biger-font);
+        margin: 0 auto;
+    }
+    
+    
+}
+
+
 
 
 
