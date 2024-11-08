@@ -3,8 +3,9 @@ footer {
     padding: 15px;
 }
 
-footer.container{
+footer .container {
     max-width: 1400px;
+    padding: 10px 0 0;
 
 }
 
@@ -56,6 +57,10 @@ footer p {
 
     footer {
         padding: 30px;
+    }
+
+    footer .container {
+        padding: 20px 0 0;
     }
     
     footer .social {
