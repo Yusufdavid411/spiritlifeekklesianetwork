@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './header.css';
 
-// Array of image URLs (replace these with your own images)
 const images = [
   "/img/img1.jfif",
   "/img/img5.jpeg",
@@ -9,32 +8,52 @@ const images = [
 ];
 
 const Image = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const imagesToShow = 3;  // Number of images to show at a time
-  const delay = 3000;      // Delay between auto-slide (in milliseconds)
+  const [currentIndex, setCurrentIndex] = useState(images.length);
+  const imagesToShow = 2;
+  const delay = 4000;
 
-  // Function to go to the next set of images
+  const totalImages = images.length;
+  const carouselImages = [
+    ...images.slice(-imagesToShow),  // Clone last few images at the beginning
+    ...images,
+    ...images.slice(0, imagesToShow) // Clone first few images at the end
+  ];
+
+  // Slide to the next set of images
   const goToNextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    setCurrentIndex((prevIndex) => prevIndex + 1);
   };
 
-  // Function to go to the previous set of images
+  // Slide to the previous set of images
   const goToPrevSlide = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? images.length - imagesToShow : prevIndex - 1
-    );
+    setCurrentIndex((prevIndex) => prevIndex - 1);
   };
 
   // Auto-slide effect
   useEffect(() => {
     const slideInterval = setInterval(goToNextSlide, delay);
-    return () => clearInterval(slideInterval); // Cleanup on unmount
-  }, [currentIndex]);
+    return () => clearInterval(slideInterval);
+  }, []);
+
+  // Handle the circular transition effect
+  useEffect(() => {
+    if (currentIndex === totalImages + imagesToShow) {
+      setTimeout(() => setCurrentIndex(imagesToShow), 0);  // Jump to the beginning clone without visible transition
+    } else if (currentIndex === 0) {
+      setTimeout(() => setCurrentIndex(totalImages), 0);   // Jump to the end clone without visible transition
+    }
+  }, [currentIndex, totalImages, imagesToShow]);
 
   return (
     <div className="carousel">
-      <div className="carousel-container" style={{ transform: `translateX(-${currentIndex * (100 / imagesToShow)}%)` }}>
-        {images.map((img, index) => (
+      <div
+        className="carousel-container"
+        style={{
+          transform: `translateX(-${currentIndex * (100 / imagesToShow)}%)`,
+          transition: currentIndex === imagesToShow || currentIndex === totalImages ? "none" : "transform 0.5s ease-in-out"
+        }}
+      >
+        {carouselImages.map((img, index) => (
           <img
             key={index}
             src={img}
