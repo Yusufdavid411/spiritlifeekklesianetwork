@@ -8,13 +8,14 @@ import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 // import toast, { Toaster } from 'react-hot-toast';
 
 
+
 const items = [
-  {id: 1, title: 'item #4', img: (<a href="https://t.me/c/1182400329/2961"><img src='/img/img5.jpeg' alt="logo" /></a>)},
+  {id: 1, title: 'item #4', img: (<a href="/img/img5.jpeg"><img src='/img/img5.jpeg' alt="logo" /></a>)},
   {id: 4, title: 'item #2', img: (<ReactPlayer className="video" url='https://youtube.com/shorts/APUm_UaDjqg?si=Zozt1010PlQ5KIXr' />)},
-  {id: 2, title: 'item #1', img: (<a href="https://t.me/c/1182400329/2961"><img src='/img/img1.jfif' alt="logo" /></a>)},
-  {id: 3, title: 'item #3', img: (<a href="https://t.me/c/1182400329/2961"><img src='/img/img2.jfif' alt="logo" /></a>)},
-  {id: 5, title: 'item #4', img: (<a href="https://t.me/c/1182400329/2961"><img src='/img/img3.jfif' alt="logo" /></a>)},
-  {id: 6, title: 'item #2', img: (<a href="https://t.me/c/1182400329/2961"><img src='/img/img4.jpg' alt="logo" /></a>)},
+  {id: 2, title: 'item #1', img: (<a href="/img/img1.jfif"><img src='/img/img1.jfif' alt="logo" /></a>)},
+  {id: 3, title: 'item #3', img: (<a href="/img/img2.jfif"><img src='/img/img2.jfif' alt="logo" /></a>)},
+  {id: 5, title: 'item #4', img: (<a href="/img/img3.jfif"><img src='/img/img3.jfif' alt="logo" /></a>)},
+  {id: 6, title: 'item #2', img: (<a href="/img/img4.jpg"><img src='/img/img4.jpg' alt="logo" /></a>)},
 ];
 
 

@@ -49,6 +49,59 @@ nav ul li a {
 
 
 
+
+
+.carousel {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    overflow: hidden;
+}
+  
+.carousel-container {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+    justify-content: center;
+}
+  
+.carousel-image {
+    max-width: 70px;
+    min-width: 20px;
+    display: none;
+}
+  
+.carousel-image.active {
+    display: block;
+}
+  
+.prev-button, .next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    cursor: pointer;
+    display: none;
+}
+  
+.prev-button {
+    left: 10px;
+}
+  
+.next-button {
+    right: 10px;
+}
+  
+
+
+
+
+
+
 /* ..........Vision.......... */
 
 .vision {
