@@ -32,19 +32,27 @@ header{
 
 .carousel {
     position: relative;
-    width: 100%;
+    width: 160px;
+    height: 120px;
     max-width: 800px;
     overflow: hidden;
     margin: auto;
+    display: flex;
 }
   
 .carousel-container {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 1s ease-in-out;
+}
+
+.carousel-container .img {
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 100%;
 }
   
 .carousel-image {
-    flex-shrink: 0;
     width: 100%;
 }
   
@@ -77,8 +85,9 @@ header{
 
 nav ul {
     padding: 0;
-    margin: 1.4px 0;
+    margin: 1.4px 0 0 10px;
     border: 1px solid white;
+    font-size: .6rem;
 }    
 
 nav ul li {
@@ -87,6 +96,7 @@ nav ul li {
     color: var(--text-color);
     list-style: none;
     background-color: rgb(68, 4, 68);
+    white-space: nowrap;
 }    
 
 nav ul li a {
