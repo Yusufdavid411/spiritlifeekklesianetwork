@@ -25,55 +25,27 @@ header{
 }
 
 
-/* ..........Navbar.......... */
 
 
-nav ul {
-    padding: 0;
-    margin: 1.4px 0;
-    border: 1px solid white;
-}
-
-nav ul li {
-    padding: 4px 8px;
-    margin: 4px 5px;
-    color: var(--text-color);
-    list-style: none;
-    background-color: rgb(68, 4, 68);
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: var(--text-color);
-}
-
-
-
+/* ..........ImageCarousel.......... */
 
 
 .carousel {
     position: relative;
     width: 100%;
     max-width: 800px;
-    margin: auto;
     overflow: hidden;
+    margin: auto;
 }
   
 .carousel-container {
     display: flex;
-    transition: transform 0.5s ease;
-    width: 100%;
-    justify-content: center;
+    transition: transform 0.5s ease-in-out;
 }
   
 .carousel-image {
-    max-width: 70px;
-    min-width: 20px;
-    display: none;
-}
-  
-.carousel-image.active {
-    display: block;
+    flex-shrink: 0;
+    width: 100%;
 }
   
 .prev-button, .next-button {
@@ -95,9 +67,31 @@ nav ul li a {
 .next-button {
     right: 10px;
 }
-  
 
 
+
+
+/* ..........Navbar.......... */
+
+
+nav ul {
+    padding: 0;
+    margin: 1.4px 0;
+    border: 1px solid white;
+}    
+
+nav ul li {
+    padding: 4px 8px;
+    margin: 4px 5px;
+    color: var(--text-color);
+    list-style: none;
+    background-color: rgb(68, 4, 68);
+}    
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-color);
+}    
 
 
 

@@ -8,7 +8,6 @@ import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 // import toast, { Toaster } from 'react-hot-toast';
 
 
-
 const items = [
   {id: 1, title: 'item #4', img: (<a href="/img/img5.jpeg"><img src='/img/img5.jpeg' alt="logo" /></a>)},
   {id: 4, title: 'item #2', img: (<ReactPlayer className="video" url='https://youtube.com/shorts/APUm_UaDjqg?si=Zozt1010PlQ5KIXr' />)},

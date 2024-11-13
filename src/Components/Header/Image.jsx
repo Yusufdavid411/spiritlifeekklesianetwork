@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './header.css'; // Make sure to create this CSS file
+import './header.css';
 
-// Sample images - replace with your own image URLs
+// Array of image URLs (replace these with your own images)
 const images = [
   "/img/img1.jfif",
   "/img/img5.jpeg",
@@ -10,48 +10,37 @@ const images = [
 
 const Image = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const delay = 3000; // time in ms for auto-slide (3 seconds)
+  const imagesToShow = 3;  // Number of images to show at a time
+  const delay = 3000;      // Delay between auto-slide (in milliseconds)
 
-  // Function to handle slide movement
+  // Function to go to the next set of images
   const goToNextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
+  // Function to go to the previous set of images
   const goToPrevSlide = () => {
     setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? images.length - imagesToShow : prevIndex - 1
     );
   };
 
   // Auto-slide effect
   useEffect(() => {
     const slideInterval = setInterval(goToNextSlide, delay);
-
-    // Clear interval on component unmount
-    return () => clearInterval(slideInterval);
+    return () => clearInterval(slideInterval); // Cleanup on unmount
   }, [currentIndex]);
 
-  // Touch handlers for mobile swipe
-  let startX;
-  const handleTouchStart = (e) => {
-    startX = e.touches[0].clientX;
-  };
-  
-  const handleTouchEnd = (e) => {
-    const endX = e.changedTouches[0].clientX;
-    if (startX - endX > 50) goToNextSlide(); // Swipe left
-    if (endX - startX > 50) goToPrevSlide(); // Swipe right
-  };
-
   return (
-    <div className="carousel" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-      <div className="carousel-container">
+    <div className="carousel">
+      <div className="carousel-container" style={{ transform: `translateX(-${currentIndex * (100 / imagesToShow)}%)` }}>
         {images.map((img, index) => (
           <img
             key={index}
             src={img}
             alt={`Slide ${index + 1}`}
-            className={`carousel-image ${index === currentIndex ? "active" : ""}`}
+            className="carousel-image"
+            style={{ width: `${100 / imagesToShow}%` }}
           />
         ))}
       </div>
