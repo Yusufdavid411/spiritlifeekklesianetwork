@@ -7,14 +7,17 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0px 10px 10px;
+    padding: 10px 0px 10px 3px;
 }
 
 
 /* ..........Logo.......... */
 
 .logo{
-    width: 50%;
+    width: 40%;
+    margin: 0 2px 0 0;
+    align-self: flex-start;
+
 }
 
 .logo img {
@@ -45,15 +48,17 @@ header{
     transition: transform 1s ease-in-out;
 }
 
-.carousel-container .img {
+/* .carousel-container .img {
     display: flex;
     justify-content: center;
     flex-shrink: 0;
     width: 100%;
-}
+} */
   
 .carousel-image {
     width: 100%;
+    flex-shrink: 0;
+    border-radius: 8px;
 }
   
 .prev-button, .next-button {
@@ -75,6 +80,155 @@ header{
 .next-button {
     right: 10px;
 }
+
+  
+  
+  /* New CSS for Modal Overlay */
+  
+/* .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+} */
+  
+/* .modal-content {
+    position: relative;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+} */
+  
+/* .modal-content img {
+    max-width: 80vw;
+    max-height: 80vh;
+    transition: transform 0.3s ease;
+} */
+  
+/* .modal-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 15px;
+    white-space: nowrap;
+    
+} */
+  
+/* .modal-buttons button, .modal-buttons a {
+    padding: 8px 12px;
+    background:rgb(112, 10, 229);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+} */
+  
+/* .modal-buttons button:hover, .modal-buttons a:hover {
+    background: #0056b3;
+} */
+
+
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay-container {
+    width: 80%;
+}
+
+
+.modal-content .img-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 8px;
+    display: flex;
+}
+
+.modal-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+
+.modal-content img {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    max-width: 80vw;
+    max-height: 80vh;
+    transition: transform 0.3s ease;
+    pointer-events: none;
+}
+  
+.modal-prev-button, .modal-next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    cursor: pointer;
+    padding: 7px;
+}
+
+.modal-prev-button:hover, .modal-next-button:hover {
+    background: black;
+}
+  
+.modal-prev-button { left: 10px; }
+.modal-next-button { right: 10px; }
+  
+.modal-buttons {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: flex-end;
+    margin: 20px 25px;
+}
+  
+.modal-buttons button, .modal-buttons a {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+  
+.modal-buttons .icon {
+    width: 24px;
+    height: 24px;
+    color: white;
+}
+
+.modal-buttons .icon:hover {
+    color: green;
+}
+  
+  
+
+
+
+
   
 
 
@@ -85,7 +239,7 @@ header{
 
 nav ul {
     padding: 0;
-    margin: 1.4px 0 0 10px;
+    margin: 1.4px 0 0 8px;
     border: 1px solid white;
     font-size: .6rem;
 }    

@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './header.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleDown } from '@fortawesome/free-regular-svg-icons'
-import { faRightFromBracket, faLink } from '@fortawesome/free-solid-svg-icons'
+
 const images = [
   "/img/Pst_Jude.png",
   "/img/klc.jfif",
@@ -26,13 +24,14 @@ const images = [
 	"/img/Pst Jude 1.jpg",
 ];
 
-const Image = () => {
+const Image1 = () => {
   const imagesToShow = 1;
   const delay = 3000;
   const [currentIndex, setCurrentIndex] = useState(images.length);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [zoomLevel, setZoomLevel] = useState(1);
-  const [modalImageIndex, setModalImageIndex] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);         // New: Modal visibility
+  const [zoomLevel, setZoomLevel] = useState(1);             // New: Image zoom level
+  const [modalImageIndex, setModalImageIndex] = useState(0); // New: Current image in modal view
+
   const totalImages = images.length;
 
   const carouselImages = [
@@ -44,13 +43,13 @@ const Image = () => {
   const autoSlideRef = useRef();
   const startX = useRef(0);
   const endX = useRef(0);
-  const modalImageRef = useRef();
+  
 
   const goToNextSlide = () => setCurrentIndex((prev) => prev + 1);
   const goToPrevSlide = () => setCurrentIndex((prev) => prev - 1);
 
   useEffect(() => {
-    autoSlideRef.current = setInterval(goToPrevSlide, delay);
+    autoSlideRef.current = setInterval(goToNextSlide, delay);
     return () => clearInterval(autoSlideRef.current);
   }, []);
 
@@ -77,42 +76,34 @@ const Image = () => {
     autoSlideRef.current = setInterval(goToNextSlide, delay);
   };
 
-  // New: Function to open the modal and display the clicked image
+  // New: Function to open modal and set modal image
   const openModal = (index) => {
     setModalOpen(true);
     setModalImageIndex(index);
   };
 
-  // New: Function to close the modal
+  // New: Function to close modal and reset zoom
   const closeModal = () => {
     setModalOpen(false);
     setZoomLevel(1);
   };
 
-  // New: Close modal when clicking outside of the image area
-  const handleOutsideClick = (e) => {
-    if (e.target.classList.contains('modal-overlay')) closeModal();
+  // New: Function to download the current modal image
+  const downloadImage = () => {
+    const link = document.createElement('a');
+    link.href = images[modalImageIndex];
+    link.download = `Image-${modalImageIndex + 1}`;
+    link.click();
   };
 
-  // New: Functions to navigate images within the modal
+  // New: Function to go to the next image in modal
   const goToNextModalImage = () => {
     setModalImageIndex((prevIndex) => (prevIndex + 1) % totalImages);
   };
 
+  // New: Function to go to the previous image in modal
   const goToPrevModalImage = () => {
     setModalImageIndex((prevIndex) => (prevIndex - 1 + totalImages) % totalImages);
-  };
-
-  // New: Function to adjust zoom level in modal
-  // const handleZoom = (inOut) => {
-  //   setZoomLevel((prev) => Math.max(1, Math.min(3, prev + inOut * 0.2)));
-  // };
-
-  // New: Support for pinch-to-zoom on touch devices
-  const handlePinchZoom = (e) => {
-    if (e.scale) {
-      setZoomLevel((prev) => Math.max(1, Math.min(3, prev * e.scale)));
-    }
   };
 
   return (
@@ -125,71 +116,39 @@ const Image = () => {
         }}
       >
         {carouselImages.map((img, index) => (
-          <img
+          <div className="img">
+            <img
             key={index}
             src={img}
             alt={`Slide ${index + 1}`}
             className="carousel-image"
             style={{ width: `${100 / imagesToShow}%` }}
-            onClick={() => openModal(index % totalImages)}
+            onClick={() => openModal(index % totalImages)} // New: Open modal on image click
           />
+          </div>
         ))}
       </div>
       <button className="prev-button" onClick={goToPrevSlide}>&#10094;</button>
       <button className="next-button" onClick={goToNextSlide}>&#10095;</button>
 
-      {/* Modal Overlay */}
+      {/* New: Modal Overlay */}
       {modalOpen && (
-        <div className="modal-overlay" onClick={handleOutsideClick}>
-          <div className="overlay-container">
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <img
+              src={images[modalImageIndex]}
+              alt={`Modal Image ${modalImageIndex + 1}`}
+              style={{ transform: `scale(${zoomLevel})` }}
+            />
             <div className="modal-buttons">
-
-              {/* Zoom In Button */}
-              {/* <button onClick={() => handleZoom(1)}>
-                <img src="zoom-in-icon.png" alt="Zoom In" />
-              </button> */}
-              
-              {/* Zoom Out Button */}
-              {/* <button onClick={() => handleZoom(-1)}>
-                <img src="zoom-out-icon.png" alt="Zoom Out" />
-              </button> */}
-
-              {/* Close Modal Button */}
-              <button onClick={closeModal}>
-                <FontAwesomeIcon icon={faRightFromBracket} flip="horizontal" className="icon" />
-              </button>
-
-              {/* New: Download Button */}
-              <a href={images[modalImageIndex]} download>
-                <FontAwesomeIcon icon={faCircleDown} bounce className="icon" />
-              </a>
-
-              {/* Link to More Images */}
-              <a href="https://example.com/more-images" target="_blank" rel="noopener noreferrer">
-                <FontAwesomeIcon icon={faLink} className="icon" />
-              </a>
-
+              <button onClick={downloadImage}>Download</button>
+              <button onClick={() => setZoomLevel((prev) => Math.min(prev + 0.2, 3))}>Zoom In</button>
+              <button onClick={() => setZoomLevel((prev) => Math.max(prev - 0.2, 1))}>Zoom Out</button>
+              <button onClick={closeModal}>Close</button>
+              <button onClick={goToPrevModalImage}>Previous</button>
+              <button onClick={goToNextModalImage}>Next</button>
+              <a href="https://example.com/more-images" target="_blank" rel="noopener noreferrer">More Images</a>
             </div>
-
-            <div className="modal-content">
-
-              <div className="img-container">
-                <img
-                  ref={modalImageRef}
-                  src={images[modalImageIndex]}
-                  alt={`Modal Image ${modalImageIndex + 1}`}
-                  style={{ transform: `scale(${zoomLevel})` }}
-                  onTouchStart={(e) => (e.touches.length > 1 ? e.preventDefault() : null)}
-                  onTouchMove={(e) => e.touches.length > 1 && handlePinchZoom(e)}
-                />
-
-              </div>
-
-              <button className="modal-prev-button" onClick={goToPrevModalImage}>&#10094;</button>
-              <button className="modal-next-button" onClick={goToNextModalImage}>&#10095;</button>
-            
-            </div>
-
           </div>
         </div>
       )}
@@ -197,4 +156,4 @@ const Image = () => {
   );
 };
 
-export default Image;
+export default Image1;
