@@ -31,6 +31,8 @@ const Section = () => {
           <div className={`link-options ${linkPosition}`}>
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
           </div>
         )}
 
@@ -53,7 +55,7 @@ const Section = () => {
 
       </div>
 
-      <div className="container" onClick={() => handleItemClick(3, 'left')}>
+      <div className="container" onClick={() => handleItemClick(3, 'right')}>
         
         <div className="icon">
           <FontAwesomeIcon icon={faBookBible} />
@@ -71,31 +73,56 @@ const Section = () => {
 
       </div>
 
-      <div className="container">
+      <div className="container" onClick={() => handleItemClick(4, 'right')}>
         <div className="icon">
           <FontAwesomeIcon icon={faFilm} />
         </div>
         <div className="text">
           <p>Drama & Movies</p>
         </div>
+
+        {activeItem === 4 && (
+          <div className={`link-options ${linkPosition}`}>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="link-option">GitHub</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="link-option">YouTube</a>
+          </div>
+        )}
+
       </div>
 
-      <div className="container">
+      <div className="container" onClick={() => handleItemClick(5, 'right')}>
         <div className="icon">
           <FontAwesomeIcon icon={faPhone} />
         </div>
         <div className="text">
           <p>Inquiries & Comments</p>
         </div>
+
+        {activeItem === 5 && (
+          <div className={`link-options ${linkPosition}`}>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="link-option">GitHub</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="link-option">YouTube</a>
+          </div>
+        )}
+
       </div>
 
-      <div className="container">
+      <div className="container" onClick={() => handleItemClick(6, 'right')}>
+        
         <div className="icon">
           <FontAwesomeIcon icon={faHandHoldingDollar} />
         </div>
         <div className="text">
           <p>Donations (Giving)</p>
         </div>
+
+        {activeItem === 6 && (
+          <div className={`link-options ${linkPosition}`}>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="link-option">GitHub</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="link-option">YouTube</a>
+          </div>
+        )}
+
       </div>
 
     </section>

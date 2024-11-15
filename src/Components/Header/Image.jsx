@@ -5,29 +5,40 @@ import { faCircleDown } from '@fortawesome/free-regular-svg-icons'
 import { faRightFromBracket, faLink } from '@fortawesome/free-solid-svg-icons'
 
 const images = [
-  "/img/Pst_Jude.png",
   "/img/klc.jfif",
   "/img/sup-klc.jfif",
 	"/img/Pst Jude 1.jpg",
-  "/img/Pst_Jude.png",
   "/img/klc.jfif",
   "/img/sup-klc.jfif",
 	"/img/Pst Jude 1.jpg",
-  "/img/Pst_Jude.png",
   "/img/klc.jfif",
   "/img/sup-klc.jfif",
 	"/img/Pst Jude 1.jpg",
-  "/img/Pst_Jude.png",
   "/img/klc.jfif",
   "/img/sup-klc.jfif",
 	"/img/Pst Jude 1.jpg",
-  "/img/Pst_Jude.png",
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
   "/img/klc.jfif",
   "/img/sup-klc.jfif",
 	"/img/Pst Jude 1.jpg",
 ];
 
 const Image = () => {
+
   const delay = 3000;
   const [imagesToShow, setImagesToShow] = useState(3);
   const [currentIndex, setCurrentIndex] = useState(images.length);
@@ -117,8 +128,8 @@ const Image = () => {
   };
 
 
-   // New: Function to set the number of images based on screen width
-   useEffect(() => {
+  // New: Function to set the number of images based on screen width
+  useEffect(() => {
     const updateImagesToShow = () => {
       if (window.innerWidth <= 600) {
         setImagesToShow(1);  // Show 1 image on mobile screens

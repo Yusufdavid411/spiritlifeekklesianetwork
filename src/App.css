@@ -21,7 +21,7 @@ body {
 .content {
     width: 100%;
     font-size: var(--font);
-    min-width: 350px;
+    min-width: 320px;
     max-width: 1700px;
 }
 
