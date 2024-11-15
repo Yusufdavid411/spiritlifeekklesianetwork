@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 
 
 const Navbar = () => {
@@ -21,8 +23,12 @@ const Navbar = () => {
 
           {activeItem === 1 && (
             <div className={`link-options ${linkPosition}`}>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
+              <div className="link-optional">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
+              </div>
+
+              <div><FontAwesomeIcon icon={faCaretRight} className="option-icon-btn" /></div>
             </div>
           )}
 
@@ -34,8 +40,12 @@ const Navbar = () => {
 
           {activeItem === 2 && (
             <div className={`link-options ${linkPosition}`}>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
+              <div className="link-optional">
+                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
+              </div>
+
+              <div><FontAwesomeIcon icon={faCaretRight} className="option-icon-btn" /></div>
             </div>
           )}
           

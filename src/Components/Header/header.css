@@ -198,19 +198,44 @@ li .link-options {
     top: 50%;
     transform: translateY(-50%);
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     /* gap: 2px; */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 2px 5px;
-    background: rgba(0, 0, 0, 0.4);
+    /* backdrop-filter: blur(10px); */
+    /* -webkit-backdrop-filter: blur(10px); */
+    /* padding: 2px 5px; */
+    /* background: rgba(0, 0, 0, 0); */
     border-radius: 5px;
     box-shadow: 10px 4px 8px rgba(0, 0, 0, 0.1);
-    /* opacity: 0; */
     transition: opacity 0.3s ease;
     z-index: 1000;
     text-align: center;
     font-weight: 700;
+    align-items: center;
+}
+
+li .link-optional {
+    /* position: absolute; */
+    top: 50%;
+    /* transform: translateY(-50%); */
+    display: flex;
+    flex-direction: column;
+    /* gap: 2px; */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    /* padding: 2px 5px; */
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    box-shadow: 10px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease;
+    z-index: 9000;
+    text-align: center;
+    font-weight: 700;
+}
+
+li .link-options .option-icon-btn {
+    color: rgb(0, 0, 0);
+    font-size: 2rem;
+    display: none;
 }
   
 li:hover  li .link-options {
@@ -218,7 +243,9 @@ li:hover  li .link-options {
 }
   
 li .link-options.left {
-    right: 102%; /* Position to the left */
+    /* display: flex; */
+    /* align-items: center; */
+    right: 105%; /* Position to the left */
 }
   
 li .link-options.right {

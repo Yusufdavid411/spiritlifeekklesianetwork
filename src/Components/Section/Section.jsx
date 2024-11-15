@@ -28,11 +28,12 @@ const Section = () => {
         </div>
 
         {activeItem === 1 && (
-          <div className={`link-options ${linkPosition}`}>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
+          <div className="arrow-container">
+            <div className={`link-options ${linkPosition}`}>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
+            </div>
+
           </div>
         )}
 
@@ -48,9 +49,11 @@ const Section = () => {
         </div>
 
         {activeItem === 2 && (
-          <div className={`link-options ${linkPosition}`}>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
+          <div className="arrow-container">
+            <div className={`link-options ${linkPosition}`}>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
+            </div>
           </div>
         )}
 
