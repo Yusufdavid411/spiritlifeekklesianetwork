@@ -49,7 +49,8 @@ const Section = () => {
 
         {activeItem === 2 && (
           <div className={`link-options ${linkPosition}`}>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="link-option">LinkedIn</a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
           </div>
         )}
 
