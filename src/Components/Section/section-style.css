@@ -13,6 +13,7 @@ section .container {
     padding: 5px 8px 5px 0px;
     display: flex;
     align-items: center;
+    cursor: pointer;
     position: relative;
 }
 
@@ -55,7 +56,50 @@ section .container p {
     font-size: var(--sm-font);
 }
 
-h
+  
+.link-options {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    /* gap: 2px; */
+    background: rgba(0, 0, 0, 0.8);
+    /* padding: 10px; */
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    /* opacity: 0; */
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+  
+.container:hover .link-options {
+    opacity: 1;
+}
+  
+.link-options.left {
+    right: 100%; /* Position to the left */
+    margin-right: 10px;
+}
+  
+.link-options.right {
+    left: 50%; /* Position to the right */
+    margin-left: 10px;
+}
+  
+.link-option {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+  
+.link-option:hover {
+    background-color: #c0392b;
+}
+
+
 
 
 @media (min-width:400px) {
