@@ -3,6 +3,7 @@ import './header.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleDown } from '@fortawesome/free-regular-svg-icons'
 import { faRightFromBracket, faLink } from '@fortawesome/free-solid-svg-icons'
+
 const images = [
   "/img/Pst_Jude.png",
   "/img/klc.jfif",
@@ -27,8 +28,8 @@ const images = [
 ];
 
 const Image = () => {
-  const imagesToShow = 1;
   const delay = 3000;
+  const [imagesToShow, setImagesToShow] = useState(3);
   const [currentIndex, setCurrentIndex] = useState(images.length);
   const [modalOpen, setModalOpen] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
@@ -115,8 +116,32 @@ const Image = () => {
     }
   };
 
+
+   // New: Function to set the number of images based on screen width
+   useEffect(() => {
+    const updateImagesToShow = () => {
+      if (window.innerWidth <= 600) {
+        setImagesToShow(1);  // Show 1 image on mobile screens
+      } else if (window.innerWidth <= 1024) {
+        setImagesToShow(2);  // Show 2 images on tablet screens
+      } else {
+        setImagesToShow(3);  // Show 3 images on larger screens
+      }
+    };
+
+    updateImagesToShow(); // Set initial value
+
+    // Add event listener for window resize
+    window.addEventListener("resize", updateImagesToShow);
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener("resize", updateImagesToShow);
+  }, []);
+
+
   return (
     <div className="carousel" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
+      
       <div
         className="carousel-container"
         style={{
@@ -142,6 +167,7 @@ const Image = () => {
       {modalOpen && (
         <div className="modal-overlay" onClick={handleOutsideClick}>
           <div className="overlay-container">
+            
             <div className="modal-buttons">
 
               {/* Zoom In Button */}
@@ -174,6 +200,7 @@ const Image = () => {
             <div className="modal-content">
 
               <div className="img-container">
+
                 <img
                   ref={modalImageRef}
                   src={images[modalImageIndex]}
