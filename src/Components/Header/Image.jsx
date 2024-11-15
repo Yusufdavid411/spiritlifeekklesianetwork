@@ -133,7 +133,7 @@ const Image = () => {
     const updateImagesToShow = () => {
       if (window.innerWidth <= 600) {
         setImagesToShow(1);  // Show 1 image on mobile screens
-      } else if (window.innerWidth <= 1024) {
+      } else if (window.innerWidth <= 1000) {
         setImagesToShow(2);  // Show 2 images on tablet screens
       } else {
         setImagesToShow(3);  // Show 3 images on larger screens

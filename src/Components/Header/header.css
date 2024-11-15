@@ -239,11 +239,15 @@ marquee{
 
     .carousel {
         position: relative;
-        width: 370px;
-        height: 230px;
+        width: 430px;
+        height: 220px;
         overflow: hidden;
         margin: auto;
         display: flex;
+    }
+
+    .carousel-image {
+        border-radius: 15px;
     }
 
     /* ..........Navbar.......... */
@@ -253,9 +257,21 @@ marquee{
     }
     
     nav ul {
-        margin: 1.8px 0 1.8px 8px;
+        margin: 1.6px 0 1.6px 10px;
         border: 1.5px solid white;
-        font-size: var(--midfont);
+        font-size: 1.2rem;
+    }
+
+    /* ..........Navbar.......... */
+
+    nav {
+        /* width: 35%; */
+    }
+    
+    nav ul {
+        margin: 1.6px 0 1.6px 10px;
+        border: 1.5px solid white;
+        font-size: 1.2rem;
     }
     
     nav ul li {
@@ -283,11 +299,18 @@ marquee{
 
 
 
+@media (min-width:1000px) {
 
+    /* ..........ImageCarousel.......... */
 
-
-
-@media (min-width:1200px){
+    .carousel {
+        position: relative;
+        width: 600px;
+        height: 230px;
+        overflow: hidden;
+        margin: auto;
+        display: flex;
+    }
 
     /* ..........Navbar.......... */
 
@@ -296,7 +319,40 @@ marquee{
     }
     
     nav ul {
-        margin: 2px 0;
+        margin: 1.6px 0 1.6px 10px;
+        border: 1.5px solid white;
+        font-size: 1.2rem;
+    }
+
+
+}
+
+
+
+
+
+@media (min-width:1200px){
+
+
+    /* ..........ImageCarousel.......... */
+
+    .carousel {
+        position: relative;
+        width: 890px;
+        height: 310px;
+        overflow: hidden;
+        margin: auto;
+        display: flex;
+    }
+
+    /* ..........Navbar.......... */
+
+    nav {
+        /* width: 35%; */
+    }
+    
+    nav ul {
+        margin: 2px 0 2px 15px;
         border: 2px solid white;
         font-size: var(--big-font);
     }
@@ -328,7 +384,19 @@ marquee{
 
 
 
-@media (min-width:1800px){
+@media (min-width:1800px) {
+
+
+    /* ..........ImageCarousel.......... */
+
+    .carousel {
+        position: relative;
+        width: 990px;
+        height: 380px;
+        overflow: hidden;
+        margin: auto;
+        display: flex;
+    }
 
 
     /* ..........Navbar.......... */
@@ -338,7 +406,6 @@ marquee{
     }
     
     nav ul {
-        margin: 3px 0;
         border: 3px solid white;
         font-size: var(--biger-font);
     }
