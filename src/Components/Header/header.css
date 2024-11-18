@@ -222,7 +222,7 @@ li .link-optional {
     /* gap: 2px; */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    /* padding: 2px 5px; */
+    padding: 3px 5px;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 5px;
     box-shadow: 10px 4px 8px rgba(0, 0, 0, 0.1);
@@ -230,10 +230,11 @@ li .link-optional {
     z-index: 9000;
     text-align: center;
     font-weight: 700;
+    border: 1px solid white;
 }
 
 li .link-options .option-icon-btn {
-    color: rgb(0, 0, 0);
+    color: white;
     font-size: 2rem;
     display: none;
 }
@@ -255,14 +256,15 @@ li .link-options.right {
 li .link-option {
     color: #fff;
     text-decoration: none;
-    padding: 5px 10px;
+    padding: 4px 6px;
     border-radius: 3px;
     transition: background-color 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.001);
 }
   
 li .link-option:hover {
-    color: #da2e07;
-    /* background-color: #da2e07; */
+    color: white;
+    border: 1px solid white;
 }
 
 

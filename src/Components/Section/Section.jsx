@@ -8,10 +8,24 @@ const Section = () => {
 
   const [activeItem, setActiveItem] = useState(null); // Track active item
   const [linkPosition, setLinkPosition] = useState('left'); // Track link position
+  const [isOverlayVisible, setOverlayVisible] = useState(false); // Manage overlay visibility
+  const [overlayContent, setOverlayContent] = useState({}); // Content for the overlay
 
   const handleItemClick = (itemId, position) => {
     setActiveItem(activeItem === itemId ? null : itemId); // Toggle item visibility
     setLinkPosition(position); // Set the position for the links (left or right)
+  };
+
+
+  // Show overlay with flyer details
+  const showOverlay = (imageUrl, accountNumber, bankName) => {
+    setOverlayContent({ imageUrl, accountNumber, bankName });
+    setOverlayVisible(true);
+  };
+
+  // Hide overlay
+  const hideOverlay = () => {
+    setOverlayVisible(false);
   };
 
   return (
@@ -122,12 +136,71 @@ const Section = () => {
 
         {activeItem === 6 && (
           <div className={`link-options ${linkPosition}`}>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="link-option">GitHub</a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="link-option">YouTube</a>
+
+            <div
+              className="link-option"
+              onClick={(e) => {
+                e.stopPropagation();
+                showOverlay(
+                  '/img/sup-klc.jfif', // Flyer image URL
+                  '1234567890', // Account number
+                  'Demo Bank' // Bank name
+                );
+              }}
+            >
+              Giving
+            </div>
+
+            <div
+              className="link-option"
+              onClick={(e) => {
+                e.stopPropagation();
+                showOverlay(
+                  '/img/sup-klc.jfif', // Flyer image URL
+                  '1234567890', // Account number
+                  'Demo Bank' // Bank name
+                );
+              }}
+            >
+              KLC Support
+            </div>
+
           </div>
         )}
 
       </div>
+
+      {/* Overlay Component */}
+      {isOverlayVisible && (
+        <div className="overlay" onClick={hideOverlay}>
+          <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
+            <img src={overlayContent.imageUrl} alt="Flyer" className="flyer-image" />
+            <div className="overlay-buttons">
+              <button
+                onClick={() => navigator.clipboard.writeText(overlayContent.accountNumber)}
+              >
+                Copy Account Number
+              </button>
+              <button
+                onClick={() => navigator.clipboard.writeText(overlayContent.bankName)}
+              >
+                Copy Bank
+              </button>
+              <button
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = overlayContent.imageUrl;
+                  link.download = 'flyer.jpg';
+                  link.click();
+                }}
+              >
+                Download Flyer
+              </button>
+              <button onClick={hideOverlay}>Exit</button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </section>
 

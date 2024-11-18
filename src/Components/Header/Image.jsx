@@ -39,8 +39,8 @@ const images = [
 
 const Image = () => {
 
-  const delay = 3000;
-  const [imagesToShow, setImagesToShow] = useState(3);
+  const delay = 5000;
+  const [imagesToShow, setImagesToShow] = useState(1);
   const [currentIndex, setCurrentIndex] = useState(images.length);
   const [modalOpen, setModalOpen] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(1);
