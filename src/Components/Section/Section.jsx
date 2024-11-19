@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './section-style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from "react-router-dom"
 
 
 const Section = () => {
@@ -10,6 +11,8 @@ const Section = () => {
   const [linkPosition, setLinkPosition] = useState('left'); // Track link position
   const [isOverlayVisible, setOverlayVisible] = useState(false); // Manage overlay visibility
   const [overlayContent, setOverlayContent] = useState({}); // Content for the overlay
+  const navigate = useNavigate();
+
 
   const handleItemClick = (itemId, position) => {
     setActiveItem(activeItem === itemId ? null : itemId); // Toggle item visibility
@@ -26,6 +29,11 @@ const Section = () => {
   // Hide overlay
   const hideOverlay = () => {
     setOverlayVisible(false);
+  };
+
+  const navigateTo = (path) => {
+    setActiveItem(null); // Close the link options
+    navigate(path); // Navigate using React Router
   };
 
   return (
@@ -51,7 +59,7 @@ const Section = () => {
                 onClick={(e) => {
                   e.stopPropagation();
                   setActiveItem(null); // Close the link options
-                  window.location.href = "/Audio";
+                  navigateTo("/Audio");
                 }}
               >
                 Audio
@@ -63,7 +71,7 @@ const Section = () => {
                 onClick={(e) => {
                   e.stopPropagation();
                   setActiveItem(null); // Close the link options
-                  window.location.href = "/Video";
+                  navigateTo("/Video");
                 }}
               >
                 Video
