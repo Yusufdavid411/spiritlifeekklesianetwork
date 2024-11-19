@@ -3,7 +3,7 @@ import Header from './Components/Header/Header'
 import Aside from './Components/Aside/Aside'
 import Section from './Components/Section/Section';
 import Footer from './Components/Footer/Footer';
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Messages from "./Components/Section/Messages/Messages";
 
 
@@ -17,7 +17,7 @@ function App() {
 
         <Header />
 
-        <Routes>
+        <Routes future={{ v7_relativeSplatPath: true }}>
 
           <Route path="/" element={
 
@@ -31,7 +31,7 @@ function App() {
             
           } />
 
-          <Route path="/Audio" element={<Messages />} />
+          <Route path="Messages/*" element={<Messages />} />
 
         </Routes>
 
