@@ -56,7 +56,23 @@ const Navbar = () => {
       </ul>
 
       <ul>
-        <li>Contact : +2349094600075</li>
+
+        <li onClick={() => handleItemClick(5, 'left')}>
+
+          Contact : +2349094600075
+
+          {activeItem === 5 && (
+            <div className={`link-options ${linkPosition}`}>
+              <div className="link-optional">
+                <a href="tel:+2349094600075" target="_blank" rel="noopener noreferrer" className="link-option">Call</a>
+                <a href="https://wa.me/9094600075" target="_blank" rel="noopener noreferrer" className="link-option">WhatsApp</a>
+              </div>
+
+              <div><FontAwesomeIcon icon={faCaretRight} className="option-icon-btn" /></div>
+            </div>
+          )}
+
+        </li>
       </ul>
   </nav>
   )

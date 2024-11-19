@@ -84,8 +84,8 @@ const Section = () => {
         {activeItem === 2 && (
           <div className="arrow-container">
             <div className={`link-options ${linkPosition}`}>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="link-option">YouTube</a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">FaceBook</a>
+              <a href="https://youtube.com/@judezakwoyi?si=scCwEitMSw9Dc7iA" target="_blank" rel="noopener noreferrer" className="link-option">YouTube</a>
+              <a href="https://t.me/SpiritLifemessages" target="_blank" rel="noopener noreferrer" className="link-option">Telegram</a>
             </div>
           </div>
         )}
