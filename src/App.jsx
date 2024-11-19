@@ -3,7 +3,7 @@ import Header from './Components/Header/Header'
 import Aside from './Components/Aside/Aside'
 import Section from './Components/Section/Section';
 import Footer from './Components/Footer/Footer';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Messages from "./Components/Section/Messages/Messages";
 
 
