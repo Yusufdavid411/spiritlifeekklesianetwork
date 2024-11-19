@@ -74,6 +74,8 @@ section .link-options {
     transition: opacity 0.3s ease;
     z-index: 900;
     font-weight: 700;
+    border: 1px solid white;
+
 }
   
 section .container:hover .link-options {
@@ -96,10 +98,11 @@ section .link-option {
     transition: background-color 0.3s ease;
     white-space: nowrap;
     text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.01);
 }
   
 section .link-option:hover {
-    background-color: #aeb0cf;
+    border: 1px solid white;
 }
 
 

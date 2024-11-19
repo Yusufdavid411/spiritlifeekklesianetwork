@@ -44,8 +44,31 @@ const Section = () => {
         {activeItem === 1 && (
           <div className="arrow-container">
             <div className={`link-options ${linkPosition}`}>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
+
+              {/* First Link: Navigate to TablePage */}
+              <div
+                className="link-option"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveItem(null); // Close the link options
+                  window.location.href = "/Audio";
+                }}
+              >
+                Audio
+              </div>
+
+              {/* Second Link: Navigate to MessagePage */}
+              <div
+                className="link-option"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveItem(null); // Close the link options
+                  window.location.href = "/Video";
+                }}
+              >
+                Video
+              </div>
+
             </div>
 
           </div>
