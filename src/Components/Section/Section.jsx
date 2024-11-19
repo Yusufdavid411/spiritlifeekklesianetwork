@@ -62,19 +62,7 @@ const Section = () => {
                   navigateTo("/Audio");
                 }}
               >
-                Audio
-              </div>
-
-              {/* Second Link: Navigate to MessagePage */}
-              <div
-                className="link-option"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveItem(null); // Close the link options
-                  navigateTo("/Video");
-                }}
-              >
-                Video
+                messages
               </div>
 
             </div>

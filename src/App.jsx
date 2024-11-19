@@ -5,7 +5,6 @@ import Section from './Components/Section/Section';
 import Footer from './Components/Footer/Footer';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Audio from "./Components/Section/Messages/Audio";
-import Video from "./Components/Section/Messages/Video"
 
 
 function App() {
@@ -33,9 +32,6 @@ function App() {
           } />
 
           <Route path="/Audio" element={<Audio />} />
-
-          <Route path="/Video" element={<Video />} />
-
 
         </Routes>
 

@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"
+import MessagesTable from "./MessagesTable";
+import messagesData from "./MessagesData"; // Importing the "database"
 
 
 const Audio = () => {
@@ -24,6 +26,10 @@ const Audio = () => {
       >
         Go Back
       </button>
+
+      <MessagesTable messages={messagesData} />
+
+
     </div>
 
 	);
