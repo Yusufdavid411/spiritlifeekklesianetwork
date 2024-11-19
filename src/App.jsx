@@ -4,7 +4,7 @@ import Aside from './Components/Aside/Aside'
 import Section from './Components/Section/Section';
 import Footer from './Components/Footer/Footer';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Audio from "./Components/Section/Messages/Audio";
+import Messages from "./Components/Section/Messages/Messages";
 
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
             
           } />
 
-          <Route path="/Audio" element={<Audio />} />
+          <Route path="/Audio" element={<Messages />} />
 
         </Routes>
 

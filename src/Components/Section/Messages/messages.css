@@ -1,23 +1,45 @@
+.message-Container {
+    padding: 20px;
+    font-weight: 600;
+}
+
+.message-Container .message {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.message-Container .message-btn {
+    font-size: 16px;
+    padding: 5px;
+}
+
+.message-Container p {
+    margin: 0 0 0 20px;
+    font-size: 1rem;
+}
+
+
+
 /* ..........table head.......... */
 
-.container {
-    padding: 20px;
+.table-Container {
     max-width: 800px;
     margin: auto;
 }
 
-.container table {
+.table-Container table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.container thead tr {
+.table-Container thead tr {
     background-color: rgba(210, 206, 206, 0.2);
     text-align: left;
 
 }
 
-.container tr th {
+.table-Container tr th {
     padding: 10px;
     border: 1px solid rgba(red, green, blue, alpha);
 }
@@ -27,15 +49,15 @@
 /* ..........table body.......... */
 
 
-.container tbody tr {
+.table-Container tbody tr {
     border-bottom: 1px solid;
 }
 
-.container tr td {
+.table-Container tr td {
     padding: 10px;
 }
 
-.container td a {
+.table-Container td a {
     text-decoration: none;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);

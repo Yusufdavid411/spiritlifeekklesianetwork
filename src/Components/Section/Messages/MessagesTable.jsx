@@ -3,12 +3,11 @@
 
 import React from "react";
 import PropTypes from "prop-types"; // Helps ensure the props are passed correctly.
-import './messages.css'
 
 
 const MessagesTable = ({ messages }) => {
   return (
-    <div className="container">
+    <div className="table-Container">
       {/* Table Header */}
       <table>
         <thead>

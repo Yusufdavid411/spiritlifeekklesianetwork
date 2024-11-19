@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './section-style.css'
+import './section.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom"
@@ -59,7 +59,7 @@ const Section = () => {
                 onClick={(e) => {
                   e.stopPropagation();
                   setActiveItem(null); // Close the link options
-                  navigateTo("/Audio");
+                  navigateTo("/Messages");
                 }}
               >
                 messages
