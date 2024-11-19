@@ -135,10 +135,8 @@ const Image = () => {
         setImagesToShow(1);  // Show 1 image on mobile screens
       } else if (window.innerWidth <= 1000) {
         setImagesToShow(2);  // Show 2 images on tablet screens
-      } else if (window.innerWidth > 1000) {
-        setImagesToShow(3);  // Show 3 images on larger screens
       } else {
-        setImagesToShow(1)
+        setImagesToShow(3);
       }
     };
 
