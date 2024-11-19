@@ -84,8 +84,8 @@ const Section = () => {
         {activeItem === 2 && (
           <div className="arrow-container">
             <div className={`link-options ${linkPosition}`}>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="link-option">YouTube</a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">FaceBook</a>
             </div>
           </div>
         )}
@@ -103,8 +103,9 @@ const Section = () => {
 
         {activeItem === 3 && (
           <div className={`link-options ${linkPosition}`}>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="link-option">GitHub</a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="link-option">YouTube</a>
+            <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Books</a>
+            <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Articles</a>
+            <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Study Materials</a>
           </div>
         )}
 
@@ -120,8 +121,8 @@ const Section = () => {
 
         {activeItem === 4 && (
           <div className={`link-options ${linkPosition}`}>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="link-option">GitHub</a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="link-option">YouTube</a>
+            <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Drama</a>
+            <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Movies</a>
           </div>
         )}
 
@@ -137,8 +138,8 @@ const Section = () => {
 
         {activeItem === 5 && (
           <div className={`link-options ${linkPosition}`}>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="link-option">GitHub</a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="link-option">YouTube</a>
+            <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Inquiries</a>
+            <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Comments</a>
           </div>
         )}
 
