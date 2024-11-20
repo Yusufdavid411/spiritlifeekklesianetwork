@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './section.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar } from '@fortawesome/free-solid-svg-icons';
+import {faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom"
 
 
@@ -214,7 +214,7 @@ const Section = () => {
                   link.click();
                 }}
               >
-                Download Flyer
+                <FontAwesomeIcon icon={faDownload} bounce />
               </button>
               <button onClick={hideOverlay}>Exit</button>
             </div>

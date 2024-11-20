@@ -69,8 +69,9 @@ section .link-options {
     background: rgba(0, 0, 0, 0.4);
     padding: 5px;
     border-radius: 5px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 50px rgb(0, 0, 0);
     /* opacity: 0; */
+    /* filter: drop-shadow(0px 0px 0px rgb(0, 0, 0)); */
     transition: opacity 0.3s ease;
     z-index: 900;
     font-weight: 700;
@@ -83,13 +84,13 @@ section .container:hover .link-options {
 }
   
 section .link-options.left {
-    right: 70%; /* Position to the left */
+    /* right: 70%; Position to the left */
 }
   
 section .link-options.right {
-    left: 53%; /* Position to the right */
+    left: 35%; /* Position to the right */
 }
-  
+
 section .link-option {
     color: #fff;
     text-decoration: none;
@@ -100,7 +101,7 @@ section .link-option {
     text-align: center;
     border: 1px solid rgba(0, 0, 0, 0.01);
 }
-  
+
 section .link-option:hover {
     border: 1px solid white;
 }
@@ -120,10 +121,10 @@ section .link-option:hover {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-  }
+}
   
-  .overlay-content {
-    background: #fff;
+.overlay-content {
+    background: #0e0c0c90;
     padding: 20px;
     border-radius: 10px;
     position: relative;
@@ -131,29 +132,33 @@ section .link-option:hover {
     max-width: 90%;
     max-height: 90%;
     overflow: auto;
-  }
+}
   
-  .flyer-image {
+.flyer-image {
     max-width: 100%;
     max-height: 70vh;
     margin-bottom: 20px;
     border-radius: 10px;
-  }
+}
   
-  .overlay-buttons button {
+.overlay-buttons button {
     margin: 10px;
     padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
+    color: #705959;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+}
   
-  .overlay-buttons button:hover {
+.overlay-buttons button:hover {
     background-color: #0056b3;
-  }
+}
+
+
+
+/* .........currency overlay.......... */
+
 
 
 
