@@ -11,7 +11,15 @@ const Section = () => {
   const [linkPosition, setLinkPosition] = useState('left'); // Track link position
   const [isOverlayVisible, setOverlayVisible] = useState(false); // Manage overlay visibility
   const [overlayContent, setOverlayContent] = useState({}); // Content for the overlay
+  const [isCurrencyOverlayVisible, setCurrencyOverlayVisible] = useState(false); // Currency overlay
   const navigate = useNavigate();
+
+  const [currencies] = useState([
+    { name: "Naira", accountNumber: "1234567890" },
+    { name: "USD", accountNumber: "9876543210" },
+    { name: "Euros", accountNumber: "1122334455" },
+    { name: "Pounds", accountNumber: "5566778899" },
+  ]);
 
 
   const handleItemClick = (itemId, position) => {
@@ -29,6 +37,23 @@ const Section = () => {
   // Hide overlay
   const hideOverlay = () => {
     setOverlayVisible(false);
+  };
+
+  // Show currency overlay
+  const showCurrencyOverlay = () => {
+    setCurrencyOverlayVisible(true);
+  };
+
+  // Hide currency overlay
+  const hideCurrencyOverlay = () => {
+    setCurrencyOverlayVisible(false);
+  };
+
+  // Handle currency click
+  const handleCurrencyClick = (accountNumber) => {
+    navigator.clipboard.writeText(accountNumber);
+    alert(`Account number ${accountNumber} copied to clipboard!`);
+    hideCurrencyOverlay(); // Close currency overlay after selection
   };
 
   const navigateTo = (path) => {
@@ -194,18 +219,23 @@ const Section = () => {
       {isOverlayVisible && (
         <div className="overlay" onClick={hideOverlay}>
           <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
+
             <img src={overlayContent.imageUrl} alt="Flyer" className="flyer-image" />
+
             <div className="overlay-buttons">
+
               <button
-                onClick={() => navigator.clipboard.writeText(overlayContent.accountNumber)}
+                onClick={showCurrencyOverlay}
               >
                 Copy Account Number
               </button>
+
               <button
                 onClick={() => navigator.clipboard.writeText(overlayContent.bankName)}
               >
                 Copy Bank
               </button>
+
               <button
                 onClick={() => {
                   const link = document.createElement('a');
@@ -216,11 +246,37 @@ const Section = () => {
               >
                 <FontAwesomeIcon icon={faDownload} bounce />
               </button>
+
               <button onClick={hideOverlay}>Exit</button>
+
             </div>
+
+          </div>
+
+        </div>
+      )}
+
+
+      {/* Currency Selection Overlay */}
+      {isCurrencyOverlayVisible && (
+        <div className="overlay" onClick={hideCurrencyOverlay}>
+          <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
+            <h3>Select Currency</h3>
+            <ul className="currency-list">
+              {currencies.map((currency, index) => (
+                <li
+                  key={index}
+                  className="currency-item"
+                  onClick={() => handleCurrencyClick(currency.accountNumber)}
+                >
+                  {currency.name}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       )}
+
 
     </section>
 

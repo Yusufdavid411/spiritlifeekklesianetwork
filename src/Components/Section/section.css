@@ -159,6 +159,24 @@ section .link-option:hover {
 
 /* .........currency overlay.......... */
 
+.currency-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+  
+.currency-item {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.currency-item:hover {
+    background-color: #ddd;
+}
 
 
 
