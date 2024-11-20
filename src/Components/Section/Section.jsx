@@ -65,7 +65,7 @@ const Section = () => {
     
     <section>
 
-      <div className="container" onClick={() => handleItemClick(1, 'right')}>
+      <div className="container" onClick={() => handleItemClick(1, 'left')}>
         
         <div className="icon">
           <FontAwesomeIcon icon={faPlay} />
@@ -97,7 +97,7 @@ const Section = () => {
 
       </div>
 
-      <div className="container" onClick={() => handleItemClick(2, 'right')}>
+      <div className="container" onClick={() => handleItemClick(2, 'left')}>
         
         <div className="icon">
           <FontAwesomeIcon icon={faHeadphones} />
@@ -117,7 +117,7 @@ const Section = () => {
 
       </div>
 
-      <div className="container" onClick={() => handleItemClick(3, 'right')}>
+      <div className="container" onClick={() => handleItemClick(3, 'left')}>
         
         <div className="icon">
           <FontAwesomeIcon icon={faBookBible} />
@@ -136,7 +136,7 @@ const Section = () => {
 
       </div>
 
-      <div className="container" onClick={() => handleItemClick(4, 'right')}>
+      <div className="container" onClick={() => handleItemClick(4, 'left')}>
         <div className="icon">
           <FontAwesomeIcon icon={faFilm} />
         </div>
@@ -153,7 +153,7 @@ const Section = () => {
 
       </div>
 
-      <div className="container" onClick={() => handleItemClick(5, 'right')}>
+      <div className="container" onClick={() => handleItemClick(5, 'left')}>
         <div className="icon">
           <FontAwesomeIcon icon={faPhone} />
         </div>
@@ -170,7 +170,7 @@ const Section = () => {
 
       </div>
 
-      <div className="container" onClick={() => handleItemClick(6, 'right')}>
+      <div className="container" onClick={() => handleItemClick(6, 'left')}>
         
         <div className="icon">
           <FontAwesomeIcon icon={faHandHoldingDollar} />
