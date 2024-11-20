@@ -117,7 +117,7 @@ section .link-option:hover {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -125,8 +125,6 @@ section .link-option:hover {
 }
   
 .overlay-content {
-    background: #0e0c0c90;
-    padding: 20px;
     border-radius: 10px;
     position: relative;
     text-align: center;
@@ -134,21 +132,52 @@ section .link-option:hover {
     max-height: 90%;
     overflow: auto;
 }
-  
+
 .flyer-image {
     max-width: 100%;
+    max-height: 80vh;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.overlay-content .exit {
+    position: absolute;
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    font-size: 2rem;
+    font-weight: 800;
+    border-radius: 10px;
+    /* top: 0; */
+}
+
+.overlay-content .download {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: rgb(0, 0, 0);
+    font-size: 2rem;
+    padding: 8px;
+    border-radius: 50%;
+    font-weight: 800;
+    /* box-shadow: 0px 0px 40px rgb(255, 255, 255); */
+    /* background-color: rgb(255, 255, 255); */
+}
+
+.image {
+    max-width: 100%;
     max-height: 70vh;
-    margin-bottom: 20px;
     border-radius: 10px;
 }
   
 .overlay-buttons button {
     margin: 10px;
-    padding: 10px 20px;
-    color: #705959;
+    padding: 10px;
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    background-color: rgba(0, 0, 0, 1);
     transition: background-color 0.3s ease;
 }
   
@@ -159,6 +188,22 @@ section .link-option:hover {
 
 
 /* .........currency overlay.......... */
+
+.currency-content {
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+}
+
+.currency-content:hover {
+    background-color: rgba(0, 0, 0, 1);
+
+}
 
 .currency-list {
     list-style: none;
@@ -177,7 +222,8 @@ section .link-option:hover {
 }
   
 .currency-item:hover {
-    background: rgba(0, 0, 0, 0.5);
+    color: green;
+    border: 1px solid green;
 }
 
 

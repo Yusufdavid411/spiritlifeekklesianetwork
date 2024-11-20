@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './section.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar, faDownload } from '@fortawesome/free-solid-svg-icons';
+import {faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar, faDownload, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom"
 
 
@@ -220,8 +220,28 @@ const Section = () => {
         <div className="overlay" onClick={hideOverlay}>
           <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
 
-            <img src={overlayContent.imageUrl} alt="Flyer" className="flyer-image" />
+            <div className="flyer-image">
 
+              <div onClick={hideOverlay} className='exit'>
+                <FontAwesomeIcon icon={faArrowLeft} className="option-icon-btn" />
+              </div>
+
+              <div
+                className='download'
+                onClick={() => {
+                  const link = document.createElement('a');
+                  link.href = overlayContent.imageUrl;
+                  link.download = 'flyer.jpg';
+                  link.click();
+                }}
+              >
+                <FontAwesomeIcon icon={faDownload} bounce />
+              </div>
+
+              <img src={overlayContent.imageUrl} alt="Flyer" className="image" />
+
+            </div>
+           
             <div className="overlay-buttons">
 
               <button
@@ -236,19 +256,6 @@ const Section = () => {
                 Copy Bank
               </button>
 
-              <button
-                onClick={() => {
-                  const link = document.createElement('a');
-                  link.href = overlayContent.imageUrl;
-                  link.download = 'flyer.jpg';
-                  link.click();
-                }}
-              >
-                <FontAwesomeIcon icon={faDownload} bounce />
-              </button>
-
-              <button onClick={hideOverlay}>Exit</button>
-
             </div>
 
           </div>
@@ -260,7 +267,7 @@ const Section = () => {
       {/* Currency Selection Overlay */}
       {isCurrencyOverlayVisible && (
         <div className="overlay" onClick={hideCurrencyOverlay}>
-          <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
+          <div className="currency-content" onClick={(e) => e.stopPropagation()}>
             <h3>Select Currency</h3>
             <ul className="currency-list">
               {currencies.map((currency, index) => (
