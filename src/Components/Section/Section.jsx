@@ -3,6 +3,7 @@ import './section.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar, faDownload, faArrowLeft, faLink } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom"
+import toast, { Toaster } from 'react-hot-toast';
 
 
 const Section = () => {
@@ -13,6 +14,8 @@ const Section = () => {
   const [overlayContent, setOverlayContent] = useState({}); // Content for the overlay
   const [isCurrencyOverlayVisible, setCurrencyOverlayVisible] = useState(false); // Currency overlay
   const navigate = useNavigate();
+
+
 
   const [currencies] = useState([
     { name: "Naira", accountNumber: "0751940803" },
@@ -49,9 +52,15 @@ const Section = () => {
     setCurrencyOverlayVisible(false);
   };
 
+  const bankNameClick = (bankName) => {
+    navigator.clipboard.writeText(bankName)
+    toast(`${bankName} copied to clipboard!`)
+  }
+
   // Handle currency click
-  const handleCurrencyClick = (accountNumber) => {
+  const handleCurrencyClick = (accountNumber, name) => {
     navigator.clipboard.writeText(accountNumber);
+    toast(`${accountNumber} copied to clipboard!`)
     // alert(`Account number ${accountNumber} copied to clipboard!`);
     hideCurrencyOverlay(); // Close currency overlay after selection
   };
@@ -189,7 +198,7 @@ const Section = () => {
                 showOverlay(
                   '/img/sup-klc.jfif', // Flyer image URL
                   '1234567890', // Account number
-                  'Demo Bank' // Bank name
+                  'GT BANK' // Bank name
                 );
               }}
             >
@@ -203,7 +212,7 @@ const Section = () => {
                 showOverlay(
                   '/img/sup-klc.jfif', // Flyer image URL
                   '1234567890', // Account number
-                  'Demo Bank' // Bank name
+                  'GT BANK' // Bank name
                 );
               }}
             >
@@ -218,6 +227,9 @@ const Section = () => {
       {/* Overlay Component */}
       {isOverlayVisible && (
         <div className="overlay" onClick={hideOverlay}>
+
+          <Toaster/>
+
           <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
 
             <div className="flyer-image">
@@ -256,7 +268,7 @@ const Section = () => {
               </button>
 
               <button
-                onClick={() => navigator.clipboard.writeText(overlayContent.bankName)}
+                onClick={() => bankNameClick(overlayContent.bankName)}
               >
                 <FontAwesomeIcon icon={faLink} />
                 Copy Bank
@@ -275,12 +287,12 @@ const Section = () => {
         <div className="overlay" onClick={hideCurrencyOverlay}>
           <div className="currency-content" onClick={(e) => e.stopPropagation()}>
             <h3>Select Currency</h3>
-            <ul className="currency-list">
+            <ul className="currency-list" >
               {currencies.map((currency, index) => (
                 <li
                   key={index}
                   className="currency-item"
-                  onClick={() => handleCurrencyClick(currency.accountNumber)}
+                  onClick={() => handleCurrencyClick(currency.accountNumber, currency.name)}
                 >
                   {currency.name}
                 </li>
