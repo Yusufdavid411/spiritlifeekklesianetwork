@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './section.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar, faDownload, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import {faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar, faDownload, faArrowLeft, faLink } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom"
 
 
@@ -222,20 +222,24 @@ const Section = () => {
 
             <div className="flyer-image">
 
-              <div onClick={hideOverlay} className='exit'>
-                <FontAwesomeIcon icon={faArrowLeft} className="option-icon-btn" />
-              </div>
+              <div className="flyer-items">
 
-              <div
-                className='download'
-                onClick={() => {
-                  const link = document.createElement('a');
-                  link.href = overlayContent.imageUrl;
-                  link.download = 'flyer.jpg';
-                  link.click();
-                }}
-              >
-                <FontAwesomeIcon icon={faDownload} bounce />
+                <div onClick={hideOverlay} className='exit'>
+                  <FontAwesomeIcon icon={faArrowLeft} className="option-icon-btn" />
+                </div>
+
+                <div
+                  className='download'
+                  onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = overlayContent.imageUrl;
+                    link.download = 'flyer.jpg';
+                    link.click();
+                  }}
+                >
+                  <FontAwesomeIcon icon={faDownload} bounce />
+                </div>
+
               </div>
 
               <img src={overlayContent.imageUrl} alt="Flyer" className="image" />
@@ -247,12 +251,14 @@ const Section = () => {
               <button
                 onClick={showCurrencyOverlay}
               >
+                <FontAwesomeIcon icon={faLink} />
                 Copy Account Number
               </button>
 
               <button
                 onClick={() => navigator.clipboard.writeText(overlayContent.bankName)}
               >
+                <FontAwesomeIcon icon={faLink} />
                 Copy Bank
               </button>
 
