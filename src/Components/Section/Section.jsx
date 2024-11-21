@@ -15,10 +15,10 @@ const Section = () => {
   const navigate = useNavigate();
 
   const [currencies] = useState([
-    { name: "Naira", accountNumber: "1234567890" },
-    { name: "USD", accountNumber: "9876543210" },
-    { name: "Euros", accountNumber: "1122334455" },
-    { name: "Pounds", accountNumber: "5566778899" },
+    { name: "Naira", accountNumber: "0751940803" },
+    { name: "USD", accountNumber: "0751940810" },
+    { name: "Euros", accountNumber: "0751940827" },
+    { name: "Pounds (GBS)", accountNumber: "0751940834" },
   ]);
 
 
@@ -52,7 +52,7 @@ const Section = () => {
   // Handle currency click
   const handleCurrencyClick = (accountNumber) => {
     navigator.clipboard.writeText(accountNumber);
-    alert(`Account number ${accountNumber} copied to clipboard!`);
+    // alert(`Account number ${accountNumber} copied to clipboard!`);
     hideCurrencyOverlay(); // Close currency overlay after selection
   };
 
