@@ -263,13 +263,13 @@ aside .video {
     
     aside img {
         width: 300px;
-        max-width: 250px;
+        max-width: 260px;
     }
     
     aside .video {
         width: 500px;
         height: 500px;
-        max-width: 250px;
+        max-width: 260px;
         max-height: 380px;
     }
 
@@ -286,23 +286,23 @@ aside .video {
 
 
 
-@media (min-width:1024px){
+@media (min-width:1000px){
 
 
     aside .items {
         width: 100%;
-        padding: 15px 15px;
+        padding: 15px 12px;
     }
     
     aside img {
         width: 300px;
-        max-width: 250px;
+        max-width: 280px;
     }
     
     aside .video {
         width: 500px;
         height: 5px;
-        max-width: 250px;
+        max-width: 280px;
         max-height: 400px;
     }
 
@@ -311,7 +311,8 @@ aside .video {
     }
 
     aside .btn .icon-btn {
-        font-size: 70px;
+        /* font-size: 70px; */
+        padding: 0;
     }
 
 }
@@ -326,14 +327,13 @@ aside .video {
     
     aside img {
         width: 300px;
-        max-width: 250px;
+        max-width: 300px;
     }
     
     aside .video {
         width: 500px;
-        height: 5px;
-        max-width: 250px;
-        max-height: 400px;
+        max-width: 300px;
+        max-height: 410px;
     }
 
     aside .btn {
