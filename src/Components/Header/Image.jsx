@@ -131,7 +131,7 @@ const Image = () => {
   // New: Function to set the number of images based on screen width
   useEffect(() => {
     const updateImagesToShow = () => {
-      if (window.innerWidth <= 600) {
+      if (window.innerWidth <= 700) {
         setImagesToShow(1);  // Show 1 image on mobile screens
       } else if (window.innerWidth <= 1000) {
         setImagesToShow(2);  // Show 2 images on tablet screens
@@ -166,7 +166,10 @@ const Image = () => {
             src={img}
             alt={`Slide ${index + 1}`}
             className="carousel-image"
-            style={{ width: `${100 / imagesToShow}%` }}
+            style={{ 
+              width: `${100 / imagesToShow}%`,
+              // margin: `${1 / imagesToShow}px`
+            }}
             onClick={() => openModal(index % totalImages)}
           />
         ))}

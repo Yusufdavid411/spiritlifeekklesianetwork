@@ -38,6 +38,7 @@ aside a {
 
 aside img {
     width: 300px;
+    border-radius: 10px;
     max-width: 130px;
 }
 
@@ -167,7 +168,6 @@ aside .video {
 
     aside .items {
         width: 100%;
-        padding: 15px 5px;
     }
     
     aside img {
@@ -196,18 +196,52 @@ aside .video {
     
     aside img {
         width: 300px;
-        max-width: 190px;
+        max-width: 200px;
     }
     
     aside .video {
         width: 300px;
         height: 20px;
-        max-width: 190px;
+        max-width: 200px;
         max-height: 300px;
     }
 
     aside .btn {
         display: block;
+    }
+    aside .icon-btn {
+        width: 14px;
+        padding: 5px;
+    }
+
+}
+
+
+@media (min-width:750px) {
+
+    aside .items {
+        width: 100%;
+        padding: 15px 5px;
+    }
+    
+    aside img {
+        width: 300px;
+        max-width: 215px;
+    }
+    
+    aside .video {
+        width: 300px;
+        height: 20px;
+        max-width: 215px;
+        max-height: 300px;
+    }
+
+    aside .btn {
+        display: block;
+    }
+    aside .icon-btn {
+        width: 14px;
+        padding: 5px;
     }
 
 }

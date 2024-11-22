@@ -60,7 +60,7 @@ const Section = () => {
   // Handle currency click
   const handleCurrencyClick = (accountNumber, name) => {
     navigator.clipboard.writeText(accountNumber);
-    toast(`${accountNumber} copied to clipboard!`)
+    toast(`${name}(${accountNumber}) copied to clipboard!`)
     // alert(`Account number ${accountNumber} copied to clipboard!`);
     hideCurrencyOverlay(); // Close currency overlay after selection
   };
@@ -197,7 +197,7 @@ const Section = () => {
                 e.stopPropagation();
                 showOverlay(
                   '/img/sup-klc.jfif', // Flyer image URL
-                  '1234567890', // Account number
+                  '07519408**', // Account number
                   'GT BANK' // Bank name
                 );
               }}
@@ -211,7 +211,7 @@ const Section = () => {
                 e.stopPropagation();
                 showOverlay(
                   '/img/sup-klc.jfif', // Flyer image URL
-                  '1234567890', // Account number
+                  '07519408**', // Account number
                   'GT BANK' // Bank name
                 );
               }}
