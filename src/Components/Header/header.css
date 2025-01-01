@@ -39,7 +39,7 @@ header{
     height: 130px;
     overflow: hidden;
     margin: auto;
-    display: flex;
+    display: none;
 }
   
 .carousel-container {
