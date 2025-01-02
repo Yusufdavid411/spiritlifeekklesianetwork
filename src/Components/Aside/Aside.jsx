@@ -1,83 +1,241 @@
-import ReactSimplyCarousel from 'react-simply-carousel';
-import { useState } from 'react';
-import React from 'react'
-import './aside-style.css'
-import ReactPlayer from 'react-player'
+import React, { useState, useEffect, useRef } from 'react';
+import './aside.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
-// import toast, { Toaster } from 'react-hot-toast';
+import { faCircleDown } from '@fortawesome/free-regular-svg-icons'
+import { faRightFromBracket, faLink } from '@fortawesome/free-solid-svg-icons'
 
-
-const items = [
-  {id: 1, title: 'item #2', img: (<div className="videos"><ReactPlayer className="video" url='https://youtube.com/shorts/APUm_UaDjqg?si=Zozt1010PlQ5KIXr' /></div>)},
-  {id: 2, title: 'item #4', img: (<a href="/img/klc.jfif"><img src='/img/klc.jfif' alt="logo" /></a>)},
-  {id: 3, title: 'item #1', img: (<a href="/img/sup-klc.jfif"><img src='/img/sup-klc.jfif' alt="logo" /></a>)},
-  {id: 4, title: 'item #3', img: (<a href="/img/klc.jfif"><img src='/img/klc.jfif' alt="logo" /></a>)},
-  {id: 5, title: 'item #4', img: (<a href="/img/sup-klc.jfif"><img src='/img/sup-klc.jfif' alt="logo" /></a>)},
-  {id: 6, title: 'item #2', img: (<a href="/img/klc.jfif"><img src='/img/klc.jfif' alt="logo" /></a>)},
+const images = [
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
+  "/img/klc.jfif",
+  "/img/sup-klc.jfif",
+	"/img/Pst Jude 1.jpg",
 ];
 
+const Image = () => {
 
-const Aside = () => {
+  const delay = 5000;
+  const [imagesToShow, setImagesToShow] = useState(3);
+  const [currentIndex, setCurrentIndex] = useState(images.length);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [modalImageIndex, setModalImageIndex] = useState(0);
+  const totalImages = images.length;
 
-  // const notify = () => toast('');
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const carouselImages = [
+    ...images.slice(-imagesToShow),
+    ...images,
+    ...images.slice(0, imagesToShow)
+  ];
+
+  const autoSlideRef = useRef();
+  const startX = useRef(0);
+  const endX = useRef(0);
+  const modalImageRef = useRef();
+
+  const goToNextSlide = () => setCurrentIndex((prev) => prev + 1);
+  const goToPrevSlide = () => setCurrentIndex((prev) => prev - 1);
+
+  useEffect(() => {
+    autoSlideRef.current = setInterval(goToPrevSlide, delay);
+    return () => clearInterval(autoSlideRef.current);
+  }, []);
+
+  useEffect(() => {
+    if (currentIndex === totalImages + imagesToShow) {
+      setTimeout(() => setCurrentIndex(imagesToShow), 0);
+    } else if (currentIndex === 0) {
+      setTimeout(() => setCurrentIndex(totalImages), 0);
+    }
+  }, [currentIndex, totalImages, imagesToShow]);
+
+  const handleTouchStart = (e) => {
+    clearInterval(autoSlideRef.current);
+    startX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    endX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (startX.current - endX.current > 50) goToNextSlide();
+    if (endX.current - startX.current > 50) goToPrevSlide();
+    autoSlideRef.current = setInterval(goToNextSlide, delay);
+  };
+
+  // New: Function to open the modal and display the clicked image
+  const openModal = (index) => {
+    setModalOpen(true);
+    setModalImageIndex(index);
+  };
+
+  // New: Function to close the modal
+  const closeModal = () => {
+    setModalOpen(false);
+    setZoomLevel(1);
+  };
+
+  // New: Close modal when clicking outside of the image area
+  const handleOutsideClick = (e) => {
+    if (e.target.classList.contains('modal-overlay')) closeModal();
+  };
+
+  // New: Functions to navigate images within the modal
+  const goToNextModalImage = () => {
+    setModalImageIndex((prevIndex) => (prevIndex + 1) % totalImages);
+  };
+
+  const goToPrevModalImage = () => {
+    setModalImageIndex((prevIndex) => (prevIndex - 1 + totalImages) % totalImages);
+  };
+
+  // New: Function to adjust zoom level in modal
+  // const handleZoom = (inOut) => {
+  //   setZoomLevel((prev) => Math.max(1, Math.min(3, prev + inOut * 0.2)));
+  // };
+
+  // New: Support for pinch-to-zoom on touch devices
+  const handlePinchZoom = (e) => {
+    if (e.scale) {
+      setZoomLevel((prev) => Math.max(1, Math.min(3, prev * e.scale)));
+    }
+  };
+
+
+  // New: Function to set the number of images based on screen width
+  useEffect(() => {
+    const updateImagesToShow = () => {
+      if (window.innerWidth <= 700) {
+        setImagesToShow(3);  // Show 1 image on mobile screens
+      } else if (window.innerWidth <= 1000) {
+        setImagesToShow(3);  // Show 2 images on tablet screens
+      } else {
+        setImagesToShow(4);
+      }
+    };
+
+    updateImagesToShow(); // Set initial value
+
+    // Add event listener for window resize
+    window.addEventListener("resize", updateImagesToShow);
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener("resize", updateImagesToShow);
+  }, []);
+
 
   return (
-    <aside>
-      {/* <Toaster/> */}
-
-      <ReactSimplyCarousel
-        activeSlideIndex={activeSlideIndex}
-        onRequestChange={setActiveSlideIndex}
-        itemsToShow={2}
-        itemsToScroll={1}
-        className="slide"
-        
-        forwardBtnProps={{
-          className:"btn",
-          //here you can also pass className, or any other button element attributes
-          // style: {
-            
-          // },
-          children: <FontAwesomeIcon icon={faCaretRight} className="icon-btn" fade />,
+    <div className="carousel" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
+      
+      <div
+        className="carousel-container"
+        style={{
+          transform: `translateX(-${currentIndex * (100 / imagesToShow)}%)`,
+          transition: currentIndex === imagesToShow || currentIndex === totalImages ? "none" : "transform 0.5s ease-in-out"
         }}
-        backwardBtnProps={{
-          className:"btn",
-          //here you can also pass className, or any other button element attributes
-          // style: {
-          //   alignSelf: 'center',
-          //   background: 'black',
-          //   border: 'none',
-          //   borderRadius: '50%',
-          //   color: 'white',
-          //   cursor: 'pointer',
-          //   fontSize: '20px',
-          //   height: 30,
-          //   lineHeight: 1,
-          //   textAlign: 'center',
-          //   width: 30,
-          // },
-          children: <FontAwesomeIcon icon={faCaretLeft} className="icon-btn" fade />,
-        }}
-        responsiveProps={[
-          {
-            itemsToShow: 3,
-            itemsToScroll: 1,
-            minWidth: 700,
-          },
-        ]}
-        speed={200}
-        easing="linear"
       >
+        {carouselImages.map((img, index) => (
+          <img
+            key={index}
+            src={img}
+            alt={`Slide ${index + 1}`}
+            className="carousel-image"
+            style={{ 
+              width: `${100 / imagesToShow}%`,
+              // margin: `${1 / imagesToShow}px`
+            }}
+            onClick={() => openModal(index % totalImages)}
+          />
+        ))}
+      </div>
+      <button className="prev-button" onClick={goToPrevSlide}>&#10094;</button>
+      <button className="next-button" onClick={goToNextSlide}>&#10095;</button>
 
-        {items.map(item => <div className="items" key={item.id}>{item.img}</div>)}
+      {/* Modal Overlay */}
+      {modalOpen && (
+        <div className="modal-overlay" onClick={handleOutsideClick}>
+          <div className="overlay-container">
+            
+            <div className="modal-buttons">
 
-      </ReactSimplyCarousel>
+              {/* Zoom In Button */}
+              {/* <button onClick={() => handleZoom(1)}>
+                <img src="zoom-in-icon.png" alt="Zoom In" />
+              </button> */}
+              
+              {/* Zoom Out Button */}
+              {/* <button onClick={() => handleZoom(-1)}>
+                <img src="zoom-out-icon.png" alt="Zoom Out" />
+              </button> */}
 
-    </aside>
-  )
+              {/* Close Modal Button */}
+              <button onClick={closeModal}>
+                <FontAwesomeIcon icon={faRightFromBracket} flip="horizontal" className="icon" />
+              </button>
 
-}
+              {/* New: Download Button */}
+              <a href={images[modalImageIndex]} download>
+                <FontAwesomeIcon icon={faCircleDown} bounce className="icon" />
+              </a>
 
-export default Aside
+              {/* Link to More Images */}
+              <a href="https://example.com/more-images" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon icon={faLink} className="icon" />
+              </a>
+
+            </div>
+
+            <div className="modal-content">
+
+              <div className="img-container">
+
+                <img
+                  ref={modalImageRef}
+                  src={images[modalImageIndex]}
+                  alt={`Modal Image ${modalImageIndex + 1}`}
+                  style={{ transform: `scale(${zoomLevel})` }}
+                  onTouchStart={(e) => (e.touches.length > 1 ? e.preventDefault() : null)}
+                  onTouchMove={(e) => e.touches.length > 1 && handlePinchZoom(e)}
+                />
+
+              </div>
+
+              <button className="modal-prev-button" onClick={goToPrevModalImage}>&#10094;</button>
+              <button className="modal-next-button" onClick={goToNextModalImage}>&#10095;</button>
+            
+            </div>
+
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Image;

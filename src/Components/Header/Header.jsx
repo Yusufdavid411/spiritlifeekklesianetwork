@@ -1,7 +1,6 @@
 import React from 'react'
 import './header.css'
 import Logo from './Logo'
-import Image from './Image'
 import Navbar from './Navbar'
 
 const Header = () => {
@@ -11,8 +10,6 @@ const Header = () => {
       <div className="navigation" id="navigation">
 
         <Logo />
-
-        <Image />
 
         <Navbar />
 
