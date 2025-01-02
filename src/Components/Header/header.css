@@ -39,7 +39,7 @@ header{
     height: 130px;
     overflow: hidden;
     margin: auto;
-    display: flex;
+    display: none;
 }
   
 .carousel-container {
@@ -325,7 +325,6 @@ marquee{
         height: 220px;
         overflow: hidden;
         margin: auto;
-        display: flex;
     }
 
     .carousel-image {
@@ -391,7 +390,6 @@ marquee{
         height: 230px;
         overflow: hidden;
         margin: auto;
-        display: flex;
     }
 
     /* ..........Navbar.......... */
@@ -424,7 +422,6 @@ marquee{
         height: 310px;
         overflow: hidden;
         margin: auto;
-        display: flex;
     }
 
     /* ..........Navbar.......... */
@@ -477,7 +474,6 @@ marquee{
         height: 380px;
         overflow: hidden;
         margin: auto;
-        display: flex;
     }
 
 
