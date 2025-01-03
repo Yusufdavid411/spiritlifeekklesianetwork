@@ -52,7 +52,7 @@ nav ul li {
 nav ul li a {
     text-decoration: none;
     color: var(--text-color);
-}        
+}
 
 
 
@@ -79,6 +79,15 @@ li .link-options {
     align-items: center;
 }
 
+/* the hover */
+
+/* .hover-item:hover .link-optional {
+    position: relative;
+    display: flex;
+} */
+
+
+
 li .link-optional {
     /* position: absolute; */
     top: 50%;
@@ -104,6 +113,7 @@ li .link-options .option-icon-btn {
     font-size: 2rem;
     display: none;
 }
+
   
 li:hover  li .link-options {
     opacity: 1;

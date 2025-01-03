@@ -120,6 +120,7 @@ const Section = () => {
             <div className={`link-options ${linkPosition}`}>
               <a href="https://youtube.com/@judezakwoyi?si=scCwEitMSw9Dc7iA" target="_blank" rel="noopener noreferrer" className="link-option">YouTube</a>
               <a href="https://t.me/SpiritLifemessages" target="_blank" rel="noopener noreferrer" className="link-option">Telegram</a>
+              <a href="https://www.facebook.com/judejerryzakwoyi/" target="_blank" rel="noopener noreferrer" className="link-option">FaceBook</a>
             </div>
           </div>
         )}
@@ -172,7 +173,7 @@ const Section = () => {
 
         {activeItem === 5 && (
           <div className={`link-options ${linkPosition}`}>
-            <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">WhatsApp</a>
+            <a href="https://wa.me/9094600075" target="_blank" rel="noopener noreferrer" className="link-option">WhatsApp</a>
             <a  href="mailto:" target="_blank" rel="noopener noreferrer" className="link-option">Send us an EMAIL</a>
             <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Comment</a>
           </div>

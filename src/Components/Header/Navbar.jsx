@@ -17,7 +17,7 @@ const Navbar = () => {
     <nav>
       <ul>
 
-        <li onClick={() => handleItemClick(1, 'left')}>
+        <li onClick={() => handleItemClick(1, 'left')} className="hover-item">
 
           Rhema Meditations
 
@@ -40,10 +40,10 @@ const Navbar = () => {
 
           {activeItem === 2 && (
             <div className={`link-options ${linkPosition}`}>
-              <div className="link-optional">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
-              </div>
+              {/* <div className="link-optional"> */}
+                {/* <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a> */}
+                {/* <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a> */}
+              {/* </div> */}
 
               <div><FontAwesomeIcon icon={faCaretRight} className="option-icon-btn" /></div>
             </div>
@@ -65,7 +65,7 @@ const Navbar = () => {
             <div className={`link-options ${linkPosition}`}>
               <div className="link-optional">
                 <a href="tel:+2349094600075" target="_blank" rel="noopener noreferrer" className="link-option">Call</a>
-                <a href="https://wa.me/9094600075" target="_blank" rel="noopener noreferrer" className="link-option">WhatsApp</a>
+                {/* <a href="https://wa.me/9094600075" target="_blank" rel="noopener noreferrer" className="link-option">WhatsApp</a> */}
               </div>
 
               <div><FontAwesomeIcon icon={faCaretRight} className="option-icon-btn" /></div>
