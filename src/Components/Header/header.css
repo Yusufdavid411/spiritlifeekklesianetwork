@@ -13,7 +13,7 @@ header{
 /* ..........Logo.......... */
 
 .logo{
-    width: 40%;
+    width: 50%;
     margin: 0 2px 0 0;
     align-self: flex-start;
 
@@ -173,7 +173,7 @@ marquee{
     /* ..........Logo.......... */
 
     .logo{
-        width: 40%;
+        width: 50%;
         margin: 0;
     }
 
