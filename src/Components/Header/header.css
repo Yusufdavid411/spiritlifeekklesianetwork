@@ -15,8 +15,7 @@ header{
 .logo{
     width: 50%;
     margin: 0 2px 0 0;
-    align-self: flex-start;
-
+    /* align-self: flex-start; */
 }
 
 .logo img {
