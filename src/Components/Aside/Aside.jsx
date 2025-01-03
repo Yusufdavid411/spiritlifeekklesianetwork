@@ -5,6 +5,7 @@ import './aside.css'; // Assuming this file contains the carousel and modal styl
 import ReactPlayer from 'react-player';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretLeft, faCaretRight, faTimes } from '@fortawesome/free-solid-svg-icons'; // Added `faTimes` for close button
+// import { faCircleDown } from '@fortawesome/free-regular-svg-icons'
 
 const items = [
   { id: 1, title: 'item #2', img: (<div className="videos"><ReactPlayer className="video" url='https://youtube.com/shorts/APUm_UaDjqg?si=Zozt1010PlQ5KIXr' /></div>) },
@@ -38,6 +39,11 @@ const Aside = () => {
   // Close the modal
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  // New: Close modal when clicking outside of the image area
+  const handleOutsideClick = (e) => {
+    if (e.target.classList.contains('modal-overlay')) closeModal();
   };
 
   // Navigate to the previous item in the modal
@@ -89,13 +95,18 @@ const Aside = () => {
 
       {/* Modal Section */}
       {isModalOpen && (
-        <div className="modal-overlay" >
+        <div className="modal-overlay" onClick={handleOutsideClick}>
           <div className='img-container'>
             <div className="modal-content">
               {/* Close Button */}
               <button className="close-btn" onClick={closeModal}>
                 <FontAwesomeIcon icon={faTimes} />
               </button>
+
+              {/* New: Download Button
+              <a href={items[modalIndex]} download>
+                <FontAwesomeIcon icon={faCircleDown} bounce className="icon" />
+              </a> */}
 
               {/* Display Current Modal Item */}
               <div className="modal-item">

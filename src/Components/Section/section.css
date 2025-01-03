@@ -84,7 +84,7 @@ section .container:hover .link-options {
 }
   
 section .link-options.left {
-    right: -20%;
+    /* right: -20%; */
 }
   
 section .link-options.right {

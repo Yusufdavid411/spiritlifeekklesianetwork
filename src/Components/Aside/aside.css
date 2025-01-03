@@ -56,7 +56,7 @@ aside .video {
 
 aside .videos {
    border: 4px solid rgb(40, 40, 42);
-   border-radius: 5px;
+   border-radius: px;
 }
 
 aside .videos:hover {

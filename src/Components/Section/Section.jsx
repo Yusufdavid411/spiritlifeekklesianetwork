@@ -172,8 +172,9 @@ const Section = () => {
 
         {activeItem === 5 && (
           <div className={`link-options ${linkPosition}`}>
-            <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Inquiries</a>
-            <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Comments</a>
+            <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">WhatsApp</a>
+            <a  href="mailto:" target="_blank" rel="noopener noreferrer" className="link-option">Send us an EMAIL</a>
+            <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Comment</a>
           </div>
         )}
 
