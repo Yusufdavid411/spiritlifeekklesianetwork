@@ -79,31 +79,15 @@ const Section = () => {
         <div className="icon">
           <FontAwesomeIcon icon={faPlay} />
         </div>
-        <div className="text">
+        <div
+          className="text"
+          onClick={(e) => {
+            e.stopPropagation();
+            setActiveItem(null); // Close the link options
+            navigateTo("/Messages");
+          }}>
           <p>Messages (Audio and Videos)</p>
         </div>
-
-        {activeItem === 1 && (
-          <div className="arrow-container">
-            <div className={`link-options ${linkPosition}`}>
-
-              {/* First Link: Navigate to TablePage */}
-              <div
-                className="link-option"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveItem(null); // Close the link options
-                  navigateTo("/Messages");
-                }}
-              >
-                messages
-              </div>
-
-            </div>
-
-          </div>
-        )}
-
       </div>
 
       <div className="container" onClick={() => handleItemClick(2, 'left')}>
@@ -174,7 +158,7 @@ const Section = () => {
         {activeItem === 5 && (
           <div className={`link-options ${linkPosition}`}>
             <a href="https://wa.me/9094600075" target="_blank" rel="noopener noreferrer" className="link-option">WhatsApp</a>
-            <a  href="mailto:" target="_blank" rel="noopener noreferrer" className="link-option">Send us an EMAIL</a>
+            <a  href="mailto:spiritlifekklesianetwork@gmail.com" target="_blank" rel="noopener noreferrer" className="link-option">Send us an EMAIL</a>
             <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Comment</a>
           </div>
         )}

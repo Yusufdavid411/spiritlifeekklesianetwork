@@ -19,18 +19,18 @@ const Navbar = () => {
 
         <li onClick={() => handleItemClick(1, 'left')} className="hover-item">
 
-          Rhema Meditations
+          <a href="https://t.me/+Rnn_SXSO4YTOa_X0">Rhema Meditations</a>
 
-          {activeItem === 1 && (
+          {/* {activeItem === 1 && (
             <div className={`link-options ${linkPosition}`}>
               <div className="link-optional">
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="link-option">Facebook</a>
+                <a href="https://t.me/+Rnn_SXSO4YTOa_X0" target="_blank" rel="noopener noreferrer" className="link-option"></a>
                 <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="link-option">Twitter</a>
               </div>
 
               <div><FontAwesomeIcon icon={faCaretRight} className="option-icon-btn" /></div>
             </div>
-          )}
+          )} */}
 
         </li>
 

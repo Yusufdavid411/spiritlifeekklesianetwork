@@ -12,8 +12,8 @@ const items = [
   { id: 2, title: 'item #4', img: (<a ><img src='/img/klc.jfif' alt="logo" /></a>) },
   { id: 3, title: 'item #1', img: (<a ><img src='/img/sup-klc.jfif' alt="logo" /></a>) },
   { id: 4, title: 'item #3', img: (<a ><img src='/img/klc.jfif' alt="logo" /></a>) },
-  { id: 5, title: 'item #4', img: (<a ><img src='/img/sup-klc.jfif' alt="logo" /></a>) },
-  { id: 6, title: 'item #2', img: (<a ><img src='/img/klc.jfif' alt="logo" /></a>) },
+  // { id: 5, title: 'item #4', img: (<a ><img src='/img/sup-klc.jfif' alt="logo" /></a>) },
+  // { id: 6, title: 'item #2', img: (<a ><img src='/img/klc.jfif' alt="logo" /></a>) },
 ];
 
 const Aside = () => {
@@ -22,13 +22,13 @@ const Aside = () => {
   const [modalIndex, setModalIndex] = useState(0); // Tracks the index of the item displayed in the modal
 
   // Auto-scroll functionality
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveSlideIndex((prevIndex) => (prevIndex + 1) % items.length); 
-    }, 3000); // Changes slide every 3 seconds
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setActiveSlideIndex((prevIndex) => (prevIndex + 1) % items.length); 
+  //   }, 3000); // Changes slide every 3 seconds
 
-    return () => clearInterval(interval); 
-  }, []);
+  //   return () => clearInterval(interval); 
+  // }, []);
 
   // Open modal and set the modal index
   const openModal = (index) => {
