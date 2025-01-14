@@ -84,7 +84,7 @@ const Section = () => {
           onClick={(e) => {
             e.stopPropagation();
             setActiveItem(null); // Close the link options
-            navigateTo("/Messages");
+            navigateTo("/Years");
           }}>
           <p>Messages (Audio and Videos)</p>
         </div>
