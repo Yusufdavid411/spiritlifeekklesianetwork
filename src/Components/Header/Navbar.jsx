@@ -51,7 +51,7 @@ const Navbar = () => {
           
         </li>
 
-        <li>Assignments</li>
+        <li>Departments</li>
         <li>Personal Study Notes</li>
       </ul>
 
