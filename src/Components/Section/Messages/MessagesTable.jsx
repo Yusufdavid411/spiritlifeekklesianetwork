@@ -62,6 +62,8 @@ const App = () => {
                 <small>{item.month} {item.year}</small>
                 <br />
                 {item.title}
+                <br />
+                {item.speaker}
               </td>
 
               {item.audio && (
