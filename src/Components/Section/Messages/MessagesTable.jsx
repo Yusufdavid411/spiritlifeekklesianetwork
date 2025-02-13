@@ -58,7 +58,11 @@ const App = () => {
           {data.map((item, index) => (
             <tr key={index} className="data-item">
 
-              <td>{item.title}</td>
+              <td>
+                <small>{item.month} {item.year}</small>
+                <br />
+                {item.title}
+              </td>
 
               {item.audio && (
                 <td>

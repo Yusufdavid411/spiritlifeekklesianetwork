@@ -60,6 +60,11 @@
 .table-Container tr td {
     padding: 12px;
 }
+.table-Container tr td small {
+    padding: 4px;
+    font-size: .5rem;
+    display: flex;
+}
 
 .table-Container td a {
     text-decoration: none;
