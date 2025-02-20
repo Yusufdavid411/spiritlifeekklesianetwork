@@ -54,7 +54,7 @@ const Section = () => {
   };
 
   const showCurrencyOverlay2 = () => {
-    setCurrencyOverlayVisible(true);
+    setCurrencyOverlayVisible2(true);
   };
 
 
@@ -66,7 +66,7 @@ const Section = () => {
   };
 
   const hideCurrencyOverlay2 = () => {
-    setCurrencyOverlayVisible(false);
+    setCurrencyOverlayVisible2(false);
   };
 
 
@@ -366,7 +366,7 @@ const Section = () => {
       )}
 
       {isCurrencyOverlayVisible2 && (
-        <div className="overlay" onClick={hideCurrencyOverlay}>
+        <div className="overlay" onClick={hideCurrencyOverlay2}>
           <div className="currency-content" onClick={(e) => e.stopPropagation()}>
             <h3>Select Currency</h3>
             <ul className="currency-list" >
