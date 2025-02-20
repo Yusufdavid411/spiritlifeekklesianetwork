@@ -11,8 +11,10 @@ const Section = () => {
   const [activeItem, setActiveItem] = useState(null); // Track active item
   const [linkPosition, setLinkPosition] = useState('left'); // Track link position
   const [isOverlayVisible, setOverlayVisible] = useState(false); // Manage overlay visibility
+  const [isOverlayVisible2, setOverlayVisible2] = useState(false); 
   const [overlayContent, setOverlayContent] = useState({}); // Content for the overlay
   const [isCurrencyOverlayVisible, setCurrencyOverlayVisible] = useState(false); // Currency overlay
+  const [isCurrencyOverlayVisible2, setCurrencyOverlayVisible2] = useState(false); 
   const navigate = useNavigate();
 
 
