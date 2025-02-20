@@ -51,11 +51,11 @@ const Navbar = () => {
           
         </li>
 
-        <li onClick={() => handleItemClick(2, 'left')}>
+        <li onClick={() => handleItemClick(3, 'left')}>
 
           Departments
 
-          {activeItem === 2 && (
+          {activeItem === 3 && (
             <div className={`link-options ${linkPosition}`}>
               <div className="link-optional">
                 <a href='ZoeStreams' target="_blank" rel="noopener noreferrer" className="link-option">Zoe Streams <br /> (Music Department)</a>
