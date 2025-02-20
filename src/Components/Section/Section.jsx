@@ -53,10 +53,24 @@ const Section = () => {
     setCurrencyOverlayVisible(true);
   };
 
+  const showCurrencyOverlay2 = () => {
+    setCurrencyOverlayVisible(true);
+  };
+
+
+  
+
   // Hide currency overlay
   const hideCurrencyOverlay = () => {
     setCurrencyOverlayVisible(false);
   };
+
+  const hideCurrencyOverlay2 = () => {
+    setCurrencyOverlayVisible(false);
+  };
+
+
+  
 
   const bankNameClick = (bankName) => {
     navigator.clipboard.writeText(bankName)
