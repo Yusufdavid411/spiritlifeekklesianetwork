@@ -347,12 +347,12 @@ const Section = () => {
       )}
       
 
-      {isCurrencyOverlayVisible2 && (
-        <div className="overlay" onClick={hideCurrencyOverlay2}>
+      {isCurrencyOverlayVisible && (
+        <div className="overlay" onClick={hideCurrencyOverlay}>
           <div className="currency-content" onClick={(e) => e.stopPropagation()}>
             <h3>Select Currency</h3>
             <ul className="currency-list" >
-              {currencies2.map((currency, index) => (
+              {currencies.map((currency, index) => (
                 <li
                   key={index}
                   className="currency-item"
@@ -368,12 +368,12 @@ const Section = () => {
 
 
       {/* Currency Selection Overlay */}
-      {isCurrencyOverlayVisible && (
-        <div className="overlay" onClick={hideCurrencyOverlay}>
+      {isCurrencyOverlayVisible2 && (
+        <div className="overlay" onClick={hideCurrencyOverlay2}>
           <div className="currency-content" onClick={(e) => e.stopPropagation()}>
             <h3>Select Currency</h3>
             <ul className="currency-list" >
-              {currencies.map((currency, index) => (
+              {currencies2.map((currency, index) => (
                 <li
                   key={index}
                   className="currency-item"
