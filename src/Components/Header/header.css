@@ -70,11 +70,8 @@ li .link-options {
     /* padding: 2px 5px; */
     /* background: rgba(0, 0, 0, 0); */
     border-radius: 5px;
-<<<<<<< HEAD
     box-shadow: 0px 50px 50px rgb(0, 0, 0);
-=======
     /* box-shadow: 0px 0px 50px rgb(0, 0, 0); */
->>>>>>> c562627f00702be15eeb8a230f090b1475de173f
     transition: opacity 0.3s ease;
     z-index: 90;
     text-align: center;
