@@ -11,8 +11,10 @@ const Section = () => {
   const [activeItem, setActiveItem] = useState(null); // Track active item
   const [linkPosition, setLinkPosition] = useState('left'); // Track link position
   const [isOverlayVisible, setOverlayVisible] = useState(false); // Manage overlay visibility
+  const [isOverlayVisible2, setOverlayVisible2] = useState(false); 
   const [overlayContent, setOverlayContent] = useState({}); // Content for the overlay
   const [isCurrencyOverlayVisible, setCurrencyOverlayVisible] = useState(false); // Currency overlay
+  const [isCurrencyOverlayVisible2, setCurrencyOverlayVisible2] = useState(false); 
   const navigate = useNavigate();
 
 
@@ -53,10 +55,24 @@ const Section = () => {
     setCurrencyOverlayVisible(true);
   };
 
+  const showCurrencyOverlay2 = () => {
+    setCurrencyOverlayVisible2(true);
+  };
+
+
+  
+
   // Hide currency overlay
   const hideCurrencyOverlay = () => {
     setCurrencyOverlayVisible(false);
   };
+
+  const hideCurrencyOverlay2 = () => {
+    setCurrencyOverlayVisible2(false);
+  };
+
+
+  
 
   const bankNameClick = (bankName) => {
     navigator.clipboard.writeText(bankName)
@@ -272,15 +288,71 @@ const Section = () => {
 
         </div>
       )}
+      
 
+      {isOverlayVisible2 && (
+        <div className="overlay" onClick={hideOverlay}>
 
-      {/* Currency Selection Overlay */}
-      {isCurrencyOverlayVisible && (
-        <div className="overlay" onClick={hideCurrencyOverlay}>
+          <Toaster/>
+
+          <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
+
+            <div className="flyer-image">
+
+              <div className="flyer-items">
+
+                <div onClick={hideOverlay} className='exit'>
+                  <FontAwesomeIcon icon={faArrowLeft} className="option-icon-btn" />
+                </div>
+
+                <div
+                  className='download'
+                  onClick={() => {
+                    const link = document.createElement('a');
+                    link.href = overlayContent.imageUrl;
+                    link.download = 'flyer.jpg';
+                    link.click();
+                  }}
+                >
+                  <FontAwesomeIcon icon={faDownload} bounce />
+                </div>
+
+              </div>
+
+              <img src={overlayContent.imageUrl} alt="Flyer" className="image" />
+
+            </div>
+           
+            <div className="overlay-buttons">
+
+              <button
+                onClick={showCurrencyOverlay2}
+              >
+                <FontAwesomeIcon icon={faLink} />
+                Copy Account Number
+              </button>
+
+              <button
+                onClick={() => bankNameClick(overlayContent.bankName)}
+              >
+                <FontAwesomeIcon icon={faLink} />
+                Copy Bank
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+      )}
+      
+
+      {isCurrencyOverlayVisible2 && (
+        <div className="overlay" onClick={hideCurrencyOverlay2}>
           <div className="currency-content" onClick={(e) => e.stopPropagation()}>
             <h3>Select Currency</h3>
             <ul className="currency-list" >
-              {currencies.map((currency, index) => (
+              {currencies2.map((currency, index) => (
                 <li
                   key={index}
                   className="currency-item"
@@ -294,12 +366,14 @@ const Section = () => {
         </div>
       )}
 
+
+      {/* Currency Selection Overlay */}
       {isCurrencyOverlayVisible && (
         <div className="overlay" onClick={hideCurrencyOverlay}>
           <div className="currency-content" onClick={(e) => e.stopPropagation()}>
             <h3>Select Currency</h3>
             <ul className="currency-list" >
-              {currencies2.map((currency, index) => (
+              {currencies.map((currency, index) => (
                 <li
                   key={index}
                   className="currency-item"
