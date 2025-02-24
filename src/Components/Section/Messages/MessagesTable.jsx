@@ -1,31 +1,51 @@
-// MessagesTable.js
-// This component receives a list of messages as props and displays them in a table format.
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import './messages.css'
 
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types"; // Helps ensure the props are passed correctly.
-
-
-const MessagesTable = ({ messages }) => {
-
-	const [visibleRows, setVisibleRows] = useState(0); // Tracks how many rows are visible
-  const rowDisplayDelay = 90; // Delay (in milliseconds) between displaying rows. You can change this value.
+const App = () => {
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    // Incrementally display rows with a delay
-    if (visibleRows < messages.length) {
-      const timer = setTimeout(() => {
-        setVisibleRows((prev) => prev + 1);
-      }, rowDisplayDelay);
+    // Fetch the CSV data
+    const fetchData = async () => {
+      const url =
+        "https://docs.google.com/spreadsheets/d/18OVONeRvroB2xmxzFNIHQrQGYhRgdC5sTV9BqoOT368/gviz/tq?tqx=out:csv";
+      try {
+        const response = await axios.get(url);
+        const csvData = response.data;
 
-      // Clear the timer when the component unmounts or updates
-      return () => clearTimeout(timer);
-    }
-  }, [visibleRows, messages.length]); // Dependency ensures effect runs when visibleRows changes
+        // Parse the CSV into JSON
+        const rows = csvData.split("\n").slice(1); // Skip the header row
+        const parsedData = rows
+          .map((row) => {
+            const fields = row.split(",");
+            if (fields.length < 3) return null; // Handle malformed rows
+
+            const [year, month, title, audio, video, speaker] = fields.map((field) =>
+              field.trim().replace(/^"|"$/g, "") // Remove quotes and trim spaces
+            );
+
+            return { year, month, title, audio, video, speaker };
+          })
+          .filter((item) => item) // Remove null entries
+          .reverse(); // Reverse the array to display the data from bottom to top
+
+        setData(parsedData);
+      } catch (error) {
+        console.error("Error fetching the data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="table-Container">
-      {/* Table Header */}
+
+      {/* table */}
+
       <table>
+
         <thead>
           <tr>
             <th>Message Title</th>
@@ -34,46 +54,42 @@ const MessagesTable = ({ messages }) => {
           </tr>
         </thead>
 
-        {/* Table Body */}
-        <tbody>
-          {messages.slice(0, visibleRows).map((message, index) => (
-            <tr key={index}>
-              <td>{message.title}</td>
+        <tbody className="data-list">
+          {data.map((item, index) => (
+            <tr key={index} className="data-item">
+
               <td>
-                <a
-                  href={message.audioLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Listen
-                </a>
+                <small>{item.month} {item.year}</small>
+                <br />
+                {item.title}
+                <br />
+                {item.speaker}
               </td>
-              <td style={{ padding: "10px" }}>
-                <a
-                  href={message.videoLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Watch
-                </a>
-              </td>
+
+              {item.audio && (
+                <td>
+                  <a href={item.audio} target="_blank" rel="noopener noreferrer">
+                    Audio
+                  </a>
+                </td>
+              )}
+
+              {item.video && (
+                <td>
+                  <a href={item.video} target="_blank" rel="noopener noreferrer">
+                    Video
+                  </a>
+                </td>
+              )}
+
             </tr>
           ))}
         </tbody>
+
       </table>
+
     </div>
   );
 };
 
-// Prop validation to ensure proper data structure
-MessagesTable.propTypes = {
-  messages: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      audioLink: PropTypes.string.isRequired,
-      videoLink: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-};
-
-export default MessagesTable;
+export default App;

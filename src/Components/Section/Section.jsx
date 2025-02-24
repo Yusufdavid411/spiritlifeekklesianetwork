@@ -20,8 +20,13 @@ const Section = () => {
   const [currencies] = useState([
     { name: "Naira", accountNumber: "0751940803" },
     { name: "USD", accountNumber: "0751940810" },
-    { name: "Euros", accountNumber: "0751940827" },
     { name: "Pounds (GBS)", accountNumber: "0751940834" },
+    { name: "Euros", accountNumber: "0751940827" },
+  ]);
+
+  const [currencies2] = useState([
+    { name: "Naira", accountNumber: "9128474017" },
+    { name: "USD", accountNumber: "1021179101" },
   ]);
 
 
@@ -36,6 +41,7 @@ const Section = () => {
     setOverlayContent({ imageUrl, accountNumber, bankName });
     setOverlayVisible(true);
   };
+
 
   // Hide overlay
   const hideOverlay = () => {
@@ -182,13 +188,13 @@ const Section = () => {
               onClick={(e) => {
                 e.stopPropagation();
                 showOverlay(
-                  '/img/sup-klc.jfif', // Flyer image URL
+                  '/img/minflyer.jpg', // Flyer image URL
                   '07519408**', // Account number
                   'GT BANK' // Bank name
                 );
               }}
             >
-              Giving
+              MINISTRY
             </div>
 
             <div
@@ -196,13 +202,13 @@ const Section = () => {
               onClick={(e) => {
                 e.stopPropagation();
                 showOverlay(
-                  '/img/sup-klc.jfif', // Flyer image URL
-                  '07519408**', // Account number
-                  'GT BANK' // Bank name
+                  '/img/fcmb.jpg', // Flyer image URL
+                  '91284740**', // Account number
+                  'FCMB BANK' // Bank name
                 );
               }}
             >
-              KLC Support
+              GOD'S SERVANT
             </div>
 
           </div>
@@ -275,6 +281,25 @@ const Section = () => {
             <h3>Select Currency</h3>
             <ul className="currency-list" >
               {currencies.map((currency, index) => (
+                <li
+                  key={index}
+                  className="currency-item"
+                  onClick={() => handleCurrencyClick(currency.accountNumber, currency.name)}
+                >
+                  {currency.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {isCurrencyOverlayVisible && (
+        <div className="overlay" onClick={hideCurrencyOverlay}>
+          <div className="currency-content" onClick={(e) => e.stopPropagation()}>
+            <h3>Select Currency</h3>
+            <ul className="currency-list" >
+              {currencies2.map((currency, index) => (
                 <li
                   key={index}
                   className="currency-item"

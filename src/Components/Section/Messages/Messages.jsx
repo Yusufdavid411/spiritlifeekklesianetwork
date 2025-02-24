@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom"
 import MessagesTable from "./MessagesTable";
-import messagesData from "./MessagesData"; // Importing the "database"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import "./messages.css"
@@ -23,7 +22,7 @@ const Messages = () => {
         <p>Messages ( Audio & Video)</p>
       </div>
 
-      <MessagesTable messages={messagesData} />
+      <MessagesTable />
 
 
     </div>

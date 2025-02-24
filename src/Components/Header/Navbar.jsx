@@ -51,7 +51,30 @@ const Navbar = () => {
           
         </li>
 
-        <li>Assignments</li>
+        <li onClick={() => handleItemClick(3, 'left')}>
+
+          Departments
+
+          {activeItem === 3 && (
+            <div className={`link-options ${linkPosition}`}>
+              <div className="link-optional">
+                <a href='ZoeStreams' target="_blank" rel="noopener noreferrer" className="link-option">Zoe Streams <br /> (Music Department)</a>
+                <a href="department/ZoeStreams" target="_blank" rel="noopener noreferrer" className="link-option">Kingdom Parables <br /> (Drama Department)</a>
+                <a href="/Departments/ZoeStreams.jsx" target="_blank" rel="noopener noreferrer" className="link-option">The Publishers <br /> (Media Department)</a>
+                <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Evangelism</a>
+                <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Children Department</a>
+                <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Prayer Department</a>
+                <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Ushering/Sanctuary Department</a>
+                <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Protocol Department</a>
+                <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Welfare Department</a>
+              </div>
+
+              <div><FontAwesomeIcon icon={faCaretRight} className="option-icon-btn" /></div>
+            </div>
+          )}
+          
+        </li>
+
         <li>Personal Study Notes</li>
       </ul>
 

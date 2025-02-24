@@ -34,6 +34,7 @@
 .table-Container table {
     width: 100%;
     border-collapse: collapse;
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .table-Container thead tr {
@@ -52,12 +53,17 @@
 
 
 .table-Container tbody tr {
-    background-color: rgba(0, 0, 0, 0.2);
+    /* background-color: rgba(0, 0, 0, 0.2); */
     border-bottom: 1px solid;
 }
 
 .table-Container tr td {
     padding: 12px;
+}
+.table-Container tr td small {
+    padding: 4px;
+    font-size: .5rem;
+    display: flex;
 }
 
 .table-Container td a {
