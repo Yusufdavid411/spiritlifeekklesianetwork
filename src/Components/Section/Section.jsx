@@ -11,25 +11,25 @@ const Section = () => {
   const [activeItem, setActiveItem] = useState(null); // Track active item
   const [linkPosition, setLinkPosition] = useState('left'); // Track link position
   const [isOverlayVisible, setOverlayVisible] = useState(false); // Manage overlay visibility
-  const [isOverlayVisible2, setOverlayVisible2] = useState(false); 
   const [overlayContent, setOverlayContent] = useState({}); // Content for the overlay
   const [isCurrencyOverlayVisible, setCurrencyOverlayVisible] = useState(false); // Currency overlay
-  const [isCurrencyOverlayVisible2, setCurrencyOverlayVisible2] = useState(false); 
+  const [selectedCurrency, setSelectedCurrency] = useState([]); // NEW: State to store selected currency details
   const navigate = useNavigate();
 
 
-
-  const [currencies] = useState([
+  // Separate currency lists for MINISTRY and GOD'S SERVANT
+  const ministryCurrencies = [
     { name: "Naira", accountNumber: "0751940803" },
     { name: "USD", accountNumber: "0751940810" },
     { name: "Pounds (GBS)", accountNumber: "0751940834" },
     { name: "Euros", accountNumber: "0751940827" },
-  ]);
+  ];
 
-  const [currencies2] = useState([
+
+  const servantCurrencies = [
     { name: "Naira", accountNumber: "9128474017" },
     { name: "USD", accountNumber: "1021179101" },
-  ]);
+  ];
 
 
   const handleItemClick = (itemId, position) => {
@@ -39,8 +39,9 @@ const Section = () => {
 
 
   // Show overlay with flyer details
-  const showOverlay = (imageUrl, accountNumber, bankName) => {
+  const showOverlay = (imageUrl, accountNumber, bankName, currencyList) => {
     setOverlayContent({ imageUrl, accountNumber, bankName });
+    setSelectedCurrency(currencyList);
     setOverlayVisible(true);
   };
 
@@ -55,24 +56,10 @@ const Section = () => {
     setCurrencyOverlayVisible(true);
   };
 
-  const showCurrencyOverlay2 = () => {
-    setCurrencyOverlayVisible2(true);
-  };
-
-
-  
-
   // Hide currency overlay
   const hideCurrencyOverlay = () => {
     setCurrencyOverlayVisible(false);
   };
-
-  const hideCurrencyOverlay2 = () => {
-    setCurrencyOverlayVisible2(false);
-  };
-
-
-  
 
   const bankNameClick = (bankName) => {
     navigator.clipboard.writeText(bankName)
@@ -188,7 +175,6 @@ const Section = () => {
       </div>
 
       <div className="container" onClick={() => handleItemClick(6, 'left')}>
-        
         <div className="icon">
           <FontAwesomeIcon icon={faHandHoldingDollar} />
         </div>
@@ -198,56 +184,51 @@ const Section = () => {
 
         {activeItem === 6 && (
           <div className={`link-options ${linkPosition}`}>
-
+            {/* Ministry Donation */}
             <div
               className="link-option"
               onClick={(e) => {
                 e.stopPropagation();
                 showOverlay(
-                  '/img/minflyer.jpg', // Flyer image URL
-                  '07519408**', // Account number
-                  'GT BANK' // Bank name
+                  '/img/minflyer.jpg',
+                  '07519408**',
+                  'GT BANK',
+                  ministryCurrencies // NEW: Pass MINISTRY currency list
                 );
               }}
             >
               MINISTRY
             </div>
 
+            {/* God's Servant Donation */}
             <div
               className="link-option"
               onClick={(e) => {
                 e.stopPropagation();
                 showOverlay(
-                  '/img/fcmb.jpg', // Flyer image URL
-                  '91284740**', // Account number
-                  'FCMB BANK' // Bank name
+                  '/img/fcmb.jpg',
+                  '91284740**',
+                  'FCMB BANK',
+                  servantCurrencies // NEW: Pass SERVANT currency list
                 );
               }}
             >
               GOD'S SERVANT
             </div>
-
           </div>
         )}
-
       </div>
 
       {/* Overlay Component */}
       {isOverlayVisible && (
         <div className="overlay" onClick={hideOverlay}>
-
-          <Toaster/>
-
+          <Toaster />
           <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
-
             <div className="flyer-image">
-
               <div className="flyer-items">
-
                 <div onClick={hideOverlay} className='exit'>
                   <FontAwesomeIcon icon={faArrowLeft} className="option-icon-btn" />
                 </div>
-
                 <div
                   className='download'
                   onClick={() => {
@@ -259,100 +240,28 @@ const Section = () => {
                 >
                   <FontAwesomeIcon icon={faDownload} bounce />
                 </div>
-
               </div>
-
               <img src={overlayContent.imageUrl} alt="Flyer" className="image" />
-
             </div>
-           
             <div className="overlay-buttons">
-
-              <button
-                onClick={showCurrencyOverlay}
-              >
-                <FontAwesomeIcon icon={faLink} />
-                Copy Account Number
+              <button onClick={showCurrencyOverlay}>
+                <FontAwesomeIcon icon={faLink} /> Copy Account Number
               </button>
-
-              <button
-                onClick={() => bankNameClick(overlayContent.bankName)}
-              >
-                <FontAwesomeIcon icon={faLink} />
-                Copy Bank
+              <button onClick={() => bankNameClick(overlayContent.bankName)}>
+                <FontAwesomeIcon icon={faLink} /> Copy Bank
               </button>
-
             </div>
-
           </div>
-
         </div>
       )}
-      
 
-      {isOverlayVisible2 && (
-        <div className="overlay" onClick={hideOverlay}>
-
-          <Toaster/>
-
-          <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
-
-            <div className="flyer-image">
-
-              <div className="flyer-items">
-
-                <div onClick={hideOverlay} className='exit'>
-                  <FontAwesomeIcon icon={faArrowLeft} className="option-icon-btn" />
-                </div>
-
-                <div
-                  className='download'
-                  onClick={() => {
-                    const link = document.createElement('a');
-                    link.href = overlayContent.imageUrl;
-                    link.download = 'flyer.jpg';
-                    link.click();
-                  }}
-                >
-                  <FontAwesomeIcon icon={faDownload} bounce />
-                </div>
-
-              </div>
-
-              <img src={overlayContent.imageUrl} alt="Flyer" className="image" />
-
-            </div>
-           
-            <div className="overlay-buttons">
-
-              <button
-                onClick={showCurrencyOverlay2}
-              >
-                <FontAwesomeIcon icon={faLink} />
-                Copy Account Number
-              </button>
-
-              <button
-                onClick={() => bankNameClick(overlayContent.bankName)}
-              >
-                <FontAwesomeIcon icon={faLink} />
-                Copy Bank
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-      )}
-      
-
+      {/* Currency Overlay with Selected Currency Details */}
       {isCurrencyOverlayVisible && (
         <div className="overlay" onClick={hideCurrencyOverlay}>
           <div className="currency-content" onClick={(e) => e.stopPropagation()}>
             <h3>Select Currency</h3>
-            <ul className="currency-list" >
-              {currencies.map((currency, index) => (
+            <ul className="currency-list">
+              {selectedCurrency.map((currency, index) => (
                 <li
                   key={index}
                   className="currency-item"
@@ -365,28 +274,6 @@ const Section = () => {
           </div>
         </div>
       )}
-
-
-      {/* Currency Selection Overlay */}
-      {isCurrencyOverlayVisible2 && (
-        <div className="overlay" onClick={hideCurrencyOverlay2}>
-          <div className="currency-content" onClick={(e) => e.stopPropagation()}>
-            <h3>Select Currency</h3>
-            <ul className="currency-list" >
-              {currencies2.map((currency, index) => (
-                <li
-                  key={index}
-                  className="currency-item"
-                  onClick={() => handleCurrencyClick(currency.accountNumber, currency.name)}
-                >
-                  {currency.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      )}
-
 
     </section>
 
