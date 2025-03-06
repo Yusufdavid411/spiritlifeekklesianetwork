@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar, faDownload, faArrowLeft, faLink } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom"
 import toast, { Toaster } from 'react-hot-toast';
-// test
+
 
 const Section = () => {
 
