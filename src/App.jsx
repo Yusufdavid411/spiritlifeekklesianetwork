@@ -5,7 +5,6 @@ import Section from './Components/Section/Section';
 import Footer from './Components/Footer/Footer';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Messages from "./Components/Section/Messages/Messages";
-import YearsPage from './Components/Section/Messages/YearsPage';
 
 
 function App() {
@@ -31,8 +30,6 @@ function App() {
             </div>
             
           } />
-
-          <Route path="/years" element={<YearsPage />} />
 
           <Route path="Messages/*" element={<Messages />} />
 
