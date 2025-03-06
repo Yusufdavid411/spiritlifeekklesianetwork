@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar, faDownload, faArrowLeft, faLink } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom"
 import toast, { Toaster } from 'react-hot-toast';
-
+// test
 
 const Section = () => {
 
@@ -93,7 +93,7 @@ const Section = () => {
           onClick={(e) => {
             e.stopPropagation();
             setActiveItem(null); // Close the link options
-            navigateTo("/Years");
+            navigateTo("/Messages");
           }}>
           <p>Messages (Audio and Videos)</p>
         </div>
@@ -274,6 +274,7 @@ const Section = () => {
           </div>
         </div>
       )}
+
     </section>
 
   )
