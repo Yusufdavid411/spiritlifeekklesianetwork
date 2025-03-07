@@ -5,7 +5,6 @@ import {faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar,
 import { useNavigate } from "react-router-dom"
 import toast, { Toaster } from 'react-hot-toast';
 
-
 const Section = () => {
 
   const [activeItem, setActiveItem] = useState(null); // Track active item
@@ -149,7 +148,15 @@ const Section = () => {
 
         {activeItem === 4 && (
           <div className={`link-options ${linkPosition}`}>
-            <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Drama</a>
+            <a 
+              className="link-option"
+              onClick={(e) => {
+                e.stopPropagation();
+                setActiveItem(null); // Close the link options
+                navigateTo("/Drama");
+              }}>
+              Drama
+            </a>
             <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Movies</a>
           </div>
         )}
