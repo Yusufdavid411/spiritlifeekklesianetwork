@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPlay, faHeadphones, faBookBible, faFilm, faPhone, faHandHoldingDollar, faDownload, faArrowLeft, faLink } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom"
 import toast, { Toaster } from 'react-hot-toast';
-// test
 
 const Section = () => {
 
@@ -149,7 +148,15 @@ const Section = () => {
 
         {activeItem === 4 && (
           <div className={`link-options ${linkPosition}`}>
-            <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Drama</a>
+            <a 
+              className="link-option"
+              onClick={(e) => {
+                e.stopPropagation();
+                setActiveItem(null); // Close the link options
+                navigateTo("/Drama");
+              }}>
+              Drama
+            </a>
             <a href="/" target="_blank" rel="noopener noreferrer" className="link-option">Movies</a>
           </div>
         )}
