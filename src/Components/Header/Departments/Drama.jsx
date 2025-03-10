@@ -15,7 +15,7 @@ const Aside = () => {
       
       <span
         onClick={() => navigate("/")}
-        className="message-btn"
+        className="drama-btn"
       >
         <FontAwesomeIcon icon={faArrowLeft} className="option-icon-btn" />
       </span>
@@ -26,7 +26,7 @@ const Aside = () => {
         playing={true}
         loop={true}
         muted={isMuted}
-        controls={false}
+        // controls={true}
         width="100%"
         height="100%"
         style={{ position: "absolute", top: 0, left: 0, zIndex: -1 }}
@@ -37,7 +37,7 @@ const Aside = () => {
         onClick={() => setIsMuted(!isMuted)}
         style={{
           position: "absolute",
-          top: "26vh",
+          top: "28vh",
           right: "10px",
           padding: "8px 10px",
           background: "linear-gradient(90deg, rgb(82, 9, 124),rgb(171, 30, 17),rgb(82, 9, 124))",

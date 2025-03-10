@@ -1,4 +1,4 @@
-.message-btn {
+.drama-btn {
     font-size: 1.2rem;
     padding: 10px;
     color: white;
@@ -8,7 +8,7 @@
     position: absolute;
 }
 
-.option-icon-btn {
+.drama-btn .option-icon-btn {
     margin: 10px 0;
     align-items: center;
 }
