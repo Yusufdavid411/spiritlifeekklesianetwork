@@ -5,6 +5,7 @@ body {
     background: var(--bg-color);
     display: flex;
     justify-content: center;
+    -webkit-tap-highlight-color: transparent;
 }
 
 :root {
