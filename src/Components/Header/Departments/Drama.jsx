@@ -22,7 +22,7 @@ const Aside = () => {
       {/* YouTube Video Background */}
       <ReactPlayer
         url="https://youtu.be/DbWQ7UDhn8Q?si=VmiBkyOQIpVXm-Dt"
-        // className="video"
+        className="video"
         playing={true}
         loop={true}
         controls={true}
