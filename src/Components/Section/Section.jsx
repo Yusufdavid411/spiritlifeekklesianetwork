@@ -23,7 +23,7 @@ const Section = () => {
     { name: "Pounds (GBS)", accountNumber: "0751940834" },
     { name: "Euros", accountNumber: "0751940827" },
   ];
-
+ 
 
   const servantCurrencies = [
     { name: "Naira", accountNumber: "9128474017" },
