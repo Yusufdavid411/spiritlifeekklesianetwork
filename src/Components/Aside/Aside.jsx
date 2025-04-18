@@ -8,11 +8,13 @@ import { faCaretLeft, faCaretRight, faTimes } from '@fortawesome/free-solid-svg-
 // import { faCircleDown } from '@fortawesome/free-regular-svg-icons'
 
 const items = [
-  { id: 1, title: 'item #2', img: (<div className="videos"><ReactPlayer className="video" url='https://youtube.com/shorts/APUm_UaDjqg?si=Zozt1010PlQ5KIXr' /></div>) },
+  { id: 1, title: 'item #2', img: (<div className="videos"><ReactPlayer className="video" url='https://youtube.com/shorts/KCnvcvIZM_w?si=TyQzz22h6tFSKinV' /></div>) },
   { id: 2, title: 'item #4', img: (<a ><img src='/img/easter.jpg' alt="logo" /></a>) },
   { id: 3, title: 'item #1', img: (<a ><img src='/img/deeptouch0.jpg' alt="Deep Touch" /></a>) },
   { id: 4, title: 'item #3', img: (<a ><img src='/img/supernaturalshift0.jpg' alt="Supernatural Shift" /></a>) },
   { id: 5, title: 'item #4', img: (<a ><img src='/img/nugget.jpg' alt="logo" /></a>) },
+  { id: 6, title: 'item #2', img: (<div className="videos"><ReactPlayer className="video" url='https://youtube.com/shorts/j-4_vvpS-LE?si=Ax5uiNTbqI9-xtgF' /></div>) },
+
   // { id: 6, title: 'item #2', img: (<a ><img src='/img/klc.jfif' alt="logo" /></a>) },
 ];
 
