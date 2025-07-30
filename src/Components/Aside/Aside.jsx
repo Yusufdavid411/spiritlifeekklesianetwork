@@ -8,7 +8,7 @@ import { faCaretLeft, faCaretRight, faTimes } from '@fortawesome/free-solid-svg-
 // import { faCircleDown } from '@fortawesome/free-regular-svg-icons'
 
 const items = [
-  { id: 1, title: 'item #2', img: (<div className="videos"><ReactPlayer className="video"  playing={true} loop={true} url='img/10years.mp4' /></div>) },
+  { id: 1, title: 'item #2', img: (<div className="videos"><ReactPlayer className="video" muted={true} playing={true} loop={true} url='img/10years.mp4' /></div>) },
   { id: 2, title: 'item #4', img: (<a ><img src='/img/blessing.jpg' alt="logo" /></a>) },
   { id: 3, title: 'item #1', img: (<a ><img src='/img/10yrsphoto.jpg' alt="Deep Touch" /></a>) },
   { id: 4, title: 'item #2', img: (<a ><img src='/img/deeptouch0.jpg' alt="Deep Touch" /></a>) },
