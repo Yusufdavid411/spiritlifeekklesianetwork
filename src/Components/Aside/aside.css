@@ -67,6 +67,28 @@ aside .videos:hover {
     box-shadow: 4px 4px 4px 5px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+/* 🟨 Hint box on top of the video */
+.unmute-hint {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  z-index: 999;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
+
 
 
 /* Modal Overlay */
