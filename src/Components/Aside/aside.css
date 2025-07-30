@@ -57,8 +57,10 @@ aside .video {
 aside .videos {
    border: 1px solid rgb(40, 40, 42);
    border-radius: 1px;
-   background-color: #02022ce0;
-   /* justify-content: center; */
+   background-color: #151518e0;
+   height: 100%;
+   border-radius: 10px;
+   justify-content: center;
 }
 
 aside .videos:hover {
