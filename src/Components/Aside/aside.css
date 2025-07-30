@@ -67,7 +67,7 @@ aside .videos:hover {
     box-shadow: 4px 4px 4px 5px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-/* 🟨 Hint box on top of the video */
+/* 💬 Hint Text Over the Video */
 .unmute-hint {
   position: absolute;
   top: 10%;
@@ -86,6 +86,7 @@ aside .videos:hover {
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
 
 
 

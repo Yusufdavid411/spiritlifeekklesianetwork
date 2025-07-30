@@ -1,97 +1,108 @@
 import ReactSimplyCarousel from 'react-simply-carousel';
-import { useState, useEffect } from 'react'; // `useEffect` for auto-scrolling
+import { useState, useEffect, useRef } from 'react';
 import React from 'react';
-import './aside.css'; // Assuming this file contains the carousel and modal styles
+import './aside.css';
 import ReactPlayer from 'react-player';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretLeft, faCaretRight, faTimes } from '@fortawesome/free-solid-svg-icons';
-import confetti from 'canvas-confetti'; // 🎉 Added for celebration effect
+import confetti from 'canvas-confetti';
 
-// 🎥 + 📸 Carousel Items
 const items = [
   {
     id: 1,
-    title: 'item #2',
-    img: (
-      <div className="videos">
-        <ReactPlayer
-          className="video"
-          muted={true} // This will be controlled with state below
-          playing={true}
-          loop={true}
-          url='img/10years.mp4'
-        />
-      </div>
-    )
+    title: 'item #1',
+    img: null // placeholder, we'll handle this separately
   },
-  { id: 2, title: 'item #4', img: (<a><img src='/img/blessing.jpg' alt="logo" /></a>) },
-  { id: 3, title: 'item #1', img: (<a><img src='/img/10yrsphoto.jpg' alt="Deep Touch" /></a>) },
-  { id: 4, title: 'item #2', img: (<a><img src='/img/deeptouch0.jpg' alt="Deep Touch" /></a>) },
-  { id: 5, title: 'item #3', img: (<a><img src='/img/supernaturalshift0.jpg' alt="Supernatural Shift" /></a>) },
-  { id: 6, title: 'item #4', img: (<a><img src='/img/nugget.jpg' alt="logo" /></a>) },
+  { id: 2, title: 'item #2', img: (<a><img src='/img/blessing.jpg' alt="logo" /></a>) },
+  { id: 3, title: 'item #3', img: (<a><img src='/img/10yrsphoto.jpg' alt="Deep Touch" /></a>) },
+  { id: 4, title: 'item #4', img: (<a><img src='/img/deeptouch0.jpg' alt="Deep Touch" /></a>) },
+  { id: 5, title: 'item #5', img: (<a><img src='/img/supernaturalshift0.jpg' alt="Supernatural Shift" /></a>) },
+  { id: 6, title: 'item #6', img: (<a><img src='/img/nugget.jpg' alt="logo" /></a>) },
 ];
 
 const Aside = () => {
-  const [activeSlideIndex, setActiveSlideIndex] = useState(0); // Tracks current slide
-  const [isModalOpen, setIsModalOpen] = useState(false); // Modal open/close
-  const [modalIndex, setModalIndex] = useState(0); // Current modal index
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalIndex, setModalIndex] = useState(0);
+  const [isVideoMuted, setIsVideoMuted] = useState(true);
+  const [hasInteracted, setHasInteracted] = useState(false);
 
-  const [isVideoMuted, setIsVideoMuted] = useState(true); // 🔇 Controls mute
-  const [hasInteracted, setHasInteracted] = useState(false); // 👆 Only fire once
+  const playerRef = useRef(null); // direct reference to player
 
-  // 🎉 Detect first screen interaction to unmute video and trigger confetti
   useEffect(() => {
     const handleFirstInteraction = () => {
       if (!hasInteracted) {
-        setIsVideoMuted(false); // 🔊 Unmute video
-        setHasInteracted(true); // ☝️ Prevent multiple triggers
-        runConfetti();          // 🎉 Fire confetti
+        setIsVideoMuted(false);
+        setHasInteracted(true);
+        runConfetti();
+      }
+    };
+
+    const handleConfettiOnClick = () => {
+      if (hasInteracted) {
+        runConfetti();
       }
     };
 
     window.addEventListener('click', handleFirstInteraction);
-    return () => window.removeEventListener('click', handleFirstInteraction);
+    window.addEventListener('scroll', handleFirstInteraction);
+    window.addEventListener('click', handleConfettiOnClick);
+
+    return () => {
+      window.removeEventListener('click', handleFirstInteraction);
+      window.removeEventListener('scroll', handleFirstInteraction);
+      window.removeEventListener('click', handleConfettiOnClick);
+    };
   }, [hasInteracted]);
 
-  // 🎉 Launch confetti
   const runConfetti = () => {
     confetti({
-      particleCount: 150,
-      spread: 100,
+      particleCount: 100,
+      spread: 80,
       origin: { y: 0.6 }
     });
 
-    setTimeout(() => {
+    const duration = 3 * 1000;
+    const animationEnd = Date.now() + duration;
+    const colors = ['#bb0000', '#ffffff', '#00bb00', '#0000bb'];
+
+    (function frame() {
+      const timeLeft = animationEnd - Date.now();
+      if (timeLeft <= 0) return;
+
       confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.3 }
+        particleCount: 2,
+        angle: 90,
+        spread: 60,
+        origin: { y: 1 },
+        colors,
+        shapes: ['circle'],
+        gravity: 0.4,
+        scalar: 1.2,
+        ticks: 200,
       });
-    }, 500);
+
+      requestAnimationFrame(frame);
+    })();
   };
 
-  // Open modal
   const openModal = (index) => {
     setModalIndex(index);
     setIsModalOpen(true);
   };
 
-  // Close modal
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
-  // Close modal if clicking outside
   const handleOutsideClick = (e) => {
     if (e.target.classList.contains('modal-overlay')) closeModal();
   };
 
-  // Navigate modal prev
   const handlePrev = () => {
     setModalIndex((prevIndex) => (prevIndex === 0 ? items.length - 1 : prevIndex - 1));
   };
 
-  // Navigate modal next
   const handleNext = () => {
     setModalIndex((prevIndex) => (prevIndex + 1) % items.length);
   };
@@ -128,20 +139,21 @@ const Aside = () => {
             key={item.id}
             onClick={() => openModal(index)}
           >
-            {/* Custom logic for item #1 to unmute */}
             {item.id === 1 ? (
               <div className="videos">
                 <ReactPlayer
+                  ref={playerRef}
                   className="video"
                   muted={isVideoMuted}
                   playing={true}
                   loop={true}
-                  url='img/10years.mp4'
+                  url="img/10years.mp4"
+                  // width="100%"
+                  // height="100%"
                 />
-                {/* 🔊 Hint Message */}
                 {isVideoMuted && (
                   <div className="unmute-hint">
-                    <p>🎉 Tap anywhere to unmute & celebrate 10 years!</p>
+                    <p>🎉 Tap or scroll to unmute & celebrate 10 years!</p>
                   </div>
                 )}
               </div>
@@ -152,22 +164,31 @@ const Aside = () => {
         ))}
       </ReactSimplyCarousel>
 
-      {/* Modal Section */}
       {isModalOpen && (
         <div className="modal-overlay" onClick={handleOutsideClick}>
           <div className='img-container'>
             <div className="modal-content">
-              {/* ❌ Close Button */}
               <button className="close-btn" onClick={closeModal}>
                 <FontAwesomeIcon icon={faTimes} />
               </button>
 
-              {/* 📸 Current Modal Item */}
               <div className="modal-item">
-                {items[modalIndex].img}
+                {modalIndex === 0 ? (
+                  <div className="videos">
+                    <ReactPlayer
+                      muted={false}
+                      playing={true}
+                      loop={true}
+                      url="img/10years.mp4"
+                      width="100%"
+                      height="100%"
+                    />
+                  </div>
+                ) : (
+                  items[modalIndex].img
+                )}
               </div>
 
-              {/* ⬅️➡️ Navigation */}
               <button className="modal-prev-button" onClick={handlePrev}>
                 <FontAwesomeIcon icon={faCaretLeft} />
               </button>
