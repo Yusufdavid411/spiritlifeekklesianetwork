@@ -13,7 +13,7 @@ const items = [
     title: 'item #1',
     img: null // placeholder, we'll handle this separately
   },
-  { id: 2, title: 'item #2', img: (<a><img src='/img/blessing.jpg' alt="logo" /></a>) },
+  { id: 2, title: 'item #2', img: (<a><img src='/img/RevJude.jpg' alt="logo" /></a>) },
   { id: 3, title: 'item #3', img: (<a><img src='/img/10yrsphoto.jpg' alt="Deep Touch" /></a>) },
   { id: 4, title: 'item #4', img: (<a><img src='/img/deeptouch0.jpg' alt="Deep Touch" /></a>) },
   { id: 5, title: 'item #5', img: (<a><img src='/img/supernaturalshift0.jpg' alt="Supernatural Shift" /></a>) },
