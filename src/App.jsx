@@ -1,55 +1,39 @@
+// ============================================
+// APP.JSX - MAIN APP ROUTING
+// Purpose: Setup routes for public website
+// Uses: Backend API (https://spiritlife.familytradecenter.com/api/)
+// Admin: https://spiritlife.tokinrides.com/
+// ============================================
+
 import './App.css'
-import Header from './Components/Header/Header'
-import Aside from './Components/Aside/Aside'
-import Section from './Components/Section/Section';
-import Footer from './Components/Footer/Footer';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Messages from "./Components/Section/Messages/Messages";
-// Departments
-import ZoeStreams from './Components/Header/Departments/ZoeStreams';
-import Drama from './Components/Header/Departments/Drama';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { AuthProvider } from "./context/AuthContext"
 
-
+// Website pages
+import Home from "./website/pages/Home"
+import About from "./website/pages/About"
+import Sermons from "./website/pages/Sermons"
+import Events from "./website/pages/Events"
+import RhemaMeditations from "./website/pages/RhemaMeditations"
 
 function App() {
-
   return (
-
-    <div className="content" id="content">
+    <AuthProvider>
       <Router>
-
-
-        <Header />
-
         <Routes future={{ v7_relativeSplatPath: true }}>
+          {/* PUBLIC WEBSITE ROUTES */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/sermons" element={<Sermons />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/rhema-meditations" element={<RhemaMeditations />} />
 
-          <Route path="/" element={
-
-            <div>
-
-              <Aside />
-
-              <Section />
-
-            </div>
-            
-          } />
-
-          <Route path="Messages/*" element={<Messages />} />
-          <Route path="ZoeStreams/*" element={<ZoeStreams />} />
-          <Route path="Drama/*" element={<Drama />} />
-
+          {/* 404 - Not found */}
+          <Route path="*" element={<div>Page not found</div>} />
         </Routes>
-
-        <Footer />
-
-
       </Router>
-
-    </div>
-
+    </AuthProvider>
   )
-
 }
 
-export default App;
+export default App

@@ -1,0 +1,439 @@
+/**
+ * HOME PAGE STYLES
+ * Hero section with background video
+ */
+
+.home {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #04046f 0%, rgb(68, 4, 68) 100%);
+}
+
+/* Background Video */
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Dark Overlay */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+/* Hero Content */
+.hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: left;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem;
+  max-width: 700px;
+  animation: slideInLeft 0.8s ease-out;
+}
+
+/* Vision Badge */
+.vision-badge {
+  background-color: white;
+  color: #04046f;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-block;
+  width: fit-content;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Hero Title */
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: bold;
+  line-height: 1.1;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+  letter-spacing: 2px;
+  margin: 0;
+  color: white;
+}
+
+/* Hero Subtitle (Typing Animation) */
+.hero-subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  line-height: 1.6;
+  color: white;
+  min-height: 4rem;
+  display: flex;
+  align-items: flex-start;
+}
+
+/* ============================================
+   HOME CONTENT SECTION
+   ============================================ */
+
+.home-content {
+  flex: 1;
+  background-color: white;
+  padding: 4rem 2rem;
+  color: #333;
+}
+
+.content-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.home-content h2 {
+  font-size: 2.5rem;
+  color: #04046f;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.home-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   TABLET RESPONSIVE (768px - 1024px)
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+  }
+
+  .hero-content {
+    max-width: 600px;
+  }
+
+  .home-content h2 {
+    font-size: 2rem;
+  }
+}
+
+/* ============================================
+   MOBILE RESPONSIVE (< 768px)
+   ============================================ */
+
+@media (max-width: 768px) {
+  .hero {
+    height: 80vh;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-description {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .hero-content {
+    gap: 1rem;
+    padding: 1.5rem;
+    max-width: 100%;
+  }
+
+  .vision-badge {
+    font-size: 0.85rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .home-content {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .home-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .home-content p {
+    font-size: 1rem;
+  }
+}
+
+/* ============================================
+   SMALL MOBILE (< 480px)
+   ============================================ */
+
+@media (max-width: 480px) {
+  .hero {
+    height: 70vh;
+  }
+
+  .hero-title {
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .hero-description {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  .hero-content {
+    gap: 0.8rem;
+    padding: 1rem;
+  }
+
+  .vision-badge {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .home-content {
+    padding: 2rem 1rem;
+  }
+
+  .home-content h2 {
+    font-size: 1.3rem;
+  }
+}
+
+/* ============================================
+   TODAY'S RHEMA SECTION ON HOME
+   ============================================ */
+
+.todays-rhema-home {
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
+  border-top: 3px solid #ff6b4a;
+}
+
+.rhema-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.rhema-section-title {
+  font-size: 2.5rem;
+  color: #04046f;
+  text-align: center;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.rhema-card-home {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  background: white;
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.rhema-image-home {
+  border-radius: 10px;
+  overflow: hidden;
+  max-height: 400px;
+}
+
+.rhema-image-home img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.rhema-card-home:hover .rhema-image-home img {
+  transform: scale(1.05);
+}
+
+.rhema-content-home {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.rhema-content-home h3 {
+  font-size: 1.8rem;
+  color: #04046f;
+  margin: 0;
+  font-weight: 700;
+}
+
+.rhema-date-home {
+  color: #ff6b4a;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.rhema-preview {
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0.5rem 0 0 0;
+}
+
+.btn-rhema-view {
+  display: inline-block;
+  background-color: #ff6b4a;
+  color: white;
+  text-decoration: none;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  width: fit-content;
+  text-align: center;
+}
+
+.btn-rhema-view:hover {
+  background-color: #ff5533;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 107, 74, 0.4);
+}
+
+/* ============================================
+   RESPONSIVE - TODAY'S RHEMA ON HOME
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .rhema-section-title {
+    font-size: 2rem;
+  }
+
+  .rhema-card-home {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+
+  .rhema-content-home h3 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .todays-rhema-home {
+    padding: 3rem 1.5rem;
+  }
+
+  .rhema-section-title {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+
+  .rhema-card-home {
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+
+  .rhema-content-home h3 {
+    font-size: 1.3rem;
+  }
+
+  .rhema-preview {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .todays-rhema-home {
+    padding: 2rem 1rem;
+    border-top: 2px solid #ff6b4a;
+  }
+
+  .rhema-section-title {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .rhema-card-home {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .rhema-content-home h3 {
+    font-size: 1.1rem;
+  }
+
+  .rhema-date-home {
+    font-size: 0.85rem;
+  }
+
+  .rhema-preview {
+    font-size: 0.9rem;
+  }
+
+  .btn-rhema-view {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+

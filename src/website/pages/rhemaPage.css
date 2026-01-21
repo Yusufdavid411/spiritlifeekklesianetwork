@@ -1,0 +1,391 @@
+/**
+ * RHEMA MEDITATIONS PAGE STYLES
+ * Styling for main rhema page and grid layout
+ */
+
+.rhema-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.rhema-page .page-content {
+  flex: 1;
+  background-color: white;
+  padding: 3rem 2rem;
+}
+
+/* ============================================
+   PAGE HEADER
+   ============================================ */
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-header h1 {
+  font-size: 3rem;
+  color: #04046f;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  font-weight: 500;
+}
+
+/* ============================================
+   TODAY'S RHEMA SECTION
+   ============================================ */
+
+.todays-rhema {
+  margin-bottom: 4rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  color: #04046f;
+  margin: 0;
+}
+
+.badge-today {
+  background-color: #ff6b4a;
+  color: white;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.rhema-featured {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  background: #f5f5f5;
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.rhema-image-wrapper {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.rhema-featured-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.rhema-image-wrapper:hover .rhema-featured-image {
+  transform: scale(1.05);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.rhema-image-wrapper:hover .image-overlay {
+  opacity: 1;
+}
+
+.rhema-featured-content h2 {
+  font-size: 2rem;
+  color: #04046f;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+.rhema-date {
+  color: #ff6b4a;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.rhema-writeup {
+  color: #333;
+  line-height: 1.8;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.btn-view-modal {
+  background-color: #ff6b4a;
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-view-modal:hover {
+  background-color: #ff5533;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 107, 74, 0.4);
+}
+
+/* ============================================
+   PREVIOUS RHEMA MEDITATIONS SECTION
+   ============================================ */
+
+.previous-rhemas {
+  margin-bottom: 2rem;
+}
+
+.previous-rhemas h2 {
+  font-size: 1.8rem;
+  color: #04046f;
+  margin-bottom: 2rem;
+}
+
+.rhema-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* ============================================
+   RHEMA CARD
+   ============================================ */
+
+.rhema-card {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.rhema-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.rhema-card-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.rhema-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.rhema-card:hover .rhema-card-image img {
+  transform: scale(1.1);
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(4, 4, 111, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.rhema-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.rhema-card-content {
+  padding: 1.5rem;
+}
+
+.rhema-card-content h3 {
+  font-size: 1.2rem;
+  color: #04046f;
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+}
+
+.card-date {
+  color: #ff6b4a;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 0.8rem 0;
+}
+
+.card-preview {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ============================================
+   EMPTY & LOADING STATES
+   ============================================ */
+
+.loading-text,
+.empty-state,
+.no-todays-rhema {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-size: 1rem;
+}
+
+.no-todays-rhema {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  padding: 2rem;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .rhema-featured {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .rhema-featured-content h2 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .rhema-page .page-content {
+    padding: 2rem 1rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rhema-featured {
+    padding: 1.5rem;
+  }
+
+  .rhema-featured-content h2 {
+    font-size: 1.4rem;
+  }
+
+  .rhema-writeup {
+    font-size: 0.9rem;
+    max-height: 150px;
+  }
+
+  .rhema-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .previous-rhemas h2 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rhema-page .page-content {
+    padding: 1rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .todays-rhema {
+    margin-bottom: 2rem;
+  }
+
+  .section-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .rhema-featured {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .rhema-featured-content h2 {
+    font-size: 1.2rem;
+  }
+
+  .rhema-date {
+    font-size: 0.8rem;
+  }
+
+  .rhema-writeup {
+    max-height: 120px;
+    font-size: 0.85rem;
+  }
+
+  .btn-view-modal {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .rhema-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
