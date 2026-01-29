@@ -67,6 +67,21 @@
   margin-top: 1rem;
 }
 
+/* ============================================
+   FIX: RESTORED HOUSE OF GLORY BADGE COLOR
+   Must match navbar color exactly
+============================================ */
+
+.vision-badge {
+  background-color: rgb(68, 4, 68); /* same as navbar */
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  width: fit-content;
+}
+
 /* ================= EVENTS ================= */
 
 .home-events {
