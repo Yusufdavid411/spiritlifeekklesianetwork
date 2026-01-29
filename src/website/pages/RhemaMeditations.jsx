@@ -1,3 +1,12 @@
+// ============================================
+// RHEMA MEDITATIONS PAGE
+// Updated UI:
+// - Unified image styling
+// - Smaller featured rhema
+// - Clear section separation
+// - Dark / purple theme
+// ============================================
+
 import React, { useEffect, useState } from "react"
 import { rhemaMeditations } from "../../services/api"
 import Navbar from "../components/Navbar"
@@ -15,88 +24,136 @@ const RhemaMeditations = () => {
     fetchRhemas()
   }, [])
 
+  // Fetch all rhema meditations
   const fetchRhemas = async () => {
     try {
       const response = await rhemaMeditations.getAll()
-      const rhemaList = response?.data?.rhemaMeditation || []
-      // sort newest first
-      const sorted = [...rhemaList].sort(
+
+      const list = Array.isArray(response?.data?.rhemaMeditation)
+        ? response.data.rhemaMeditation
+        : []
+
+      const sorted = [...list].sort(
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
       )
+
       setRhemas(sorted)
-      // Find today's rhema
+
+      // Detect today’s rhema or fallback to latest
       const today = new Date().toISOString().split("T")[0]
-      const todayRhemaData = sorted.find(r => new Date(r.created_at).toISOString().split("T")[0] === today)
-      setTodayRhema(todayRhemaData || null)
-    } catch (error) {
-      console.error("Failed to fetch rhemas:", error)
+      const todayItem = sorted.find(
+        r => new Date(r.created_at).toISOString().split("T")[0] === today
+      )
+
+      setTodayRhema(todayItem || sorted[0] || null)
+    } catch (err) {
+      console.error("Failed to fetch rhema:", err)
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="rhema-page">
+    <div className="rhema-page dark-theme">
       <Navbar />
+
       <main className="page-content">
+
+        {/* PAGE TITLE */}
         <div className="page-header">
           <h1>Rhema Meditations</h1>
-          <p className="page-subtitle">Daily inspirational messages for your spiritual growth</p>
         </div>
 
-        {loading && <p>Loading rhema meditations...</p>}
-        {!loading && !todayRhema && rhemas.length === 0 && (
-          <p>No rhema meditations available.</p>
-        )}
+        {/* ================= TODAY RHEMA ================= */}
+        <h2 className="section-title">Today Rhema Meditation</h2>
 
-
-        {/* Today's Rhema Meditation - Side by Side */}
-        {!loading && todayRhema && (
-          <section className="todays-rhema-featured">
-            <h2 className="featured-label">Today's Rhema Meditation</h2>
-            <div className="featured-rhema-card rhema-featured" onClick={() => setSelectedRhema(todayRhema)}>
-              <div className="rhema-image-wrapper">
-                <img className="rhema-featured-image" src={todayRhema.image?.image_url} alt={todayRhema.title} />
+        <section className="today-rhema-wrapper">
+          {loading ? (
+            <div className="today-rhema-skeleton" />
+          ) : todayRhema ? (
+            <div
+              className="today-rhema-card unified-rhema-card"
+              onClick={() => setSelectedRhema(todayRhema)}
+            >
+              {/* Image (full image, smaller size) */}
+              <div className="rhema-image-box">
+                <img
+                  src={todayRhema.image?.image_url}
+                  alt={todayRhema.title}
+                />
               </div>
-              <div className="rhema-featured-content">
-                <h2>{todayRhema.title}</h2>
-                <p className="rhema-date">{new Date(todayRhema.created_at).toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" })}</p>
-                <p className="rhema-writeup">{todayRhema.content}</p>
-                <button className="btn-view-modal">View Full Rhema</button>
+
+              {/* Content */}
+              <div className="rhema-text">
+                <h3>{todayRhema.title}</h3>
+
+                <p className="rhema-date">
+                  {new Date(todayRhema.created_at).toLocaleDateString("en-US", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+
+                <p className="rhema-preview">
+                  {todayRhema.content?.substring(0, 260)}...
+                </p>
               </div>
             </div>
-          </section>
-        )}
+          ) : null}
+        </section>
 
-        {/* Previous Rhema Meditations Grid */}
-        {!loading && rhemas.length > 0 && (
-          <section className="previous-rhemas">
-            <h3 className="previous-title">Previous Rhema Meditations</h3>
-            <div className="rhema-grid">
+        {/* ================= PREVIOUS RHEMA ================= */}
+        <h2 className="section-title">Previous Rhema Meditations</h2>
+
+        <section className="previous-rhema-wrapper">
+          {loading ? (
+            <div className="previous-skeleton-grid">
+              {[1, 2, 3, 4].map(i => (
+                <div key={i} className="previous-rhema-skeleton" />
+              ))}
+            </div>
+          ) : (
+            <div className="previous-rhema-grid">
               {rhemas
-                .filter(r => !todayRhema || r.id !== todayRhema.id)
+                .filter(r => r.id !== todayRhema?.id)
                 .map(rhema => (
                   <div
                     key={rhema.id}
-                    className="rhema-card"
+                    className="previous-rhema-card unified-rhema-card"
                     onClick={() => setSelectedRhema(rhema)}
                   >
-                    <div className="rhema-card-image">
-                      <img src={rhema.image?.image_url} alt={rhema.title} />
+                    {/* Image */}
+                    <div className="rhema-image-box small">
+                      <img
+                        src={rhema.image?.image_url}
+                        alt={rhema.title}
+                      />
                     </div>
-                    <div className="rhema-card-content">
+
+                    {/* Content */}
+                    <div className="rhema-text">
                       <h4>{rhema.title}</h4>
-                      <p className="card-date">{new Date(rhema.created_at).toLocaleDateString()}</p>
+                      <span className="rhema-date">
+                        {new Date(rhema.created_at).toLocaleDateString()}
+                      </span>
                     </div>
                   </div>
                 ))}
             </div>
-          </section>
-        )}
+          )}
+        </section>
       </main>
+
+      {/* MODAL */}
       {selectedRhema && (
-        <RhemaModal rhema={selectedRhema} onClose={() => setSelectedRhema(null)} />
+        <RhemaModal
+          rhema={selectedRhema}
+          onClose={() => setSelectedRhema(null)}
+        />
       )}
+
       <Footer />
     </div>
   )

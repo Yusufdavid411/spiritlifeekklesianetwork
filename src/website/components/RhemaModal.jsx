@@ -1,77 +1,62 @@
 // ============================================
-// RHEMA MODAL COMPONENT
-// Purpose: Display full rhema meditation with download option
-// Features:
-// - Full image display
-// - Complete writeup
-// - Download image functionality
-// - Close button
+// RHEMA MODAL
+// Purpose: Display full rhema meditation
+// Fixes:
+// - Correct image source
+// - Proper centered modal
+// - Scrollable content
+// - Reliable close behavior
 // ============================================
 
 import React from "react"
 import "./rhemaModal.css"
 
 const RhemaModal = ({ rhema, onClose }) => {
-  const handleDownload = async () => {
-    try {
-      const response = await fetch(rhema.image_url)
-      const blob = await response.blob()
-      const url = window.URL.createObjectURL(blob)
-      const a = document.createElement("a")
-      a.href = url
-      a.download = `${rhema.title.replace(/\s+/g, "-")}.jpg`
-      document.body.appendChild(a)
-      a.click()
-      window.URL.revokeObjectURL(url)
-      document.body.removeChild(a)
-    } catch (error) {
-      console.error("Error downloading image:", error)
-      alert("Failed to download image")
-    }
-  }
-
+  // Close modal when clicking backdrop
   const handleBackdropClick = (e) => {
-    if (e.target.className === "rhema-modal-backdrop") {
+    if (e.target.classList.contains("rhema-modal-backdrop")) {
       onClose()
     }
   }
 
   return (
     <div className="rhema-modal-backdrop" onClick={handleBackdropClick}>
-      <div className="rhema-modal">
+      <div className="rhema-modal-container">
+
         {/* Close Button */}
-        <button className="modal-close" onClick={onClose} aria-label="Close modal">
+        <button
+          className="rhema-modal-close"
+          onClick={onClose}
+          aria-label="Close modal"
+        >
           ✕
         </button>
 
-        {/* Modal Content */}
-        <div className="modal-content">
-          {/* Image Section */}
-          <div className="modal-image-section">
-            <img src={rhema.image_url} alt={rhema.title} className="modal-image" />
+        {/* Image */}
+        {rhema.image?.image_url && (
+          <div className="rhema-modal-image">
+            <img
+              src={rhema.image.image_url}
+              alt={rhema.title}
+            />
           </div>
+        )}
 
-          {/* Text Content Section */}
-          <div className="modal-text-section">
-            <h2 className="modal-title">{rhema.title}</h2>
-            
-            <p className="modal-date">
-              {new Date(rhema.created_at).toLocaleDateString("en-US", {
-                weekday: "long",
-                year: "numeric",
-                month: "long",
-                day: "numeric"
-              })}
-            </p>
+        {/* Content */}
+        <div className="rhema-modal-content">
+          <h2>{rhema.title}</h2>
 
-            <div className="modal-writeup">
-              {rhema.content}
-            </div>
+          <p className="rhema-modal-date">
+            {new Date(rhema.created_at).toLocaleDateString("en-US", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </p>
 
-            {/* Download Button */}
-            <button onClick={handleDownload} className="btn-download">
-              📥 Download Image
-            </button>
+          <div className="rhema-modal-text">
+            {rhema.content}
           </div>
         </div>
       </div>
