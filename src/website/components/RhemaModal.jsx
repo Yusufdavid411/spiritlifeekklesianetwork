@@ -1,64 +1,50 @@
 // ============================================
 // RHEMA MODAL
-// Purpose: Display full rhema meditation
-// Fixes:
-// - Correct image source
-// - Proper centered modal
-// - Scrollable content
-// - Reliable close behavior
+// FIX:
+// - Explicit Download Image button
 // ============================================
 
 import React from "react"
 import "./rhemaModal.css"
 
 const RhemaModal = ({ rhema, onClose }) => {
-  // Close modal when clicking backdrop
-  const handleBackdropClick = (e) => {
-    if (e.target.classList.contains("rhema-modal-backdrop")) {
-      onClose()
+  const downloadImage = async () => {
+    try {
+      const res = await fetch(rhema.image?.image_url)
+      const blob = await res.blob()
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement("a")
+      a.href = url
+      a.download = `${rhema.title}.jpg`
+      a.click()
+      URL.revokeObjectURL(url)
+    } catch (e) {
+      alert("Failed to download image")
     }
   }
 
   return (
-    <div className="rhema-modal-backdrop" onClick={handleBackdropClick}>
-      <div className="rhema-modal-container">
+    <div className="rhema-modal-backdrop" onClick={onClose}>
+      <div className="rhema-modal" onClick={e => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>✕</button>
 
-        {/* Close Button */}
-        <button
-          className="rhema-modal-close"
-          onClick={onClose}
-          aria-label="Close modal"
-        >
-          ✕
+        <img
+          src={rhema.image?.image_url}
+          alt={rhema.title}
+          className="modal-image"
+        />
+
+        <h2>{rhema.title}</h2>
+        <p className="modal-date">
+          {new Date(rhema.created_at).toDateString()}
+        </p>
+
+        <div className="modal-writeup">{rhema.content}</div>
+
+        {/* ✅ DOWNLOAD BUTTON */}
+        <button className="btn-download" onClick={downloadImage}>
+          Download Image
         </button>
-
-        {/* Image */}
-        {rhema.image?.image_url && (
-          <div className="rhema-modal-image">
-            <img
-              src={rhema.image.image_url}
-              alt={rhema.title}
-            />
-          </div>
-        )}
-
-        {/* Content */}
-        <div className="rhema-modal-content">
-          <h2>{rhema.title}</h2>
-
-          <p className="rhema-modal-date">
-            {new Date(rhema.created_at).toLocaleDateString("en-US", {
-              weekday: "long",
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </p>
-
-          <div className="rhema-modal-text">
-            {rhema.content}
-          </div>
-        </div>
       </div>
     </div>
   )

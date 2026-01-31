@@ -1,17 +1,17 @@
 // ============================================
 // HOME PAGE
-// Updates:
-// - Maintains original background
-// - Faster event rendering with skeletons
-// - Unified image styling (same as Rhema)
-// - Full image display (no crop)
+// Final version
+// - Events show date + time + venue
+// - Events modal supports download & social sharing
+// - Rhema modal behavior preserved
 // ============================================
 
 import React, { useEffect, useRef, useState } from "react"
-import { events as eventsAPI } from "../../services/api"
+import { events as eventsAPI, rhemaMeditations } from "../../services/api"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import TypingAnimation from "../components/TypingAnimation"
+import RhemaModal from "../components/RhemaModal"
 import "./home.css"
 
 const Home = () => {
@@ -20,11 +20,15 @@ const Home = () => {
   const [loadingEvents, setLoadingEvents] = useState(true)
   const [activeEvent, setActiveEvent] = useState(null)
 
+  // RHEMA STATE
+  const [todayRhema, setTodayRhema] = useState(null)
+  const [loadingRhema, setLoadingRhema] = useState(true)
+  const [activeRhema, setActiveRhema] = useState(null)
+
   // VIDEO
   const videoRef = useRef(null)
   const [isMuted, setIsMuted] = useState(false)
 
-  // Play hero video immediately
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.muted = false
@@ -35,40 +39,61 @@ const Home = () => {
     }
   }, [])
 
-  const toggleMute = () => {
-    setIsMuted(prev => {
-      if (videoRef.current) videoRef.current.muted = !prev
-      return !prev
-    })
-  }
-
-  // Fetch events immediately
   useEffect(() => {
     fetchEvents()
+    fetchTodayRhema()
   }, [])
 
   const fetchEvents = async () => {
     try {
       const response = await eventsAPI.getAll()
-
-      const list = Array.isArray(response?.data?.events)
-        ? response.data.events
-        : []
-
-      setEvents(list)
+      setEvents(Array.isArray(response?.data?.events) ? response.data.events : [])
     } catch (err) {
-      console.error("Failed to fetch events:", err)
+      console.error(err)
     } finally {
-      // Stop loading as soon as response returns
       setLoadingEvents(false)
     }
   }
+
+  const fetchTodayRhema = async () => {
+    try {
+      const response = await rhemaMeditations.getAll()
+      const list = response?.data?.rhemaMeditation || []
+      const today = new Date().toISOString().split("T")[0]
+      const item = list.find(r => r.created_at.startsWith(today)) || list[0]
+      setTodayRhema(item || null)
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setLoadingRhema(false)
+    }
+  }
+
+  const downloadImage = async (url, title) => {
+    const res = await fetch(url)
+    const blob = await res.blob()
+    const link = document.createElement("a")
+    link.href = URL.createObjectURL(blob)
+    link.download = `${title}.jpg`
+    link.click()
+    URL.revokeObjectURL(link.href)
+  }
+
+  const shareText = (event) =>
+    `${event.title}
+📅 ${new Date(event.start_datetime).toLocaleDateString()}
+⏰ ${new Date(event.start_datetime).toLocaleTimeString()}
+📍 ${event.location || ""}
+
+${event.image?.image_url}
+
+${window.location.origin}`
 
   return (
     <div className="home">
       <Navbar />
 
-      {/* ================= HERO SECTION ================= */}
+      {/* ================= HERO ================= */}
       <section className="hero">
         <video
           ref={videoRef}
@@ -83,16 +108,13 @@ const Home = () => {
 
         <div className="hero-overlay" />
 
-        {/* Mute Button */}
-        <button className="mute-btn" onClick={toggleMute}>
+        <button className="mute-btn" onClick={() => setIsMuted(m => !m)}>
           {isMuted ? "🔇" : "🔊"}
         </button>
 
         <div className="hero-content">
           <h1 className="hero-title">SPIRIT LIFE EKKLESIA NETWORK</h1>
-
           <div className="vision-badge">HOUSE OF GLORY</div>
-
           <div className="hero-subtitle">
             <TypingAnimation
               text="A Ministry with a vision to be, and raise men in whom God can entrust his counsel in all spheres of life as ordained and not suffer loss"
@@ -102,42 +124,41 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ================= EVENTS SECTION ================= */}
+      {/* ================= EVENTS ================= */}
       <section className="home-events">
         <h2 className="home-section-title">Programs & Events</h2>
 
         {loadingEvents ? (
-          // Instant skeleton UI (no delay)
-          <div className="events-skeleton-grid">
+          <div className="events-grid">
             {[1, 2, 3].map(i => (
               <div key={i} className="event-skeleton unified-rhema-card" />
             ))}
           </div>
-        ) : events.length === 0 ? (
-          <p className="no-events">No upcoming events at the moment.</p>
         ) : (
           <div className="events-grid">
             {events.map(event => (
               <div
                 key={event.id}
-                className="event-card unified-rhema-card"
+                className="unified-rhema-card"
                 onClick={() => setActiveEvent(event)}
               >
-                {/* FULL IMAGE (same pattern as Rhema) */}
                 <div className="rhema-image-box small">
                   {event.image?.image_url && (
-                    <img
-                      src={event.image.image_url}
-                      alt={event.title}
-                    />
+                    <img src={event.image.image_url} alt={event.title} />
                   )}
                 </div>
 
                 <div className="rhema-text">
                   <h4>{event.title}</h4>
 
+                  {/* EVENT DATE */}
                   <p className="rhema-date">
-                    {new Date(event.start_datetime).toLocaleDateString()}
+                    📅 {new Date(event.start_datetime).toLocaleDateString()}
+                  </p>
+
+                  {/* ✅ EVENT TIME ADDED */}
+                  <p className="rhema-date">
+                    ⏰ {new Date(event.start_datetime).toLocaleTimeString()}
                   </p>
 
                   {event.location && (
@@ -150,16 +171,47 @@ const Home = () => {
         )}
       </section>
 
+      {/* ================= HOME RHEMA ================= */}
+      <section className="home-rhema">
+        <h2 className="home-section-title">Today’s Rhema Meditation</h2>
+
+        {loadingRhema ? (
+          <div className="event-skeleton unified-rhema-card" />
+        ) : todayRhema && (
+          <div
+            className="unified-rhema-card"
+            onClick={() => setActiveRhema(todayRhema)}
+          >
+            <div className="rhema-image-box">
+              <img src={todayRhema.image?.image_url} alt={todayRhema.title} />
+            </div>
+
+            <div className="rhema-text">
+              <h4>{todayRhema.title}</h4>
+              <p className="rhema-date">
+                {new Date(todayRhema.created_at).toDateString()}
+              </p>
+              <p>{todayRhema.content?.substring(0, 180)}...</p>
+
+              <a
+                href="/rhema-meditations"
+                className="view-all-btn"
+                onClick={(e) => e.stopPropagation()}
+              >
+                View All Rhema
+              </a>
+            </div>
+          </div>
+        )}
+      </section>
+
       {/* ================= EVENT MODAL ================= */}
       {activeEvent && (
         <div
           className="event-modal-backdrop"
           onClick={() => setActiveEvent(null)}
         >
-          <div
-            className="event-modal"
-            onClick={e => e.stopPropagation()}
-          >
+          <div className="event-modal" onClick={e => e.stopPropagation()}>
             <button
               className="event-modal-close"
               onClick={() => setActiveEvent(null)}
@@ -168,29 +220,78 @@ const Home = () => {
             </button>
 
             <div className="rhema-image-box">
-              {activeEvent.image?.image_url && (
-                <img
-                  src={activeEvent.image.image_url}
-                  alt={activeEvent.title}
-                />
-              )}
+              <img
+                src={activeEvent.image?.image_url}
+                alt={activeEvent.title}
+              />
             </div>
 
             <h3>{activeEvent.title}</h3>
 
             <p className="rhema-date">
-              {new Date(activeEvent.start_datetime).toLocaleString()}
+              📅 {new Date(activeEvent.start_datetime).toLocaleDateString()} <br />
+              ⏰ {new Date(activeEvent.start_datetime).toLocaleTimeString()}
             </p>
 
             {activeEvent.location && (
               <p className="event-location">📍 {activeEvent.location}</p>
             )}
 
-            <p className="event-description">
-              {activeEvent.description}
-            </p>
+            <div className="modal-actions">
+              <button
+                className="btn-download"
+                onClick={() =>
+                  downloadImage(
+                    activeEvent.image.image_url,
+                    activeEvent.title
+                  )
+                }
+              >
+                Download Image
+              </button>
+
+              <div className="share-buttons">
+                <a
+                  href={`https://wa.me/?text=${encodeURIComponent(
+                    shareText(activeEvent)
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  WhatsApp
+                </a>
+
+                <a
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                    activeEvent.image.image_url
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Facebook
+                </a>
+
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                    shareText(activeEvent)
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  X
+                </a>
+              </div>
+            </div>
           </div>
         </div>
+      )}
+
+      {/* ================= RHEMA MODAL ================= */}
+      {activeRhema && (
+        <RhemaModal
+          rhema={activeRhema}
+          onClose={() => setActiveRhema(null)}
+        />
       )}
 
       <Footer />

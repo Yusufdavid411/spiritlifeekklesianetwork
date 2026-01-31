@@ -120,7 +120,14 @@
 .dropdown-toggle {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
+}
+
+.dropdown-toggle svg,
+.dropdown-toggle img {
+  display: block;       /* removes inline baseline issues */
+  margin-top: 0;        /* reset any inherited margin */
 }
 
 .dropdown-icon {
