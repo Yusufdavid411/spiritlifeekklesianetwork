@@ -1,15 +1,14 @@
 // ============================================
-// PUBLIC WEBSITE - SERMONS PAGE
-// Purpose: Display all sermons
-// Route: /sermons
-// Fetches: Sermons from backend API
+// PUBLIC WEBSITE – SERMONS PAGE
+// Data Source: Google Sheet (CSV)
+// Latest sermons shown first
 // ============================================
 
-import React, { useState, useEffect } from "react"
-import { sermons as sermonsAPI } from "../../services/api"
+import React, { useEffect, useState } from "react"
+import axios from "axios"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
-import "./website.css"
+import "./sermons.css"
 
 const Sermons = () => {
   const [sermons, setSermons] = useState([])
@@ -20,78 +19,111 @@ const Sermons = () => {
   }, [])
 
   const fetchSermons = async () => {
-    try {
-      const response = await sermonsAPI.getAll()
-      console.log("Sermons API Response:", response)
-      
-      let sermonsData = []
-      if (Array.isArray(response.data)) {
-        sermonsData = response.data
-      } else if (Array.isArray(response)) {
-        sermonsData = response
-      }
+    const url =
+      "https://docs.google.com/spreadsheets/d/18OVONeRvroB2xmxzFNIHQrQGYhRgdC5sTV9BqoOT368/gviz/tq?tqx=out:csv"
 
-      if (sermonsData.length > 0) {
-        setSermons(sermonsData)
-      } else {
-        console.log("Using sample sermons for development")
-        setSermons(getSampleSermons())
-      }
+    try {
+      const response = await axios.get(url)
+      const csvData = response.data
+
+      const rows = csvData.split("\n").slice(1)
+
+      const parsed = rows
+        .map(row => {
+          const fields = row.split(",")
+
+          if (fields.length < 5) return null
+
+          const [
+            year,
+            month,
+            title,
+            audio,
+            video,
+            speaker,
+            thumbnail,
+          ] = fields.map(field =>
+            field.trim().replace(/^"|"$/g, "")
+          )
+
+          return {
+            year,
+            month,
+            title,
+            audio,
+            video,
+            speaker,
+            thumbnail,
+          }
+        })
+        .filter(Boolean)
+        .reverse() // 🔥 latest first
+
+      setSermons(parsed)
     } catch (error) {
-      console.error("Error fetching sermons:", error)
-      console.log("Using sample sermons for development")
-      setSermons(getSampleSermons())
+      console.error("Failed to fetch sermons:", error)
     } finally {
       setLoading(false)
     }
   }
 
-  const getSampleSermons = () => {
-    return [
-      {
-        id: 1,
-        title: "The Power of Prayer",
-        preacher: "Pastor John",
-        description: "Learn how prayer can transform your life and bring you closer to God.",
-        cover_image: "https://via.placeholder.com/500x300?text=Power+of+Prayer",
-        audio_file: "https://example.com/sermon1.mp3"
-      },
-      {
-        id: 2,
-        title: "Grace and Mercy",
-        preacher: "Pastor Mary",
-        description: "Understanding God's grace and how it applies to our daily lives.",
-        cover_image: "https://via.placeholder.com/500x300?text=Grace+Mercy",
-        audio_file: "https://example.com/sermon2.mp3"
-      }
-    ]
-  }
-
   return (
     <div className="sermons-page">
       <Navbar />
-      
+
       <main className="page-content">
-        <h1>Sermons</h1>
+        <div className="sermons-header">
+          <h1>Sermons</h1>
+          <p>Audio & video messages to build your faith</p>
+        </div>
 
         {loading ? (
-          <p>Loading sermons...</p>
-        ) : sermons.length === 0 ? (
-          <p>No sermons available yet.</p>
+          <div className="sermons-loading">Loading sermons...</div>
         ) : (
           <div className="sermons-grid">
-            {sermons.map(sermon => (
-              <div key={sermon.id} className="sermon-card">
-                {sermon.imageUrl && (
-                  <img src={sermon.imageUrl} alt={sermon.title} />
+            {sermons.map((sermon, index) => (
+              <div key={index} className="sermon-card">
+                
+                {/* Thumbnail */}
+                {sermon.thumbnail && (
+                  <div className="sermon-image">
+                    <img src={sermon.thumbnail} alt={sermon.title} />
+                  </div>
                 )}
-                <h3>{sermon.title}</h3>
-                <p>{sermon.description}</p>
-                {sermon.videoUrl && (
-                  <a href={sermon.videoUrl} target="_blank" rel="noopener noreferrer" className="btn">
-                    Watch Sermon
-                  </a>
-                )}
+
+                {/* Content */}
+                <div className="sermon-content">
+                  <h3>{sermon.title}</h3>
+
+                  <p className="sermon-meta">
+                    {sermon.speaker} · {sermon.month} {sermon.year}
+                  </p>
+
+                  <div className="sermon-actions">
+                    {sermon.audio && (
+                      <a
+                        href={sermon.audio}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-outline"
+                      >
+                        Listen
+                      </a>
+                    )}
+
+                    {sermon.video && (
+                      <a
+                        href={sermon.video}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary"
+                      >
+                        Watch
+                      </a>
+                    )}
+                  </div>
+                </div>
+
               </div>
             ))}
           </div>

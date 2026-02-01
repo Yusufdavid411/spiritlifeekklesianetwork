@@ -294,6 +294,15 @@ ${window.location.origin}`
         />
       )}
 
+      <a
+        href="https://wa.me/234XXXXXXXXXX"
+        className="whatsapp-float"
+        target="_blank"
+        rel="noreferrer"
+      >
+        💬
+      </a>
+
       <Footer />
     </div>
   )

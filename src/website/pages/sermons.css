@@ -1,0 +1,109 @@
+/* ============================================
+   SERMONS PAGE – MODERN DESIGN
+============================================ */
+
+.sermons-page {
+  background: #f7f7fb;
+}
+
+.sermons-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sermons-header h1 {
+  font-size: 2.2rem;
+  color: #04046f;
+}
+
+.sermons-header p {
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 0.4rem;
+}
+
+.sermons-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2.5rem;
+}
+
+.sermon-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  transition: transform 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.sermon-card:hover {
+  transform: translateY(-6px);
+}
+
+.sermon-image img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.sermon-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.sermon-content h3 {
+  color: #04046f;
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+}
+
+.sermon-meta {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgb(68, 4, 68);
+  margin-bottom: 1.2rem;
+}
+
+.sermon-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.btn-primary {
+  background: rgb(68, 4, 68);
+  color: white;
+  padding: 0.5rem 1.3rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.btn-outline {
+  border: 1px solid rgb(68, 4, 68);
+  color: rgb(68, 4, 68);
+  padding: 0.5rem 1.3rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.sermons-loading {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+  .sermons-header h1 {
+    font-size: 1.8rem;
+  }
+}

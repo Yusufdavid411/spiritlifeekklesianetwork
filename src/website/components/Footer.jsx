@@ -9,7 +9,7 @@ import {
   faInstagram,
   faSquareThreads,
 } from "@fortawesome/free-brands-svg-icons"
-import { faLocationDot, faEnvelope } from "@fortawesome/free-solid-svg-icons"
+import { faLocationDot } from "@fortawesome/free-solid-svg-icons"
 
 const Footer = () => {
   return (
@@ -20,27 +20,51 @@ const Footer = () => {
         <div className="footer-section">
           <h3 className="footer-title">SpiritLife Ekklesia Network</h3>
           <p className="footer-text">
-            Raising men in whom God can entrust His counsel, 
+            Raising men in whom God can entrust His counsel,
             shaping lives for divine purpose across all spheres.
           </p>
 
           <div className="footer-socials">
-            <a href="https://youtube.com/@judezakwoyi?si=scCwEitMSw9Dc7iA" target="_blank" rel="noreferrer">
+            <a
+              href="https://youtube.com/@judezakwoyi?si=scCwEitMSw9Dc7iA"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FontAwesomeIcon icon={faYoutube} />
             </a>
-            <a href="https://www.facebook.com/judejerryzakwoyi/" target="_blank" rel="noreferrer">
+            <a
+              href="https://www.facebook.com/judejerryzakwoyi/"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FontAwesomeIcon icon={faFacebook} />
             </a>
-            <a href="https://t.me/SpiritLifemessages" target="_blank" rel="noreferrer">
+            <a
+              href="https://t.me/SpiritLifemessages"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FontAwesomeIcon icon={faTelegram} />
             </a>
-            <a href="https://www.instagram.com/jude_zakwoyi?igsh=dnhoMnd3Y3IybDM3" target="_blank" rel="noreferrer">
+            <a
+              href="https://www.instagram.com/jude_zakwoyi?igsh=dnhoMnd3Y3IybDM3"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FontAwesomeIcon icon={faInstagram} />
             </a>
-            <a href="https://www.threads.net/@jude_zakwoyi" target="_blank" rel="noreferrer">
+            <a
+              href="https://www.threads.net/@jude_zakwoyi"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FontAwesomeIcon icon={faSquareThreads} />
             </a>
-            <a href="https://www.tiktok.com/@judezakwoyi?_t=ZM-8skmJ16vqSs&_r=1" target="_blank" rel="noreferrer">
+            <a
+              href="https://www.tiktok.com/@judezakwoyi?_t=ZM-8skmJ16vqSs&_r=1"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FontAwesomeIcon icon={faTiktok} />
             </a>
           </div>
@@ -69,7 +93,7 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* ================= LOCATION & NEWSLETTER ================= */}
+        {/* ================= LOCATION ================= */}
         <div className="footer-section">
           <h4 className="footer-subtitle">Location</h4>
 
@@ -85,14 +109,6 @@ const Footer = () => {
               Along Airport Road, Abuja
             </span>
           </a>
-
-          <div className="footer-newsletter">
-            <p>Get Daily Rhema & Ministry Updates</p>
-            <div className="newsletter-input">
-              <FontAwesomeIcon icon={faEnvelope} />
-              <input type="email" placeholder="Enter your email" />
-            </div>
-          </div>
         </div>
 
       </div>

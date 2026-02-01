@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react"
 import { events as eventsAPI } from "../../services/api"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
-import "./website.css"
+import "./events.css"
 
 const Events = () => {
   const [events, setEvents] = useState([])
