@@ -113,12 +113,12 @@ ${window.location.origin}`
         </button>
 
         <div className="hero-content">
-          <h1 className="hero-title">SPIRIT LIFE EKKLESIA NETWORK</h1>
+          <h1 className="hero-title">SPIRITLIFE EKKLESIA NETWORK</h1>
           <div className="vision-badge">HOUSE OF GLORY</div>
           <div className="hero-subtitle">
             <TypingAnimation
               text="A Ministry with a vision to be, and raise men in whom God can entrust his counsel in all spheres of life as ordained and not suffer loss"
-              speed={28}
+              speed={30}
             />
           </div>
         </div>

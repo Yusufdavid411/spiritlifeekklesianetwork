@@ -78,7 +78,6 @@ const Footer = () => {
             <li><a href="/about">About the Ministry</a></li>
             <li><a href="/sermons">Sermons</a></li>
             <li><a href="/rhema-meditations">Rhema Meditations</a></li>
-            <li><a href="/events">Programs & Events</a></li>
             <li><a href="/contact">Contact</a></li>
           </ul>
         </div>
@@ -87,9 +86,8 @@ const Footer = () => {
         <div className="footer-section">
           <h4 className="footer-subtitle">Service Times</h4>
           <ul className="footer-times">
-            <li>🕊️ Sunday Service — 9:00 AM</li>
-            <li>🔥 Midweek Service — Wednesday 5:30 PM</li>
-            <li>📖 Rhema Meditation — Daily</li>
+            <li>SUPERNATURAL SHIFT — SUNDAYS 8:00 AM</li>
+            <li>DEEP TOUCH _ FRIDAYS 4PM</li>
           </ul>
         </div>
 

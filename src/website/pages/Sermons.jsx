@@ -1,7 +1,9 @@
 // ============================================
 // PUBLIC WEBSITE – SERMONS PAGE
 // Data Source: Google Sheet (CSV)
-// Latest sermons shown first
+// Features:
+// - Live search (as user types)
+// - Latest sermons shown first
 // ============================================
 
 import React, { useEffect, useState } from "react"
@@ -12,6 +14,7 @@ import "./sermons.css"
 
 const Sermons = () => {
   const [sermons, setSermons] = useState([])
+  const [searchTerm, setSearchTerm] = useState("")
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -24,14 +27,11 @@ const Sermons = () => {
 
     try {
       const response = await axios.get(url)
-      const csvData = response.data
-
-      const rows = csvData.split("\n").slice(1)
+      const rows = response.data.split("\n").slice(1)
 
       const parsed = rows
         .map(row => {
           const fields = row.split(",")
-
           if (fields.length < 5) return null
 
           const [
@@ -42,30 +42,30 @@ const Sermons = () => {
             video,
             speaker,
             thumbnail,
-          ] = fields.map(field =>
-            field.trim().replace(/^"|"$/g, "")
-          )
+          ] = fields.map(f => f.trim().replace(/^"|"$/g, ""))
 
-          return {
-            year,
-            month,
-            title,
-            audio,
-            video,
-            speaker,
-            thumbnail,
-          }
+          return { year, month, title, audio, video, speaker, thumbnail }
         })
         .filter(Boolean)
         .reverse() // 🔥 latest first
 
       setSermons(parsed)
-    } catch (error) {
-      console.error("Failed to fetch sermons:", error)
+    } catch (err) {
+      console.error("Failed to fetch sermons:", err)
     } finally {
       setLoading(false)
     }
   }
+
+  // 🔍 LIVE SEARCH FILTER
+  const filteredSermons = sermons.filter(sermon => {
+    const q = searchTerm.toLowerCase()
+    return (
+      sermon.title.toLowerCase().includes(q) ||
+      sermon.speaker.toLowerCase().includes(q) ||
+      `${sermon.month} ${sermon.year}`.toLowerCase().includes(q)
+    )
+  })
 
   return (
     <div className="sermons-page">
@@ -74,24 +74,29 @@ const Sermons = () => {
       <main className="page-content">
         <div className="sermons-header">
           <h1>Sermons</h1>
-          <p>Audio & video messages to build your faith</p>
+
+          {/* 🔍 SEARCH INPUT (exact place you requested) */}
+          <input
+            type="text"
+            className="sermon-search"
+            placeholder="Search sermons, speaker, date..."
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+          />
         </div>
 
         {loading ? (
           <div className="sermons-loading">Loading sermons...</div>
         ) : (
           <div className="sermons-grid">
-            {sermons.map((sermon, index) => (
+            {filteredSermons.map((sermon, index) => (
               <div key={index} className="sermon-card">
-                
-                {/* Thumbnail */}
                 {sermon.thumbnail && (
                   <div className="sermon-image">
                     <img src={sermon.thumbnail} alt={sermon.title} />
                   </div>
                 )}
 
-                {/* Content */}
                 <div className="sermon-content">
                   <h3>{sermon.title}</h3>
 
@@ -110,7 +115,6 @@ const Sermons = () => {
                         Listen
                       </a>
                     )}
-
                     {sermon.video && (
                       <a
                         href={sermon.video}
@@ -123,7 +127,6 @@ const Sermons = () => {
                     )}
                   </div>
                 </div>
-
               </div>
             ))}
           </div>

@@ -1,0 +1,142 @@
+/* ============================================
+   ABOUT PAGE – MINISTRY DESIGN
+============================================ */
+
+.about-page {
+  background: #f7f7fb;
+}
+
+/* ================= HERO ================= */
+
+.about-hero {
+  padding: 4rem 1.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(4, 4, 111, 0.95),
+    rgba(68, 4, 68, 0.95)
+  );
+  color: white;
+}
+
+.about-hero-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
+.about-intro h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.about-intro h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.9;
+  margin-bottom: 1.2rem;
+}
+
+.about-core {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* ================= SECTIONS ================= */
+
+.about-section {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+
+.about-section h2 {
+  font-size: 1.6rem;
+  color: #04046f;
+  margin-bottom: 1.2rem;
+}
+
+.about-section p {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+/* ================= CARDS ================= */
+
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+.about-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.about-card h3 {
+  color: rgb(68, 4, 68);
+  margin-bottom: 0.8rem;
+}
+
+/* ================= LIST ================= */
+
+.about-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.about-list li {
+  padding-left: 1.2rem;
+  margin-bottom: 0.7rem;
+  position: relative;
+  font-size: 0.95rem;
+}
+
+.about-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: rgb(68, 4, 68);
+}
+
+/* ================= CLOSING ================= */
+
+.about-closing {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.about-closing p {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(68, 4, 68);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .about-hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .about-image img {
+    margin: 0 auto;
+  }
+}

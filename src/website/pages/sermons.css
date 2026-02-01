@@ -14,6 +14,7 @@
 .sermons-header h1 {
   font-size: 2.2rem;
   color: #04046f;
+  margin-top: 2rem;
 }
 
 .sermons-header p {
@@ -24,7 +25,7 @@
 
 .sermons-grid {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 10px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2.5rem;
@@ -107,3 +108,40 @@
     font-size: 1.8rem;
   }
 }
+
+
+
+/* ================= SEARCH ================= */
+
+.sermon-search {
+  margin-top: 1.2rem;
+  padding: 0.7rem 1.2rem;
+  width: 80%;
+  max-width: 420px;
+  border-radius: 30px;
+  border: 1px solid rgba(68, 4, 68, 0.3);
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.sermon-search:focus {
+  border-color: rgb(68, 4, 68);
+}
+
+/* ================= REVEAL ANIMATION ================= */
+
+.reveal {
+  animation: fadeUp 0.45s ease both;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

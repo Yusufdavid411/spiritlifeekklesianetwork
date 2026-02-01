@@ -51,7 +51,7 @@
   position: relative;
   z-index: 3;
   padding: 2rem;
-  max-width: 800px;
+  max-width: 700px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -77,19 +77,19 @@
   font-weight: 600;
   font-size: 0.95rem;
   width: fit-content;
+  margin-top: .5rem;
 }
 
 /* ================= EVENTS ================= */
 
 .home-events {
   padding: 4rem 2rem;
-  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .home-section-title {
   text-align: center;
   font-size: 2rem;
-  color: #04046f;
+  color: #1e002b;
   margin-bottom: 2.5rem;
 }
 
@@ -147,7 +147,7 @@
 
 .home-rhema {
   padding: 4rem 2rem;
-  background-color: rgba(0, 0, 0, 0.2);
+  /* background-color: rgba(0, 0, 0, 0.2); */
 }
 
 .view-all-btn {
