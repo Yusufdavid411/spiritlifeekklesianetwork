@@ -1,0 +1,57 @@
+.dept-page {
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.child-theme {
+  background: linear-gradient(135deg, #dfe9ff, #f6eaff);
+}
+
+/* TOP BAR */
+.dept-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.dept-switcher {
+  padding: 0.5rem;
+  border-radius: 20px;
+  border: .4rem solid white;
+  width: 10rem;
+  font-size: 0.9rem;
+}
+
+/* HERO */
+.dept-hero {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.dept-hero h1 {
+  font-size: 2.2rem;
+  color: #04046f;
+}
+
+.dept-hero p {
+  margin-top: 0.6rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* CONTENT */
+.dept-content {
+  max-width: 700px;
+  margin: 3rem auto 0;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}

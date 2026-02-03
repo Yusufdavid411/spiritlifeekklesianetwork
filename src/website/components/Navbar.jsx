@@ -1,10 +1,5 @@
 // ============================================
 // PUBLIC WEBSITE - RESPONSIVE NAVBAR
-// Features:
-// - Mobile: Hamburger menu icon
-// - Desktop/Tablet: Straight line navigation
-// - Departments dropdown
-// - Logo on left, nav on right
 // ============================================
 
 import React, { useState } from "react"
@@ -16,17 +11,17 @@ const Navbar = () => {
   const [departmentsOpen, setDepartmentsOpen] = useState(false)
   const navigate = useNavigate()
 
-  // Department links with paths
+  // ✅ FIXED: Department paths now match App.jsx routes
   const departments = [
-    { name: 'Zoe Streams (Music)', path: '/ZoeStreams' },
-    { name: 'Kingdom Parables (Drama)', path: '/Drama' },
-    { name: 'The Publishers (Media)', path: '/Media' },
-    { name: 'Evangelism', path: '/Evan' },
-    { name: 'Children', path: '/Child' },
-    { name: 'Prayer', path: '/Prayer' },
-    { name: 'Ushering/Sanctuary', path: '/Usher' },
-    { name: 'Protocol', path: '/Protocol' },
-    { name: 'Welfare', path: '/Welfare' }
+    { name: "Zoe Streams (Music)", path: "/departments/zoestreams" },
+    { name: "Kingdom Parables (Drama)", path: "/departments/drama" },
+    { name: "The Publishers (Media)", path: "/departments/media" },
+    { name: "Evangelism", path: "/departments/evan" },
+    { name: "Children", path: "/departments/child" },
+    { name: "Prayer", path: "/departments/prayer" },
+    { name: "Ushering/Sanctuary", path: "/departments/usher" },
+    { name: "Protocol", path: "/departments/protocol" },
+    { name: "Welfare", path: "/departments/welfare" },
   ]
 
   const handleNavClick = (path) => {
@@ -43,15 +38,15 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        
+
         {/* Logo */}
         <div className="navbar-logo">
           <img src="/img/logo.png" alt="Spirit Life Ekklesia Network Logo" />
         </div>
 
         {/* Hamburger Menu Icon (Mobile) */}
-        <div 
-          className={`hamburger ${mobileMenuOpen ? 'active' : ''}`}
+        <div
+          className={`hamburger ${mobileMenuOpen ? "active" : ""}`}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           <span></span>
@@ -60,46 +55,34 @@ const Navbar = () => {
         </div>
 
         {/* Navigation Menu */}
-        <ul className={`nav-menu ${mobileMenuOpen ? 'active' : ''}`}>
-          
-          {/* Home */}
+        <ul className={`nav-menu ${mobileMenuOpen ? "active" : ""}`}>
+
           <li className="nav-item">
-            <a 
-              className="nav-link"
-              onClick={() => handleNavClick('/')}
-            >
+            <a className="nav-link" onClick={() => handleNavClick("/")}>
               Home
             </a>
           </li>
 
-          {/* About */}
           <li className="nav-item">
-            <a 
-              className="nav-link"
-              onClick={() => handleNavClick('/about')}
-            >
+            <a className="nav-link" onClick={() => handleNavClick("/about")}>
               About
             </a>
           </li>
 
-          {/* Departments with Dropdown */}
+          {/* Departments Dropdown */}
           <li className="nav-item dropdown">
-            <a 
-              className="nav-link dropdown-toggle"
-              onClick={toggleDepartments}
-            >
+            <a className="nav-link dropdown-toggle" onClick={toggleDepartments}>
               Departments
-              <span className={`dropdown-icon ${departmentsOpen ? 'open' : ''}`}>▼</span>
+              <span className={`dropdown-icon ${departmentsOpen ? "open" : ""}`}>
+                ▼
+              </span>
             </a>
 
-            {/* Dropdown Menu */}
             {departmentsOpen && (
               <ul className="dropdown-menu">
                 {departments.map((dept, index) => (
                   <li key={index} className="dropdown-item">
-                    <a 
-                      onClick={() => handleNavClick(dept.path)}
-                    >
+                    <a onClick={() => handleNavClick(dept.path)}>
                       {dept.name}
                     </a>
                   </li>
@@ -108,37 +91,27 @@ const Navbar = () => {
             )}
           </li>
 
-          {/* Sermons */}
           <li className="nav-item">
-            <a 
-              className="nav-link"
-              onClick={() => handleNavClick('/sermons')}
-            >
+            <a className="nav-link" onClick={() => handleNavClick("/sermons")}>
               Sermons
             </a>
           </li>
 
-          {/* Rhema Meditation */}
           <li className="nav-item">
-            <a 
+            <a
               className="nav-link"
-              onClick={() => handleNavClick('/rhema-meditations')}
+              onClick={() => handleNavClick("/rhema-meditations")}
             >
               Rhema Meditation
             </a>
           </li>
 
-          {/* ...existing code... */}
-
-          {/* Contact */}
           <li className="nav-item">
-            <a 
-              className="nav-link contact"
-              href="tel:+2349094600075"
-            >
+            <a className="nav-link contact" href="tel:+2349094600075">
               📞 +234 909 460 0075
             </a>
           </li>
+
         </ul>
       </div>
     </nav>
