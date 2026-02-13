@@ -22,7 +22,7 @@ const Aside = () => {
         <select
           className="dept-switcher"
           onChange={(e) => navigate(`/departments/${e.target.value}`)}
-          defaultValue="child"
+          defaultValue="drama"
         >
           <option value="child">Children</option>
           <option value="drama">Drama</option>

@@ -8,7 +8,56 @@ import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import "./about.css"
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  faHandHoldingDollar,
+  faArrowLeft,
+  faDownload,
+  faLink,
+} from "@fortawesome/free-solid-svg-icons"
+import toast, { Toaster } from "react-hot-toast"
+
 const About = () => {
+
+  // ================= DONATIONS (GIVING) =================
+  const [isOverlayVisible, setOverlayVisible] = React.useState(false)
+  const [isCurrencyOverlayVisible, setCurrencyOverlayVisible] = React.useState(false)
+  const [overlayContent, setOverlayContent] = React.useState({})
+  const [selectedCurrency, setSelectedCurrency] = React.useState([])
+
+  const ministryCurrencies = [
+    { name: "Naira", accountNumber: "0751940803" },
+    { name: "USD", accountNumber: "0751940810" },
+    { name: "Pounds (GBS)", accountNumber: "0751940834" },
+    { name: "Euros", accountNumber: "0751940827" },
+  ]
+
+  const servantCurrencies = [
+    { name: "Naira", accountNumber: "9128474017" },
+    { name: "USD", accountNumber: "1021179101" },
+  ]
+
+  const showOverlay = (imageUrl, bankName, currencyList) => {
+    setOverlayContent({ imageUrl, bankName })
+    setSelectedCurrency(currencyList)
+    setOverlayVisible(true)
+  }
+
+  const hideOverlay = () => setOverlayVisible(false)
+  const showCurrencyOverlay = () => setCurrencyOverlayVisible(true)
+  const hideCurrencyOverlay = () => setCurrencyOverlayVisible(false)
+
+  const bankNameClick = (bankName) => {
+    navigator.clipboard.writeText(bankName)
+    toast(`${bankName} copied to clipboard!`)
+  }
+
+  const handleCurrencyClick = (accountNumber, name) => {
+    navigator.clipboard.writeText(accountNumber)
+    toast(`${name} (${accountNumber}) copied to clipboard!`)
+    hideCurrencyOverlay()
+  }
+
   return (
     <div className="about-page">
       <Navbar />
@@ -47,6 +96,7 @@ const About = () => {
           His mind across all spheres of life.
         </p>
       </section>
+
 
       {/* ================= VISION / MANDATE ================= */}
       <section className="about-section about-cards">
@@ -104,6 +154,54 @@ const About = () => {
         </ul>
       </section>
 
+      {/* ================= MINISTRY GALLERY SLIDER ================= */}
+      <section className="about-section about-gallery">
+        <h2>Ministry Gallery</h2>
+
+        <div className="gallery-wrapper">
+          <div className="gallery-track">
+            {/* Repeat image multiple times for smooth infinite scroll */}
+            <img src="/img/Pst Jude 1.jpg" alt="Ministry Moment" />
+            <img src="/img/nugget.jpg" alt="Ministry Moment" />
+            <img src="/img/supernaturalshift0.jpg" alt="Ministry Moment" />
+            <img src="/img/easter.jpg" alt="Ministry Moment" />
+            <img src="/img/minflyer.jpg" alt="Ministry Moment" />
+            <img src="/img/sundayflyer.jpg" alt="Ministry Moment" />
+            <img src="/img/deeptouch.jpg" alt="Ministry Moment" />
+            <img src="/img/deeptouch0.jpg" alt="Ministry Moment" />
+          </div>
+        </div>
+      </section>
+
+      
+      {/* ================= DONATIONS (GIVING) ================= */}
+      <section className="about-section about-giving">
+        <h2>Donations (Giving)</h2>
+
+        <p>
+          Your giving supports the work of the ministry and helps advance
+          the spread of the Word across lives and nations.
+        </p>
+
+        <div className="giving-buttons">
+          <button
+            onClick={() =>
+              showOverlay("/img/minflyer.jpg", "GT BANK", ministryCurrencies)
+            }
+            >
+            <FontAwesomeIcon icon={faHandHoldingDollar} /> Give to Ministry
+          </button>
+
+          <button
+            onClick={() =>
+              showOverlay("/img/fcmb.jpg", "FCMB BANK", servantCurrencies)
+            }
+            >
+            <FontAwesomeIcon icon={faHandHoldingDollar} /> Give to God’s Servant
+          </button>
+        </div>
+      </section>
+
       {/* ================= LOCATION ================= */}
       <section className="about-section">
         <h2>Location & Reach</h2>
@@ -122,6 +220,73 @@ const About = () => {
           order, and spiritual depth.
         </p>
       </section>
+
+      {/* ================= GIVING OVERLAYS ================= */}
+      {isOverlayVisible && (
+        <div className="overlay" onClick={hideOverlay}>
+          <Toaster />
+          <div className="overlay-content" onClick={(e) => e.stopPropagation()}>
+            <div className="flyer-image">
+              <div className="flyer-items">
+                <div onClick={hideOverlay} className="exit">
+                  <FontAwesomeIcon icon={faArrowLeft} />
+                </div>
+                <div
+                  className="download"
+                  onClick={() => {
+                    const link = document.createElement("a")
+                    link.href = overlayContent.imageUrl
+                    link.download = "giving.jpg"
+                    link.click()
+                  }}
+                >
+                  <FontAwesomeIcon icon={faDownload} />
+                </div>
+              </div>
+              <img
+                src={overlayContent.imageUrl}
+                alt="Giving Flyer"
+                className="image"
+              />
+            </div>
+
+            <div className="overlay-buttons">
+              <button onClick={showCurrencyOverlay}>
+                <FontAwesomeIcon icon={faLink} /> Copy Account Number
+              </button>
+              <button onClick={() => bankNameClick(overlayContent.bankName)}>
+                <FontAwesomeIcon icon={faLink} /> Copy Bank
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+
+
+      {isCurrencyOverlayVisible && (
+        <div className="overlay" onClick={hideCurrencyOverlay}>
+          <div className="currency-content" onClick={(e) => e.stopPropagation()}>
+            <h3>Select Currency</h3>
+            <ul className="currency-list">
+              {selectedCurrency.map((currency, index) => (
+                <li
+                  key={index}
+                  className="currency-item"
+                  onClick={() =>
+                    handleCurrencyClick(
+                      currency.accountNumber,
+                      currency.name
+                    )
+                  }
+                >
+                  {currency.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>

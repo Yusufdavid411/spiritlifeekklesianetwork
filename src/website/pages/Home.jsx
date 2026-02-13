@@ -295,7 +295,7 @@ ${window.location.origin}`
       )}
 
       <a
-        href="https://wa.me/234XXXXXXXXXX"
+        href="https://wa.me/+2349094600075"
         className="whatsapp-float"
         target="_blank"
         rel="noreferrer"
