@@ -71,7 +71,7 @@ const About = () => {
 
           <div className="about-intro">
             <h1>Reverend Jude Zakwoyi</h1>
-            <h3>Lead Minister & Visionary</h3>
+            <h3>Lead Pastor</h3>
 
             <p className="about-core">
               Commissioned to raise men in whom God can entrust His counsel.
@@ -103,8 +103,7 @@ const About = () => {
         <div className="about-card">
           <h3>Vision</h3>
           <p>
-            To be and raise men in whom God can entrust His counsel in all
-            spheres of life.
+            A Ministry with a vision to be, and raise men in whom God can entrust his counsel in all spheres of life as ordained and not suffer loss
           </p>
         </div>
 

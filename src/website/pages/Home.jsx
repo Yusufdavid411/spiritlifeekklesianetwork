@@ -10,6 +10,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { events as eventsAPI, rhemaMeditations } from "../../services/api"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
+import Reels from "../components/Aside/Aside"
 import TypingAnimation from "../components/TypingAnimation"
 import RhemaModal from "../components/RhemaModal"
 import "./home.css"
@@ -25,18 +26,23 @@ const Home = () => {
   const [loadingRhema, setLoadingRhema] = useState(true)
   const [activeRhema, setActiveRhema] = useState(null)
 
-  // VIDEO
-  const videoRef = useRef(null)
-  const [isMuted, setIsMuted] = useState(false)
+  // HERO IMAGE SLIDER
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  const heroImages = [
+    "/img/deeptouch.jpg",
+    "/img/img4.jpg",
+    "/img/minflyer.jpg",
+    "/img/easter.jpg",
+    "/img/deeptouch0.jpg",
+  ]
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = false
-      videoRef.current.play().catch(() => {
-        videoRef.current.muted = true
-        setIsMuted(true)
-      })
-    }
+    const interval = setInterval(() => {
+      setCurrentSlide(prev => (prev + 1) % heroImages.length)
+    }, 5000) // change every 5 seconds
+
+    return () => clearInterval(interval)
   }, [])
 
   useEffect(() => {
@@ -95,22 +101,17 @@ ${window.location.origin}`
 
       {/* ================= HERO ================= */}
       <section className="hero">
-        <video
-          ref={videoRef}
-          className="hero-video"
-          autoPlay
-          loop
-          playsInline
-          muted={isMuted}
-        >
-          <source src="/video/hero.mp4" type="video/mp4" />
-        </video>
+        <div className="hero-slider">
+          {heroImages.map((img, index) => (
+            <div
+              key={index}
+              className={`hero-slide ${index === currentSlide ? "active" : ""}`}
+              style={{ backgroundImage: `url(${img})` }}
+            />
+          ))}
+        </div>
 
         <div className="hero-overlay" />
-
-        <button className="mute-btn" onClick={() => setIsMuted(m => !m)}>
-          {isMuted ? "🔇" : "🔊"}
-        </button>
 
         <div className="hero-content">
           <h1 className="hero-title">SPIRITLIFE EKKLESIA NETWORK</h1>
@@ -204,6 +205,13 @@ ${window.location.origin}`
           </div>
         )}
       </section>
+
+      <Reels />
+
+
+
+
+      {/* .................Modals........................... */}
 
       {/* ================= EVENT MODAL ================= */}
       {activeEvent && (
@@ -302,6 +310,18 @@ ${window.location.origin}`
       >
         💬
       </a>
+
+
+
+
+
+
+
+
+
+
+
+      
 
       <Footer />
     </div>
