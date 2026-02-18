@@ -62,6 +62,14 @@
 
 /* ================= SOCIAL ================= */
 
+.footer-section h5 {
+  margin-top: 1.4rem;
+}
+
+.footer-section h5 p {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
 .footer-socials {
   display: flex;
   gap: 1rem;

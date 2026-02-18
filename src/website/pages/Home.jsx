@@ -220,7 +220,7 @@ const Home = () => {
 
                   {/* ✅ EVENT TIME ADDED */}
                   <p className="rhema-date">
-                    ⏰ {new Date(event.start_datetime).toLocaleTimeString()}
+                    ⏰ {new Date(event.start_datetime).toLocaleTimeString()} (WAT)
                   </p>
 
                   {event.location && (

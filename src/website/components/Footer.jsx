@@ -20,9 +20,10 @@ const Footer = () => {
         <div className="footer-section">
           <h3 className="footer-title">SpiritLife Ekklesia Network</h3>
           <p className="footer-text">
-            Raising men in whom God can entrust His counsel,
-            shaping lives for divine purpose across all spheres.
+            A Ministry with a vision to be, and raise men in whom God can entrust his counsel in all spheres of life as ordained and not suffer loss
           </p>
+          
+          <h5> Social Media handle <p>@JUDE ZAKWOYI</p></h5>
 
           <div className="footer-socials">
             <a
@@ -86,8 +87,8 @@ const Footer = () => {
         <div className="footer-section">
           <h4 className="footer-subtitle">Service Times</h4>
           <ul className="footer-times">
-            <li>SUPERNATURAL SHIFT — SUNDAYS 8:00 AM</li>
-            <li>DEEP TOUCH _ FRIDAYS 4PM</li>
+            <li>SUPERNATURAL SHIFT — SUNDAYS 08:00 AM (WAT)</li>
+            <li>DEEP TOUCH _ FRIDAYS 04:00 PM (WAT)</li>
           </ul>
         </div>
 

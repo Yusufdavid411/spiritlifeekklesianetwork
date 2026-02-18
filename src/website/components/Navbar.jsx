@@ -108,7 +108,7 @@ const Navbar = () => {
 
           <li className="nav-item">
             <a className="nav-link contact" href="tel:+2349094600075">
-              📞 +234 909 460 0075
+              📞 Contact Us
             </a>
           </li>
 
