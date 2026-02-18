@@ -65,6 +65,7 @@
 .footer-socials {
   display: flex;
   gap: 1rem;
+  margin-top: .5rem;
 }
 
 .footer-socials a {

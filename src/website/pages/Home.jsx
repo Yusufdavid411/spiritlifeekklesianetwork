@@ -37,6 +37,33 @@ const Home = () => {
     "/img/deeptouch0.jpg",
   ]
 
+  // ============================================
+  // SCROLL REVEAL EFFECT
+  // ============================================
+
+  useEffect(() => {
+    const revealElements = document.querySelectorAll(".reveal")
+
+    const revealOnScroll = () => {
+      const windowHeight = window.innerHeight
+
+      revealElements.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top
+
+        if (elementTop < windowHeight - 80) {
+          el.classList.add("active")
+        }
+      })
+    }
+
+    window.addEventListener("scroll", revealOnScroll)
+    revealOnScroll()
+
+    return () => window.removeEventListener("scroll", revealOnScroll)
+  }, [])
+
+
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide(prev => (prev + 1) % heroImages.length)
@@ -53,13 +80,23 @@ const Home = () => {
   const fetchEvents = async () => {
     try {
       const response = await eventsAPI.getAll()
-      setEvents(Array.isArray(response?.data?.events) ? response.data.events : [])
+
+      const eventsData =
+        response?.data?.events ||
+        response?.data ||
+        []
+
+      console.log("Events:", eventsData)
+
+      setEvents(Array.isArray(eventsData) ? eventsData : [])
     } catch (err) {
-      console.error(err)
+      console.error("Events fetch failed:", err)
+      setEvents([]) // prevent crash
     } finally {
       setLoadingEvents(false)
     }
   }
+
 
   const fetchTodayRhema = async () => {
     try {
@@ -87,13 +124,18 @@ const Home = () => {
 
   const shareText = (event) =>
     `${event.title}
-📅 ${new Date(event.start_datetime).toLocaleDateString()}
-⏰ ${new Date(event.start_datetime).toLocaleTimeString()}
-📍 ${event.location || ""}
+    📅 ${new Date(event.start_datetime).toLocaleDateString()}
+    ⏰ ${new Date(event.start_datetime).toLocaleTimeString()}
+    📍 ${event.location || ""}
 
-${event.image?.image_url}
+    ${getImageUrl(event)}
 
-${window.location.origin}`
+    ${window.location.origin}`
+
+  const getImageUrl = (event) => {
+    return event?.image?.image_url || ""
+  }
+
 
   return (
     <div className="home">
@@ -119,14 +161,16 @@ ${window.location.origin}`
           <div className="hero-subtitle">
             <TypingAnimation
               text="A Ministry with a vision to be, and raise men in whom God can entrust his counsel in all spheres of life as ordained and not suffer loss"
-              speed={30}
+              speed={33}
             />
           </div>
         </div>
+        <div className="hero-divider" />
       </section>
 
+
       {/* ================= EVENTS ================= */}
-      <section className="home-events">
+      <section className="home-events reveal">
         <h2 className="home-section-title">Programs & Events</h2>
 
         {loadingEvents ? (
@@ -144,9 +188,26 @@ ${window.location.origin}`
                 onClick={() => setActiveEvent(event)}
               >
                 <div className="rhema-image-box small">
-                  {event.image?.image_url && (
-                    <img src={event.image.image_url} alt={event.title} />
-                  )}
+                  
+                  {event.image?.image_url ? (
+                  <img
+                    src={event.image.image_url}
+                    alt={event.title}
+                    loading="lazy"
+                    onError={(e) => {
+                      e.target.style.display = "none"
+                      const fallback = document.createElement("div")
+                      fallback.className = "image-fallback"
+                      fallback.innerText = event.title
+                      e.target.parentNode.appendChild(fallback)
+                    }}
+                  />
+                ) : (
+                  <div className="image-fallback">
+                    {event.title}
+                  </div>
+                )}
+
                 </div>
 
                 <div className="rhema-text">
@@ -173,7 +234,7 @@ ${window.location.origin}`
       </section>
 
       {/* ================= HOME RHEMA ================= */}
-      <section className="home-rhema">
+      <section className="home-rhema reveal">
         <h2 className="home-section-title">Today’s Rhema Meditation</h2>
 
         {loadingRhema ? (
@@ -228,10 +289,23 @@ ${window.location.origin}`
             </button>
 
             <div className="rhema-image-box">
-              <img
-                src={activeEvent.image?.image_url}
-                alt={activeEvent.title}
-              />
+              {activeEvent.image?.image_url ? (
+                <img
+                  src={activeEvent.image.image_url}
+                  alt={activeEvent.title}
+                  onError={(e) => {
+                    e.target.style.display = "none"
+                    const fallback = document.createElement("div")
+                    fallback.className = "image-fallback"
+                    fallback.innerText = activeEvent.title
+                    e.target.parentNode.appendChild(fallback)
+                  }}
+                />
+              ) : (
+                <div className="image-fallback">
+                  {activeEvent.title}
+                </div>
+              )}
             </div>
 
             <h3>{activeEvent.title}</h3>
@@ -249,6 +323,7 @@ ${window.location.origin}`
               <button
                 className="btn-download"
                 onClick={() =>
+                  activeEvent.image?.image_url &&
                   downloadImage(
                     activeEvent.image.image_url,
                     activeEvent.title

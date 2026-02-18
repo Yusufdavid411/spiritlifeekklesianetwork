@@ -126,7 +126,7 @@ const About = () => {
 
       {/* ================= LEAD MINISTER ================= */}
       <section className="about-section">
-        <h2>The Lead Minister</h2>
+        <h2>The Lead Pastor</h2>
 
         <p>
           Reverend Jude Zakwoyi is a teacher of the Word with a strong apostolic
