@@ -111,3 +111,44 @@
     max-height: 220px;
   }
 }
+
+
+/* SHARE SECTION */
+
+.share-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.share-section h4 {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  color: #04046f;
+}
+
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.share-buttons a,
+.share-buttons button {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  background: #04046f;
+  color: white;
+  transition: 0.3s ease;
+}
+
+.share-buttons a:hover,
+.share-buttons button:hover {
+  background: #2b2bb2;
+}
