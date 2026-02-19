@@ -160,14 +160,14 @@ const About = () => {
         <div className="gallery-wrapper">
           <div className="gallery-track">
             {/* Repeat image multiple times for smooth infinite scroll */}
-            <img src="/img/Pst Jude 1.jpg" alt="Ministry Moment" />
-            <img src="/img/nugget.jpg" alt="Ministry Moment" />
-            <img src="/img/supernaturalshift0.jpg" alt="Ministry Moment" />
-            <img src="/img/easter.jpg" alt="Ministry Moment" />
-            <img src="/img/minflyer.jpg" alt="Ministry Moment" />
-            <img src="/img/sundayflyer.jpg" alt="Ministry Moment" />
-            <img src="/img/deeptouch.jpg" alt="Ministry Moment" />
-            <img src="/img/deeptouch0.jpg" alt="Ministry Moment" />
+            <img src="/img/gal/img0.jpg" alt="Ministry Moment" />
+            <img src="/img/gal/img1.jpg" alt="Ministry Moment" />
+            <img src="/img/gal/img2.jpg" alt="Ministry Moment" />
+            <img src="/img/gal/img3.jpg" alt="Ministry Moment" />
+            <img src="/img/gal/img5.jpg" alt="Ministry Moment" />
+            <img src="/img/gal/img4.jpg" alt="Ministry Moment" />
+            <img src="/img/gal/img6.jpg" alt="Ministry Moment" />
+            <img src="/img/gal/img7.jpg" alt="Ministry Moment" />
           </div>
         </div>
       </section>

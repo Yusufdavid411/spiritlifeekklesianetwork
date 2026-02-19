@@ -30,11 +30,15 @@ const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const heroImages = [
-    "/img/deeptouch.jpg",
-    "/img/img4.jpg",
-    "/img/minflyer.jpg",
-    "/img/easter.jpg",
-    "/img/deeptouch0.jpg",
+    "/img/hero/img00.jpg",
+    "/img/hero/img0.jpg",
+    "/img/hero/img1.jpg",
+    "/img/hero/img2.jpg",
+    "/img/hero/img3.jpg",
+    "/img/hero/img4.jpg",
+    "/img/hero/img5.jpg",
+    "/img/hero/img6.jpg",
+    "/img/hero/img7.jpg",
   ]
 
   // ============================================

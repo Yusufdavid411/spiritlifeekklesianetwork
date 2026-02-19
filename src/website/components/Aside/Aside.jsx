@@ -9,12 +9,13 @@ import { faCaretLeft, faCaretRight, faTimes } from '@fortawesome/free-solid-svg-
 
 const items = [
   { id: 1, title: 'item #2', img: (<div className="videos"><ReactPlayer className="video" url='https://youtube.com/shorts/U3c0SAUTK-Q?si=tAmk6DPU8iwDB91t' /></div>) },
-  { id: 2, title: 'item #4', img: (<a ><img src='/img/sundayflyer.jpg' alt="logo" /></a>) },
-  { id: 3, title: 'item #1', img: (<a ><img src='/img/deeptouch0.jpg' alt="Deep Touch" /></a>) },
+  { id: 2, title: 'item #4', img: (<a ><img src='/img/gal/img0.jpg' alt="logo" /></a>) },
+  { id: 3, title: 'item #1', img: (<a ><img src='/img/gal/img1.jpg' alt="Deep Touch" /></a>) },
   { id: 4, title: 'item #2', img: (<div className="videos"><ReactPlayer className="video" playing={true} loop={true} url='img/latestvideo.mp4' /></div>) },
-  { id: 5, title: 'item #3', img: (<a ><img src='/img/supernaturalshift0.jpg' alt="Supernatural Shift" /></a>) },
-  { id: 6, title: 'item #4', img: (<a ><img src='/img/nugget.jpg' alt="logo" /></a>) },
+  { id: 5, title: 'item #3', img: (<a ><img src='/img/gal/img2.jpg' alt="Supernatural Shift" /></a>) },
+  { id: 6, title: 'item #4', img: (<a ><img src='/img/gal/img3.jpg' alt="logo" /></a>) },
   { id: 7, title: 'item #2', img: (<div className="videos"><ReactPlayer className="video" url='https://youtube.com/shorts/j-4_vvpS-LE?si=Ax5uiNTbqI9-xtgF' /></div>) },
+  { id: 8, title: 'item #3', img: (<a ><img src='/img/gal/img4.jpg' alt="Supernatural Shift" /></a>) },
 
   // { id: 6, title: 'item #2', img: (<a ><img src='/img/klc.jfif' alt="logo" /></a>) },
 ];
