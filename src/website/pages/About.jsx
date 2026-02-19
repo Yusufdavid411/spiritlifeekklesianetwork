@@ -66,7 +66,7 @@ const About = () => {
       <section className="about-hero">
         <div className="about-hero-content">
           <div className="about-image">
-            <img src="/img/Pst Jude 1.jpg" alt="Reverend Jude Zakwoyi" />
+            <img src="/img/hero/img00.jpg" alt="Reverend Jude Zakwoyi" />
           </div>
 
           <div className="about-intro">
