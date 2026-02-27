@@ -10,10 +10,11 @@ import React, { useEffect, useRef, useState } from "react"
 import { events as eventsAPI, rhemaMeditations } from "../../services/api"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
-import Reels from "../components/Aside/Aside"
 import TypingAnimation from "../components/TypingAnimation"
 import RhemaModal from "../components/RhemaModal"
 import "./home.css"
+import MinistrySlider from "../components/MinistrySlider"
+// import Aside from "../components/Aside/Aside"
 
 const Home = () => {
   // EVENTS STATE
@@ -170,6 +171,7 @@ const Home = () => {
           </div>
         </div>
         <div className="hero-divider" />
+        <div className="hero-divider" />
       </section>
 
 
@@ -237,6 +239,7 @@ const Home = () => {
         )}
       </section>
 
+
       {/* ================= HOME RHEMA ================= */}
       <section className="home-rhema reveal">
         <h2 className="home-section-title">Today’s Rhema Meditation</h2>
@@ -271,7 +274,18 @@ const Home = () => {
         )}
       </section>
 
-      <Reels />
+      <MinistrySlider/>
+      {/* <Aside /> */}
+
+
+
+      <Footer />
+
+
+
+
+
+
 
 
 
@@ -392,17 +406,6 @@ const Home = () => {
 
 
 
-
-
-
-
-
-
-
-
-      
-
-      <Footer />
     </div>
   )
 }

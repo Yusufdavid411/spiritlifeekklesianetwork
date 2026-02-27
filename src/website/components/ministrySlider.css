@@ -1,0 +1,155 @@
+/* ================= MAIN SLIDER ================= */
+
+.elite-slider {
+  padding: 80px 20px;
+  background: rgba(255,255,255,0.15);
+}
+
+.slider-title {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+}
+
+.slider-track {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.slider-track::-webkit-scrollbar {
+  display: none;
+}
+
+.slide-item {
+  position: relative;
+  flex: 0 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  scroll-snap-align: start;
+}
+
+.slide-item:hover {
+  transform: scale(1.05);
+}
+
+.slide-item img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+
+/* CAPTION OVERLAY */
+
+.caption-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 15px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  color: white;
+  font-weight: bold;
+}
+
+/* MOBILE → 2 */
+@media (max-width: 768px) {
+  .slide-item {
+    width: calc((100% - 15px) / 2);
+  }
+}
+
+/* TABLET → 3 */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .slide-item {
+    width: calc((100% - 30px) / 3);
+  }
+}
+
+/* LAPTOP → 4 */
+@media (min-width: 1025px) {
+  .slide-item {
+    width: calc((100% - 45px) / 4);
+  }
+}
+
+/* ================= MODAL ================= */
+
+.elite-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.elite-modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+  text-align: center;
+}
+
+.modal-image {
+  max-height: 75vh;
+  border-radius: 15px;
+}
+
+.fade-in {
+  animation: fade 0.4s ease;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 50px;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 50%;
+}
+
+.nav.left { left: -70px; }
+.nav.right { right: -70px; }
+
+.close-btn {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+}
+
+.modal-caption {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.download-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
