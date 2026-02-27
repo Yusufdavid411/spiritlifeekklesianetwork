@@ -171,7 +171,6 @@ const Home = () => {
           </div>
         </div>
         <div className="hero-divider" />
-        <div className="hero-divider" />
       </section>
 
 
