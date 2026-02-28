@@ -130,15 +130,25 @@
 
 .reveal {
   opacity: 0;
-  transform: translateY(60px);
-  transition: all 5s ease;
+  transition: all 2s ease;
+  will-change: transform, opacity;
 }
 
+/* Slide from LEFT */
+.reveal-left {
+  transform: translateX(-1000px);
+}
+
+/* Slide from RIGHT */
+.reveal-right {
+  transform: translateX(100px);
+}
+
+/* When visible */
 .reveal.active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(0);
 }
-
 
 
 

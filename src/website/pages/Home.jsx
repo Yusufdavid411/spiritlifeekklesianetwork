@@ -14,7 +14,7 @@ import TypingAnimation from "../components/TypingAnimation"
 import RhemaModal from "../components/RhemaModal"
 import "./home.css"
 import MinistrySlider from "../components/MinistrySlider"
-// import Aside from "../components/Aside/Aside"
+import Reel from "../components/Reel";
 
 const Home = () => {
   // EVENTS STATE
@@ -47,25 +47,26 @@ const Home = () => {
   // ============================================
 
   useEffect(() => {
-    const revealElements = document.querySelectorAll(".reveal")
+    const elements = document.querySelectorAll(".reveal");
 
-    const revealOnScroll = () => {
-      const windowHeight = window.innerHeight
+    const observer = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+            observer.unobserve(entry.target); // animate once only
+          }
+        });
+      },
+      {
+        threshold: 0.2,
+      }
+    );
 
-      revealElements.forEach(el => {
-        const elementTop = el.getBoundingClientRect().top
+    elements.forEach((el) => observer.observe(el));
 
-        if (elementTop < windowHeight - 80) {
-          el.classList.add("active")
-        }
-      })
-    }
-
-    window.addEventListener("scroll", revealOnScroll)
-    revealOnScroll()
-
-    return () => window.removeEventListener("scroll", revealOnScroll)
-  }, [])
+    return () => observer.disconnect();
+  }, [events, todayRhema]);
 
 
 
@@ -175,7 +176,7 @@ const Home = () => {
 
 
       {/* ================= EVENTS ================= */}
-      <section className="home-events reveal">
+      <section className="home-events reveal reveal-left">
         <h2 className="home-section-title">Programs & Events</h2>
 
         {loadingEvents ? (
@@ -234,13 +235,15 @@ const Home = () => {
                 </div>
               </div>
             ))}
+            <Reel youtubeId="U3c0SAUTK-Q" /> 
           </div>
         )}
+
       </section>
 
 
       {/* ================= HOME RHEMA ================= */}
-      <section className="home-rhema reveal">
+      <section className="home-rhema reveal reveal-right">
         <h2 className="home-section-title">Today’s Rhema Meditation</h2>
 
         {loadingRhema ? (
@@ -274,7 +277,6 @@ const Home = () => {
       </section>
 
       <MinistrySlider/>
-      {/* <Aside /> */}
 
 
 
