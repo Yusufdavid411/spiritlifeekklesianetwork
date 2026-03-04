@@ -24,6 +24,7 @@ import Protocol from "./website/components/departments/Protocol"
 import Usher from "./website/components/departments/Usher"
 import Welfare from "./website/components/departments/Welfare"
 import ZoeStreams from "./website/components/departments/ZoeStreams"
+import AdminDashboard from "./admin/AdminDashboard";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/sermons" element={<Sermons />} />
           <Route path="/events" element={<Events />} />
           <Route path="/rhema-meditations" element={<RhemaMeditations />} />
+          <Route path="/admin" element={<AdminDashboard />} />
 
           {/* DEPARTMENTS */}
           <Route path="/departments/child" element={<Child />} />

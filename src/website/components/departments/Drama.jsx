@@ -1,65 +1,145 @@
-import './drama.css'
-import React, { useState } from "react";
-import ReactPlayer from 'react-player';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { useNavigate } from "react-router-dom"
+import React, { useEffect, useState } from "react";
+import { db } from "../../../firebase/firebaseConfig";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import "./drama.css";
 
+const Drama = () => {
 
-const Aside = () => {
-  const navigate = useNavigate();
+  const [dramas, setDramas] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+
+  // ================= FETCH DRAMA POSTS =================
+
+  useEffect(() => {
+
+    const fetchDrama = async () => {
+
+      try {
+
+        const q = query(
+          collection(db, "drama"),
+          orderBy("createdAt", "desc")
+        );
+
+        const snapshot = await getDocs(q);
+
+        const list = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+
+        setDramas(list);
+
+      } catch (error) {
+        console.log(error);
+      }
+
+    };
+
+    fetchDrama();
+
+  }, []);
+
+  // ================= EXTRACT YOUTUBE ID =================
+
+  const getYoutubeId = (url) => {
+
+    if (!url) return null;
+
+    if (url.includes("shorts")) {
+      return url.split("shorts/")[1]?.split("?")[0];
+    }
+
+    if (url.includes("watch?v=")) {
+      return url.split("watch?v=")[1]?.split("&")[0];
+    }
+
+    if (url.includes("youtu.be/")) {
+      return url.split("youtu.be/")[1]?.split("?")[0];
+    }
+
+    return null;
+  };
+
+  // ================= PAGE =================
 
   return (
 
-    <div style={{ width: "100%", height: "100vh", overflow: "hidden" }}>
-      
-      {/* TOP BAR */}
-      <div className="dept-top">
-        <button className="back-btn" onClick={() => navigate("/")}>
-          ← Back
-        </button>
+    <div className="drama-page">
 
-        <select
-          className="dept-switcher"
-          onChange={(e) => navigate(`/departments/${e.target.value}`)}
-          defaultValue="drama"
-        >
-          <option value="child">Children</option>
-          <option value="drama">Drama</option>
-          <option value="evan">Evangelism</option>
-          <option value="media">Media</option>
-          <option value="prayer">Prayer</option>
-          <option value="protocol">Protocol</option>
-          <option value="usher">Ushering</option>
-          <option value="welfare">Welfare</option>
-          <option value="zoestreams">Zoe Streams</option>
-        </select>
+      <h2 className="drama-title">
+        Drama Department
+      </h2>
+
+      <div className="drama-grid">
+
+        {dramas.map((drama) => {
+
+          const videoId = getYoutubeId(drama.videoUrl);
+
+          const thumbnail = videoId
+            ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+            : "";
+
+          return (
+
+            <div
+              key={drama.id}
+              className="drama-card"
+              onClick={() => setSelectedVideo(drama.videoUrl)}
+            >
+
+              <img
+                src={thumbnail}
+                alt={drama.title}
+              />
+
+              <h4>{drama.title}</h4>
+
+            </div>
+
+          );
+
+        })}
+
       </div>
 
-      {/* YouTube Video Background */}
-      <ReactPlayer
-        url="https://youtu.be/DbWQ7UDhn8Q?si=VmiBkyOQIpVXm-Dt"
-        className="video"
-        playing={true}
-        loop={true}
-        controls={true}
-        width="100%"
-        height="100%"
-        style={{ top: 0, left: 0,}}
-      />
+      {/* ================= VIDEO MODAL ================= */}
 
-      {/* <ReactPlayer
-        className="video"
-        style={{ top: 0, left: 0, zIndex: 1,}}
-        url='https://youtube.com/shorts/APUm_UaDjqg?si=Zozt1010PlQ5KIXr'
-      /> */}
+      {selectedVideo && (
 
-      {/* Content Above the Video */}
-      {/* <div style={{ position: "relative", fontSize: "1.5rem", zIndex: 20, color: "white", textAlign: "center", marginTop: "10%" }}>
-        <p>Kingdom Parables <br /> (Drama Department)</p>
-      </div> */}
+        <div
+          className="drama-modal"
+          onClick={() => setSelectedVideo(null)}
+        >
+
+          <div
+            className="drama-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+
+            <button
+              className="drama-close"
+              onClick={() => setSelectedVideo(null)}
+            >
+              ✕
+            </button>
+
+            <iframe
+              src={`https://www.youtube.com/embed/${getYoutubeId(selectedVideo)}?autoplay=1`}
+              title="Drama Video"
+              frameBorder="0"
+              allowFullScreen
+            />
+
+          </div>
+
+        </div>
+
+      )}
+
     </div>
   );
 };
 
-export default Aside;
+export default Drama;
