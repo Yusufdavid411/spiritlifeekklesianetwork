@@ -1,18 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { auth, db } from "../firebase/firebaseConfig";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
+
+import PostForm from "./components/PostForm";
+import PostsList from "./components/PostsList";
+
 import "./admin.css";
+
+const departments = [
+  { label: "Drama", value: "drama" },
+  { label: "Evangelism", value: "evan" },
+  { label: "Children", value: "child" },
+  { label: "Media", value: "media" },
+  { label: "Prayer", value: "prayer" },
+  { label: "Protocol", value: "protocol" },
+  { label: "Ushering", value: "ushering" },
+  { label: "Welfare", value: "welfare" },
+  { label: "Zoe Streams", value: "zoestreams" },
+];
 
 const AdminDashboard = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [loggedIn, setLoggedIn] = useState(false);
-
-  const [title, setTitle] = useState("");
-  const [videoUrl, setVideoUrl] = useState("");
+  const [posts, setPosts] = useState([]);
   const [department, setDepartment] = useState("drama");
+
+  const [departmentStats, setDepartmentStats] = useState([]);
+  const [totalPosts, setTotalPosts] = useState(0);
 
   // ================= LOGIN =================
 
@@ -34,42 +51,68 @@ const AdminDashboard = () => {
     setLoggedIn(false);
   };
 
-  // ================= POST CONTENT =================
+  // ================= FETCH SELECTED DEPARTMENT POSTS =================
 
-  const handlePost = async (e) => {
-    e.preventDefault();
+  const fetchPosts = async () => {
+    const snapshot = await getDocs(collection(db, department));
 
-    try {
-      await addDoc(collection(db, department), {
-        title: title,
-        videoUrl: videoUrl,
-        createdAt: serverTimestamp(),
-      });
+    const list = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
 
-      alert("Posted successfully");
-
-      setTitle("");
-      setVideoUrl("");
-
-    } catch (error) {
-      alert(error.message);
-    }
+    setPosts(list);
   };
 
-  // ================= LOGIN SCREEN =================
+  // ================= FETCH ALL DEPARTMENT COUNTS =================
+
+  const fetchDepartmentStats = async () => {
+    let total = 0;
+
+    const stats = await Promise.all(
+      departments.map(async (dept) => {
+        const snapshot = await getDocs(collection(db, dept.value));
+
+        total += snapshot.size;
+
+        return {
+          ...dept,
+          count: snapshot.size,
+        };
+      })
+    );
+
+    setDepartmentStats(stats);
+    setTotalPosts(total);
+  };
+
+  const refreshDashboard = () => {
+    fetchPosts();
+    fetchDepartmentStats();
+  };
+
+  useEffect(() => {
+    if (loggedIn) {
+      refreshDashboard();
+    }
+  }, [department, loggedIn]);
+
+  // ================= LOGIN PAGE =================
 
   if (!loggedIn) {
     return (
-      <div className="admin-login-container">
-        <form className="admin-login" onSubmit={handleLogin}>
+      <div className="admin-login-page">
+        <form className="admin-login-card" onSubmit={handleLogin}>
+          <div className="admin-logo">SEN</div>
+
           <h2>Admin Login</h2>
+          <p>Login to manage SpiritLife Ekklesia Network content.</p>
 
           <input
             type="email"
             placeholder="Admin Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
 
           <input
@@ -77,10 +120,9 @@ const AdminDashboard = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
           />
 
-          <button type="submit">Login</button>
+          <button>Login</button>
         </form>
       </div>
     );
@@ -90,56 +132,67 @@ const AdminDashboard = () => {
 
   return (
     <div className="admin-dashboard">
+      <header className="admin-header">
+        <div>
+          <span>SpiritLife Admin</span>
+          <h2>Content Dashboard</h2>
+        </div>
 
-      <div className="admin-header">
-        <h2>Admin Dashboard</h2>
-
-        <button onClick={handleLogout}>
+        <button className="logout-btn" onClick={handleLogout}>
           Logout
         </button>
-      </div>
+      </header>
 
-      <form className="admin-post-form" onSubmit={handlePost}>
+      <section className="admin-summary">
+        <div className="summary-card total-card">
+          <span>Total Uploads</span>
+          <h3>{totalPosts}</h3>
+          <p>All department posts</p>
+        </div>
 
-        <h3>Create New Post</h3>
+        {departmentStats.map((dept) => (
+          <div className="summary-card" key={dept.value}>
+            <span>{dept.label}</span>
+            <h3>{dept.count}</h3>
+            <p>Uploaded posts</p>
+          </div>
+        ))}
+      </section>
 
-        <label>Department</label>
+      <section className="admin-control-box">
+        <div>
+          <h3>Manage Department</h3>
+          <p>Select a department to upload and view its content.</p>
+        </div>
 
-        <select
-          value={department}
-          onChange={(e) => setDepartment(e.target.value)}
-        >
-          <option value="drama">Drama Department</option>
-          <option value="evan">Evangelism</option>
-          <option value="choir">Choir</option>
+        <select value={department} onChange={(e) => setDepartment(e.target.value)}>
+          {departments.map((dept) => (
+            <option value={dept.value} key={dept.value}>
+              {dept.label}
+            </option>
+          ))}
         </select>
+      </section>
 
-        <label>Video Title</label>
+      <section className="admin-workspace">
+        <div className="admin-panel upload-panel">
+          <h3>Upload New Content</h3>
+          <p>Add new content to the selected department.</p>
 
-        <input
-          type="text"
-          placeholder="Drama Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
+          <PostForm department={department} refresh={refreshDashboard} />
+        </div>
 
-        <label>YouTube / Facebook Video Link</label>
+        <div className="admin-panel posts-panel">
+          <h3>Existing Posts</h3>
+          <p>Preview and manage uploaded content.</p>
 
-        <input
-          type="text"
-          placeholder="Paste video link"
-          value={videoUrl}
-          onChange={(e) => setVideoUrl(e.target.value)}
-          required
-        />
-
-        <button type="submit">
-          Publish Post
-        </button>
-
-      </form>
-
+          <PostsList
+            posts={posts}
+            department={department}
+            refresh={refreshDashboard}
+          />
+        </div>
+      </section>
     </div>
   );
 };

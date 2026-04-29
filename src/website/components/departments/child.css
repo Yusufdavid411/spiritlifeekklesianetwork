@@ -7,28 +7,7 @@
   background: linear-gradient(135deg, #dfe9ff, #f6eaff);
 }
 
-/* TOP BAR */
-.dept-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 10px;
-}
 
-.back-btn {
-  background: none;
-  border: none;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-.dept-switcher {
-  padding: 0.5rem;
-  border-radius: 20px;
-  border: .4rem solid white;
-  width: 10rem;
-  font-size: 0.9rem;
-}
 
 /* HERO */
 .dept-hero {

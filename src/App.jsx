@@ -21,7 +21,7 @@ import Evan from "./website/components/departments/Evan"
 import Media from "./website/components/departments/Media"
 import Prayer from "./website/components/departments/Prayer"
 import Protocol from "./website/components/departments/Protocol"
-import Usher from "./website/components/departments/Usher"
+import Ushering from "./website/components/departments/Ushering"
 import Welfare from "./website/components/departments/Welfare"
 import ZoeStreams from "./website/components/departments/ZoeStreams"
 import AdminDashboard from "./admin/AdminDashboard";
@@ -46,7 +46,7 @@ function App() {
           <Route path="/departments/media" element={<Media />} />
           <Route path="/departments/prayer" element={<Prayer />} />
           <Route path="/departments/protocol" element={<Protocol />} />
-          <Route path="/departments/usher" element={<Usher />} />
+          <Route path="/departments/ushering" element={<Ushering />} />
           <Route path="/departments/welfare" element={<Welfare />} />
           <Route path="/departments/zoestreams" element={<ZoeStreams />} />
 

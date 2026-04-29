@@ -35,6 +35,22 @@
   cursor: pointer;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   margin: .5rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* rhemaa meditation on home page */
+
+.unified-rhema-cardhome {
+  background: #1e002b;
+  border-radius: 16px;
+  padding: 1.8rem;
+  display: flex;
+  gap: 1.8rem;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  margin: .5rem;
 }
 
 /* Image container (same for today & previous) */
@@ -42,12 +58,12 @@
   background: #2b003d;
   padding: 0.8rem;
   border-radius: 12px;
-  width: 160px;
+  width: 450px;
   flex-shrink: 0;
 }
 
 .rhema-image-box.small {
-  width: 130px;
+  width: 200px;
 }
 
 .rhema-image-box img {
@@ -82,6 +98,7 @@
 
 .today-rhema-wrapper {
   margin-bottom: 2.5rem;
+  display: flex;
 }
 
 /* ============================================

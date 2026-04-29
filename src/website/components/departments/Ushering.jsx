@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import "./nav.css"
 import Nav from "./Nav"
 
-const Prayer = () => {
+const Ushering = () => {
 
   return (
     <div className="dept-page child-theme">
@@ -19,4 +19,4 @@ const Prayer = () => {
   )
 }
 
-export default Prayer
+export default Ushering

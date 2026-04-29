@@ -250,7 +250,7 @@ const Home = () => {
           <div className="event-skeleton unified-rhema-card" />
         ) : todayRhema && (
           <div
-            className="unified-rhema-card"
+            className="unified-rhema-cardhome"
             onClick={() => setActiveRhema(todayRhema)}
           >
             <div className="rhema-image-box">

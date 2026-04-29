@@ -1,7 +1,3 @@
-// ============================================
-// PUBLIC WEBSITE - RESPONSIVE NAVBAR
-// ============================================
-
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "./navbar.css"
@@ -14,12 +10,12 @@ const Navbar = () => {
   // ✅ FIXED: Department paths now match App.jsx routes
   const departments = [
     { name: "Zoe Streams (Music)", path: "/departments/zoestreams" },
-    { name: "Kingdom Parables (Drama)", path: "/departments/drama" },
+    { name: "Spiritlife Kingdom Parables (Drama)", path: "/departments/drama" },
     { name: "The Publishers (Media)", path: "/departments/media" },
     { name: "Evangelism", path: "/departments/evan" },
     { name: "Children", path: "/departments/child" },
     { name: "Prayer", path: "/departments/prayer" },
-    { name: "Ushering/Sanctuary", path: "/departments/usher" },
+    { name: "Ushering/Sanctuary", path: "/departments/ushering" },
     { name: "Protocol", path: "/departments/protocol" },
     { name: "Welfare", path: "/departments/welfare" },
   ]

@@ -16,7 +16,7 @@
 
 /* Modal container */
 .rhema-modal {
-  background: white;
+  background: rgba(255, 255, 255, 0.727);
   border-radius: 16px;
   width: 100%;
   max-width: 720px;          /* ✅ prevents full-width takeover */
