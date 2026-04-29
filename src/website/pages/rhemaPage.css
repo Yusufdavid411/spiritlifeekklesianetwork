@@ -51,6 +51,8 @@
   cursor: pointer;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   margin: .5rem;
+  box-shadow: 0 10px 30px #0006;
+  flex-wrap: wrap;
 }
 
 /* Image container (same for today & previous) */
