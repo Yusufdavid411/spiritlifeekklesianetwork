@@ -1,6 +1,6 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
-import Nav from "./nav"
+import Nav from "./Nav";
 import "./child.css"
 
 const Child = () => {
