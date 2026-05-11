@@ -335,6 +335,8 @@ const Sermons = () => {
 
   return (
     <>
+      <Navbar />
+
       <div className="sermons-page">
         <div
           className="sermons-bg sermons-bg-previous"
@@ -350,8 +352,6 @@ const Sermons = () => {
             backgroundImage: `url(${backgroundImages[bgIndex].image})`,
           }}
         />
-
-        <Navbar />
 
         <main className="page-content">
           <div className="sermons-header">
