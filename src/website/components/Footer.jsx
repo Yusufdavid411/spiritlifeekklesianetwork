@@ -9,7 +9,13 @@ import {
   faInstagram,
   faSquareThreads,
 } from "@fortawesome/free-brands-svg-icons"
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons"
+import {
+  faLocationDot,
+  faDownload,
+} from "@fortawesome/free-solid-svg-icons"
+
+const APP_DOWNLOAD_LINK =
+  "https://drive.google.com/uc?export=download&id=1AzL-UpFNe3PvZOKxRuuVZeXwd1M5UOAh"
 
 const Footer = () => {
   return (
@@ -19,52 +25,68 @@ const Footer = () => {
         {/* ================= MINISTRY INFO ================= */}
         <div className="footer-section">
           <h3 className="footer-title">SpiritLife Ekklesia Network</h3>
+
           <p className="footer-text">
-            A Ministry with a vision to be, and raise men in whom God can entrust his counsel in all spheres of life as ordained and not suffer loss
+            A Ministry with a vision to be, and raise men in whom God can
+            entrust his counsel in all spheres of life as ordained and not
+            suffer loss
           </p>
-          
-          <h5> Social Media handle <p>@JUDE ZAKWOYI</p></h5>
+
+          <h5>
+            Social Media handle <p>@JUDE ZAKWOYI</p>
+          </h5>
 
           <div className="footer-socials">
             <a
               href="https://youtube.com/@judezakwoyi?si=scCwEitMSw9Dc7iA"
               target="_blank"
               rel="noreferrer"
+              aria-label="YouTube"
             >
               <FontAwesomeIcon icon={faYoutube} />
             </a>
+
             <a
               href="https://www.facebook.com/judejerryzakwoyi/"
               target="_blank"
               rel="noreferrer"
+              aria-label="Facebook"
             >
               <FontAwesomeIcon icon={faFacebook} />
             </a>
+
             <a
               href="https://t.me/SpiritLifemessages"
               target="_blank"
               rel="noreferrer"
+              aria-label="Telegram"
             >
               <FontAwesomeIcon icon={faTelegram} />
             </a>
+
             <a
               href="https://www.instagram.com/jude_zakwoyi?igsh=dnhoMnd3Y3IybDM3"
               target="_blank"
               rel="noreferrer"
+              aria-label="Instagram"
             >
               <FontAwesomeIcon icon={faInstagram} />
             </a>
+
             <a
               href="https://www.threads.net/@jude_zakwoyi"
               target="_blank"
               rel="noreferrer"
+              aria-label="Threads"
             >
               <FontAwesomeIcon icon={faSquareThreads} />
             </a>
+
             <a
               href="https://www.tiktok.com/@judezakwoyi?_t=ZM-8skmJ16vqSs&_r=1"
               target="_blank"
               rel="noreferrer"
+              aria-label="TikTok"
             >
               <FontAwesomeIcon icon={faTiktok} />
             </a>
@@ -74,6 +96,7 @@ const Footer = () => {
         {/* ================= QUICK LINKS ================= */}
         <div className="footer-section">
           <h4 className="footer-subtitle">Quick Links</h4>
+
           <ul className="footer-links">
             <li><a href="/">Home</a></li>
             <li><a href="/about">About the Ministry</a></li>
@@ -86,10 +109,35 @@ const Footer = () => {
         {/* ================= SERVICE TIMES ================= */}
         <div className="footer-section">
           <h4 className="footer-subtitle">Service Times</h4>
+
           <ul className="footer-times">
             <li>SUPERNATURAL SHIFT — SUNDAYS 08:00 AM (WAT)</li>
-            <li>DEEP TOUCH _ FRIDAYS 04:00 PM (WAT)</li>
+            <li>DEEP TOUCH — FRIDAYS 04:00 PM (WAT)</li>
           </ul>
+        </div>
+
+        {/* ================= APP DOWNLOAD ================= */}
+        <div className="footer-section">
+          <h4 className="footer-subtitle">Download Our App</h4>
+
+          <p className="footer-text">
+            Stay connected with SpiritLife messages, Rhema meditations,
+            events, and ministry updates directly on your phone.
+          </p>
+
+          <a
+            href={APP_DOWNLOAD_LINK}
+            className="footer-app-download"
+            download
+            aria-label="Download SpiritLife App"
+          >
+            <FontAwesomeIcon icon={faDownload} />
+            <span>Download SpiritLife App</span>
+          </a>
+
+          <p className="footer-app-note">
+            Tap to download and install the app on your device.
+          </p>
         </div>
 
         {/* ================= LOCATION ================= */}
@@ -117,6 +165,7 @@ const Footer = () => {
         <p>
           © {new Date().getFullYear()} SpiritLife Ekklesia Network · All rights reserved
         </p>
+
         <span>Built to spread the Gospel of Christ</span>
       </div>
     </footer>

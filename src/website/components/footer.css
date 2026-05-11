@@ -55,9 +55,20 @@
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.4); opacity: 0.6; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.4);
+    opacity: 0.6;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /* ================= SOCIAL ================= */
@@ -67,13 +78,14 @@
 }
 
 .footer-section h5 p {
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
 .footer-socials {
   display: flex;
   gap: 1rem;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
 }
 
 .footer-socials a {
@@ -91,6 +103,8 @@
 
 .footer-links {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .footer-links li {
@@ -111,11 +125,49 @@
 
 .footer-times {
   list-style: none;
+  padding: 0;
+  margin: 0;
   font-size: 0.9rem;
 }
 
 .footer-times li {
   margin-bottom: 0.6rem;
+}
+
+/* ================= APP DOWNLOAD ================= */
+
+.footer-app-download {
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  background: linear-gradient(135deg, rgb(171, 30, 17), rgb(68, 4, 68));
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1.15rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+.footer-app-download:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.38);
+  opacity: 0.95;
+}
+
+.footer-app-download svg {
+  font-size: 0.95rem;
+}
+
+.footer-app-note {
+  margin-top: 0.75rem;
+  color: #d6d6d6;
+  font-size: 0.78rem;
+  line-height: 1.5;
 }
 
 /* ================= LOCATION ================= */
@@ -181,5 +233,14 @@
 @media (max-width: 600px) {
   .footer {
     padding: 3rem 1.2rem 2rem;
+  }
+
+  .footer-container {
+    gap: 2rem;
+  }
+
+  .footer-app-download {
+    width: 100%;
+    max-width: 280px;
   }
 }
