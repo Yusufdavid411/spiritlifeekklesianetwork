@@ -1,12 +1,171 @@
 import React, { useState, useEffect } from "react";
 import { auth, db } from "../firebase/firebaseConfig";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 import PostForm from "./components/PostForm";
 import PostsList from "./components/PostsList";
 
 import "./admin.css";
+
+const formatNumber = (value) => new Intl.NumberFormat("en").format(value || 0);
+
+const getDateKey = (date = new Date()) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+};
+
+const getPeriodTotals = (records) => {
+  const now = new Date();
+  const todayKey = getDateKey(now);
+  const weekStart = new Date(now);
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+  const yearStart = new Date(now.getFullYear(), 0, 1);
+
+  weekStart.setDate(now.getDate() - 6);
+  weekStart.setHours(0, 0, 0, 0);
+
+  const totals = {
+    today: 0,
+    week: 0,
+    month: 0,
+    year: 0,
+    pageViews: 0,
+  };
+
+  records.forEach((record) => {
+    const visitors = record.visitors || 0;
+    const pageViews = record.pageViews || 0;
+    const recordDate = new Date(`${record.date}T00:00:00`);
+
+    totals.pageViews += pageViews;
+
+    if (record.date === todayKey) {
+      totals.today += visitors;
+    }
+
+    if (recordDate >= weekStart) {
+      totals.week += visitors;
+    }
+
+    if (recordDate >= monthStart) {
+      totals.month += visitors;
+    }
+
+    if (recordDate >= yearStart) {
+      totals.year += visitors;
+    }
+  });
+
+  return totals;
+};
+
+const buildTrendData = (records) => {
+  const recordMap = new Map(records.map((record) => [record.date, record.visitors || 0]));
+  const days = [];
+
+  for (let index = 13; index >= 0; index -= 1) {
+    const date = new Date();
+    date.setDate(date.getDate() - index);
+
+    const key = getDateKey(date);
+    days.push({
+      date: key,
+      label: date.toLocaleDateString("en", { weekday: "short" }),
+      visitors: recordMap.get(key) || 0,
+    });
+  }
+
+  return days;
+};
+
+const VisitorAnalytics = ({ records }) => {
+  const totals = getPeriodTotals(records);
+  const trendData = buildTrendData(records);
+  const maxVisitors = Math.max(...trendData.map((day) => day.visitors), 1);
+  const bestDay = trendData.reduce(
+    (highest, day) => (day.visitors > highest.visitors ? day : highest),
+    trendData[0]
+  );
+  const averageDailyVisitors = Math.round(totals.week / 7);
+
+  return (
+    <section className="visitor-analytics">
+      <div className="analytics-heading">
+        <div>
+          <span>Website Visitors</span>
+          <h3>Visitor Analytics</h3>
+        </div>
+        <p>Daily, weekly, monthly, and yearly visitor performance.</p>
+      </div>
+
+      <div className="visitor-summary-grid">
+        <div className="visitor-card highlight">
+          <span>Today</span>
+          <strong>{formatNumber(totals.today)}</strong>
+          <p>Unique visitors</p>
+        </div>
+        <div className="visitor-card">
+          <span>This Week</span>
+          <strong>{formatNumber(totals.week)}</strong>
+          <p>Last 7 days</p>
+        </div>
+        <div className="visitor-card">
+          <span>This Month</span>
+          <strong>{formatNumber(totals.month)}</strong>
+          <p>Current month</p>
+        </div>
+        <div className="visitor-card">
+          <span>This Year</span>
+          <strong>{formatNumber(totals.year)}</strong>
+          <p>Current year</p>
+        </div>
+      </div>
+
+      <div className="analytics-body">
+        <div className="analytics-chart-card">
+          <div className="chart-header">
+            <div>
+              <h4>14-Day Visitor Trend</h4>
+              <p>Unique visitors recorded each day.</p>
+            </div>
+            <span>{formatNumber(totals.pageViews)} page views</span>
+          </div>
+
+          <div className="visitor-chart" aria-label="14-day visitor trend">
+            {trendData.map((day) => (
+              <div className="chart-column" key={day.date}>
+                <div className="chart-value">{formatNumber(day.visitors)}</div>
+                <div
+                  className="chart-bar"
+                  style={{ height: `${Math.max((day.visitors / maxVisitors) * 100, 6)}%` }}
+                />
+                <span>{day.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="analytics-insight-card">
+          <span>Written Summary</span>
+          <h4>{formatNumber(totals.month)} visitors this month</h4>
+          <p>
+            Your website has welcomed {formatNumber(totals.week)} visitors in the last
+            7 days, with an average of {formatNumber(averageDailyVisitors)} visitors per
+            day.
+          </p>
+          <p>
+            The strongest day in the current trend is {bestDay.label}, with{" "}
+            {formatNumber(bestDay.visitors)} visitors.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const departments = [
   { label: "Drama", value: "drama" },
@@ -30,6 +189,7 @@ const AdminDashboard = () => {
 
   const [departmentStats, setDepartmentStats] = useState([]);
   const [totalPosts, setTotalPosts] = useState(0);
+  const [visitorRecords, setVisitorRecords] = useState([]);
 
   // ================= LOGIN =================
 
@@ -86,9 +246,25 @@ const AdminDashboard = () => {
     setTotalPosts(total);
   };
 
+  const fetchVisitorAnalytics = async () => {
+    const analyticsQuery = query(
+      collection(db, "visitorAnalyticsDaily"),
+      orderBy("date", "desc")
+    );
+    const snapshot = await getDocs(analyticsQuery);
+
+    const records = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    setVisitorRecords(records);
+  };
+
   const refreshDashboard = () => {
     fetchPosts();
     fetchDepartmentStats();
+    fetchVisitorAnalytics();
   };
 
   useEffect(() => {
@@ -158,6 +334,8 @@ const AdminDashboard = () => {
           </div>
         ))}
       </section>
+
+      <VisitorAnalytics records={visitorRecords} />
 
       <section className="admin-control-box">
         <div>

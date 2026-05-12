@@ -4,8 +4,10 @@
 // ============================================
 
 import "./App.css"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { useEffect } from "react"
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom"
 import { AuthProvider } from "./context/AuthContext"
+import { recordPageView, trackDailyVisitor } from "./services/visitorAnalytics"
 
 // Website pages
 import Home from "./website/pages/Home"
@@ -26,10 +28,27 @@ import Welfare from "./website/components/departments/Welfare"
 import ZoeStreams from "./website/components/departments/ZoeStreams"
 import AdminDashboard from "./admin/AdminDashboard";
 
+function VisitorTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    trackDailyVisitor(location.pathname).catch((error) => {
+      console.error("Visitor analytics tracking failed:", error);
+    });
+
+    recordPageView(location.pathname).catch((error) => {
+      console.error("Page view tracking failed:", error);
+    });
+  }, [location.pathname]);
+
+  return null;
+}
+
 function App() {
   return (
     <AuthProvider>
       <Router>
+        <VisitorTracker />
         <Routes future={{ v7_relativeSplatPath: true }}>
           {/* PUBLIC WEBSITE */}
           <Route path="/" element={<Home />} />
