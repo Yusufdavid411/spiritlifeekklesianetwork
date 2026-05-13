@@ -194,12 +194,21 @@
 }
 
 .unified-rhema-card {
-  background: #1e002b;
-  border-radius: 14px;
+  background: linear-gradient(145deg, #14001f, #230235);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
   padding: 1.5rem;
   display: flex;
   gap: 1.2rem;
   cursor: pointer;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.unified-rhema-card:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28);
+  transform: translateY(-4px);
 }
 
 .rhema-image-box {
@@ -224,6 +233,18 @@
   color: #04046f;
 }
 
+.home-events .rhema-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.home-events .rhema-text h4 {
+  color: #ffffff;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  margin: 0 0 1rem;
+}
+
 .rhema-date {
   color: rgb(68, 4, 68);
   font-weight: 600;
@@ -233,6 +254,40 @@
 .event-location {
   font-size: 0.85rem;
   color: #eaeaea;
+}
+
+.event-meta {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.event-meta-item {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.event-meta-item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.event-meta-item span {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.event-meta-item strong {
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .image-fallback {
@@ -295,6 +350,14 @@
   width: 100%;
   padding: 2rem;
   position: relative;
+}
+
+.event-modal .event-meta {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
 }
 
 .event-modal-close {

@@ -16,6 +16,75 @@ import "./home.css"
 import MinistrySlider from "../components/MinistrySlider"
 import Reel from "../components/Reel";
 
+const RECURRING_EVENT_DAYS = [
+  { matcher: /deep\s*touch/i, weekday: 5 },
+  { matcher: /supernatural\s*shift/i, weekday: 0 },
+]
+
+const getNextWeekday = (weekday, sourceDate = new Date()) => {
+  const date = new Date(sourceDate)
+  date.setHours(12, 0, 0, 0)
+
+  const daysUntilNext = (weekday - date.getDay() + 7) % 7
+  date.setDate(date.getDate() + daysUntilNext)
+
+  return date
+}
+
+const getEventDate = (event) => {
+  const eventDate = event?.start_datetime ? new Date(event.start_datetime) : new Date()
+  const recurringEvent = RECURRING_EVENT_DAYS.find(({ matcher }) =>
+    matcher.test(event?.title || "")
+  )
+
+  if (!recurringEvent) return eventDate
+
+  const nextDate = getNextWeekday(recurringEvent.weekday)
+  nextDate.setHours(
+    eventDate.getHours(),
+    eventDate.getMinutes(),
+    eventDate.getSeconds(),
+    eventDate.getMilliseconds()
+  )
+
+  return nextDate
+}
+
+const formatEventDate = (event) =>
+  getEventDate(event).toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  })
+
+const formatEventTime = (event) =>
+  getEventDate(event).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  })
+
+const EventMeta = ({ event }) => (
+  <div className="event-meta" aria-label={`${event.title} schedule`}>
+    <div className="event-meta-item">
+      <span>Date</span>
+      <strong>{formatEventDate(event)}</strong>
+    </div>
+
+    <div className="event-meta-item">
+      <span>Time</span>
+      <strong>{formatEventTime(event)} WAT</strong>
+    </div>
+
+    {event.location && (
+      <div className="event-meta-item">
+        <span>Venue</span>
+        <strong>{event.location}</strong>
+      </div>
+    )}
+  </div>
+)
+
 const Home = () => {
   // EVENTS STATE
   const [events, setEvents] = useState([])
@@ -130,9 +199,9 @@ const Home = () => {
 
   const shareText = (event) =>
     `${event.title}
-    📅 ${new Date(event.start_datetime).toLocaleDateString()}
-    ⏰ ${new Date(event.start_datetime).toLocaleTimeString()}
-    📍 ${event.location || ""}
+    Date: ${formatEventDate(event)}
+    Time: ${formatEventTime(event)} WAT
+    Venue: ${event.location || ""}
 
     ${getImageUrl(event)}
 
@@ -218,20 +287,7 @@ const Home = () => {
 
                 <div className="rhema-text">
                   <h4>{event.title}</h4>
-
-                  {/* EVENT DATE */}
-                  <p className="rhema-date">
-                    📅 {new Date(event.start_datetime).toLocaleDateString()}
-                  </p>
-
-                  {/* ✅ EVENT TIME ADDED */}
-                  <p className="rhema-date">
-                    ⏰ {new Date(event.start_datetime).toLocaleTimeString()} (WAT)
-                  </p>
-
-                  {event.location && (
-                    <p className="event-location">📍 {event.location}</p>
-                  )}
+                  <EventMeta event={event} />
                 </div>
               </div>
             ))}
@@ -328,15 +384,7 @@ const Home = () => {
             </div>
 
             <h3>{activeEvent.title}</h3>
-
-            <p className="rhema-date">
-              📅 {new Date(activeEvent.start_datetime).toLocaleDateString()} <br />
-              ⏰ {new Date(activeEvent.start_datetime).toLocaleTimeString()}
-            </p>
-
-            {activeEvent.location && (
-              <p className="event-location">📍 {activeEvent.location}</p>
-            )}
+            <EventMeta event={activeEvent} />
 
             <div className="modal-actions">
               <button
