@@ -1,22 +1,9 @@
-import React from "react"
-import { useNavigate } from "react-router-dom"
-import "./nav.css"
-import Nav from "./Nav"
+import React from "react";
+import { getDepartmentByValue } from "../../../data/departments";
+import DepartmentPrograms from "./DepartmentPrograms";
 
-const ZoeStreams = () => {
+const ZoeStreams = () => (
+  <DepartmentPrograms department={getDepartmentByValue("zoestreams")} />
+);
 
-  return (
-    <div className="dept-page child-theme">
-      
-      <Nav />
-
-      {/* HERO */}
-      <section className="dept-hero">
-        <h1>Coming Soon</h1>
-      </section>
-
-    </div>
-  )
-}
-
-export default ZoeStreams
+export default ZoeStreams;

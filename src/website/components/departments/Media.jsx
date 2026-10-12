@@ -1,22 +1,9 @@
-import React from "react"
-import { useNavigate } from "react-router-dom"
-import "./nav.css"
-import Nav from "./Nav"
+import React from "react";
+import { getDepartmentByValue } from "../../../data/departments";
+import DepartmentPrograms from "./DepartmentPrograms";
 
-const Media = () => {
+const Media = () => (
+  <DepartmentPrograms department={getDepartmentByValue("media")} />
+);
 
-  return (
-    <div className="dept-page child-theme">
-      
-      <Nav />
-
-      {/* HERO */}
-      <section className="dept-hero">
-        <h1>Coming Soon</h1>
-      </section>
-
-    </div>
-  )
-}
-
-export default Media
+export default Media;

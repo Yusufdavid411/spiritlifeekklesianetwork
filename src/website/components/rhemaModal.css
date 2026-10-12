@@ -78,6 +78,25 @@
   margin-bottom: 1rem;
 }
 
+.modal-engagement {
+  margin-bottom: 1rem;
+}
+
+.modal-engagement .rhema-engagement,
+.modal-engagement .home-program-engagement {
+  margin-top: 0;
+}
+
+.modal-engagement .rhema-engagement-item,
+.modal-engagement .home-program-engagement-item {
+  color: #04046f;
+}
+
+.modal-engagement .rhema-icon-btn,
+.modal-engagement .home-program-icon {
+  background: #f2edf6;
+}
+
 /* Text */
 .modal-writeup {
   font-size: 0.95rem;

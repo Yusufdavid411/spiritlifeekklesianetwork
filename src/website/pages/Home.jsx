@@ -7,7 +7,20 @@
 // ============================================
 
 import React, { useEffect, useRef, useState } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faEye, faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons"
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons"
 import { events as eventsAPI, rhemaMeditations } from "../../services/api"
+import {
+  getProgramEventAnalytics,
+  getRhemaAnalytics,
+  hasLikedProgramEvent,
+  hasLikedRhema,
+  likeProgramEventOnce,
+  likeRhemaOnce,
+  recordProgramEventWatch,
+  recordRhemaView,
+} from "../../services/engagementAnalytics"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import TypingAnimation from "../components/TypingAnimation"
@@ -85,16 +98,64 @@ const EventMeta = ({ event }) => (
   </div>
 )
 
+const formatNumber = (value) => new Intl.NumberFormat("en").format(value || 0)
+
+const getYoutubeId = (url) => {
+  if (!url) return null
+
+  if (url.includes("shorts")) {
+    return url.split("shorts/")[1]?.split("?")[0]
+  }
+
+  if (url.includes("watch?v=")) {
+    return url.split("watch?v=")[1]?.split("&")[0]
+  }
+
+  if (url.includes("youtu.be/")) {
+    return url.split("youtu.be/")[1]?.split("?")[0]
+  }
+
+  if (url.includes("embed/")) {
+    return url.split("embed/")[1]?.split("?")[0]
+  }
+
+  return null
+}
+
+const getProgramImage = (item) => {
+  const videoId = getYoutubeId(item.videoUrl)
+
+  if (videoId) {
+    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+  }
+
+  return item.imageUrl || item.image?.image_url || ""
+}
+
+const getTimestampValue = (value) => {
+  if (value?.seconds) {
+    return value.seconds * 1000
+  }
+
+  if (value) {
+    return new Date(value).getTime()
+  }
+
+  return 0
+}
+
 const Home = () => {
   // EVENTS STATE
   const [events, setEvents] = useState([])
   const [loadingEvents, setLoadingEvents] = useState(true)
   const [activeEvent, setActiveEvent] = useState(null)
+  const viewedProgramKeysRef = useRef(new Set())
 
   // RHEMA STATE
   const [todayRhema, setTodayRhema] = useState(null)
   const [loadingRhema, setLoadingRhema] = useState(true)
   const [activeRhema, setActiveRhema] = useState(null)
+  const viewedHomeRhemaKeysRef = useRef(new Set())
 
   // HERO IMAGE SLIDER
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -163,10 +224,32 @@ const Home = () => {
 
       console.log("Events:", eventsData)
 
-      setEvents(Array.isArray(eventsData) ? eventsData : [])
+      if (Array.isArray(eventsData)) {
+        const apiProgramItems = await Promise.all(
+          eventsData.map(async (event, index) => {
+            const eventId = event.id || `event-${index}`
+            const analytics = await getProgramEventAnalytics(eventId)
+
+            return {
+              ...event,
+              id: eventId,
+              key: `api-event-${eventId}`,
+              source: "api-event",
+              watchCount: analytics.watchCount,
+              likeCount: analytics.likeCount,
+              liked: hasLikedProgramEvent(eventId),
+              sortTime: getTimestampValue(event.start_datetime),
+            }
+          })
+        )
+
+        setEvents(apiProgramItems.sort((a, b) => (b.sortTime || 0) - (a.sortTime || 0)))
+      } else {
+        setEvents([])
+      }
     } catch (err) {
       console.error("Events fetch failed:", err)
-      setEvents([]) // prevent crash
+      setEvents([])
     } finally {
       setLoadingEvents(false)
     }
@@ -179,7 +262,23 @@ const Home = () => {
       const list = response?.data?.rhemaMeditation || []
       const today = new Date().toISOString().split("T")[0]
       const item = list.find(r => r.created_at.startsWith(today)) || list[0]
-      setTodayRhema(item || null)
+
+      if (!item) {
+        setTodayRhema(null)
+        return
+      }
+
+      const rhemaId = item.id || "home-rhema"
+      const analytics = await getRhemaAnalytics(rhemaId)
+
+      setTodayRhema({
+        ...item,
+        id: rhemaId,
+        key: `rhema-${rhemaId}`,
+        viewCount: analytics.viewCount,
+        likeCount: analytics.likeCount,
+        liked: hasLikedRhema(rhemaId),
+      })
     } catch (err) {
       console.error(err)
     } finally {
@@ -208,8 +307,214 @@ const Home = () => {
     ${window.location.origin}`
 
   const getImageUrl = (event) => {
-    return event?.image?.image_url || ""
+    return getProgramImage(event)
   }
+
+  const updateProgramCounter = (key, field) => {
+    setEvents((currentEvents) =>
+      currentEvents.map((event) =>
+        event.key === key ? { ...event, [field]: (event[field] || 0) + 1 } : event
+      )
+    )
+  }
+
+  const updateProgramLiked = (key, liked) => {
+    setEvents((currentEvents) =>
+      currentEvents.map((event) =>
+        event.key === key ? { ...event, liked } : event
+      )
+    )
+  }
+
+  const recordProgramImpression = async (event) => {
+    if (!event || viewedProgramKeysRef.current.has(event.key)) return
+
+    viewedProgramKeysRef.current.add(event.key)
+    try {
+      const counted = await recordProgramEventWatch(event.id, event)
+
+      if (counted) {
+        updateProgramCounter(event.key, "watchCount")
+      }
+    } catch (err) {
+      viewedProgramKeysRef.current.delete(event.key)
+      console.error("Program impression tracking failed:", err)
+    }
+  }
+
+  const openProgram = (event) => {
+    setActiveEvent(event)
+  }
+
+  const likeProgram = async (clickEvent, event) => {
+    clickEvent.stopPropagation()
+
+    if (event.liked) return
+
+    updateProgramLiked(event.key, true)
+
+    try {
+      const liked = await likeProgramEventOnce(event.id, event)
+
+      if (liked) {
+        updateProgramCounter(event.key, "likeCount")
+      }
+    } catch (err) {
+      updateProgramLiked(event.key, false)
+      console.error("Program like failed:", err)
+    }
+  }
+
+  const getActiveProgram = () => {
+    return events.find((event) => event.key === activeEvent?.key) || activeEvent
+  }
+
+  const renderProgramEngagement = (event) => (
+    <div className="home-program-engagement">
+      <div className="home-program-engagement-item">
+        <button
+          aria-label={event.liked ? "Already liked" : "Like this program"}
+          className={`home-program-icon ${event.liked ? "liked" : ""}`}
+          onClick={(clickEvent) => likeProgram(clickEvent, event)}
+          type="button"
+        >
+          <FontAwesomeIcon icon={event.liked ? solidHeart : regularHeart} />
+        </button>
+        <span>{formatNumber(event.likeCount)}</span>
+      </div>
+
+      <div className="home-program-engagement-item">
+        <span className="home-program-icon static">
+          <FontAwesomeIcon icon={faEye} />
+        </span>
+        <span>{formatNumber(event.watchCount)}</span>
+      </div>
+    </div>
+  )
+
+  const updateHomeRhemaCounter = (field) => {
+    setTodayRhema((currentRhema) =>
+      currentRhema
+        ? { ...currentRhema, [field]: (currentRhema[field] || 0) + 1 }
+        : currentRhema
+    )
+  }
+
+  const updateHomeRhemaLiked = (liked) => {
+    setTodayRhema((currentRhema) =>
+      currentRhema ? { ...currentRhema, liked } : currentRhema
+    )
+  }
+
+  const recordHomeRhemaImpression = async (rhema) => {
+    if (!rhema || viewedHomeRhemaKeysRef.current.has(rhema.key)) return
+
+    viewedHomeRhemaKeysRef.current.add(rhema.key)
+
+    try {
+      const counted = await recordRhemaView(rhema.id, rhema)
+
+      if (counted) {
+        updateHomeRhemaCounter("viewCount")
+      }
+    } catch (err) {
+      viewedHomeRhemaKeysRef.current.delete(rhema.key)
+      console.error("Home Rhema view tracking failed:", err)
+    }
+  }
+
+  const likeHomeRhema = async (event) => {
+    event.stopPropagation()
+
+    if (!todayRhema || todayRhema.liked) return
+
+    updateHomeRhemaLiked(true)
+
+    try {
+      const liked = await likeRhemaOnce(todayRhema.id, todayRhema)
+
+      if (liked) {
+        updateHomeRhemaCounter("likeCount")
+      }
+    } catch (err) {
+      updateHomeRhemaLiked(false)
+      console.error("Home Rhema like failed:", err)
+    }
+  }
+
+  const renderHomeRhemaEngagement = (rhema) => (
+    <div className="home-program-engagement">
+      <div className="home-program-engagement-item">
+        <button
+          aria-label={rhema.liked ? "Already liked" : "Like this Rhema"}
+          className={`home-program-icon ${rhema.liked ? "liked" : ""}`}
+          onClick={likeHomeRhema}
+          type="button"
+        >
+          <FontAwesomeIcon icon={rhema.liked ? solidHeart : regularHeart} />
+        </button>
+        <span>{formatNumber(rhema.likeCount)}</span>
+      </div>
+
+      <div className="home-program-engagement-item">
+        <span className="home-program-icon static">
+          <FontAwesomeIcon icon={faEye} />
+        </span>
+        <span>{formatNumber(rhema.viewCount)}</span>
+      </div>
+    </div>
+  )
+
+  useEffect(() => {
+    if (loadingEvents || events.length === 0) return undefined
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return
+
+          const eventKey = entry.target.getAttribute("data-program-event-key")
+          const event = events.find((programEvent) => programEvent.key === eventKey)
+
+          if (event) {
+            recordProgramImpression(event)
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      {
+        threshold: 0.45,
+      }
+    )
+
+    const cards = document.querySelectorAll("[data-program-event-key]")
+    cards.forEach((card) => observer.observe(card))
+
+    return () => observer.disconnect()
+  }, [events, loadingEvents])
+
+  useEffect(() => {
+    if (loadingRhema || !todayRhema) return undefined
+
+    const card = document.querySelector("[data-home-rhema-key]")
+    if (!card) return undefined
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            recordHomeRhemaImpression(todayRhema)
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.45 }
+    )
+
+    observer.observe(card)
+
+    return () => observer.disconnect()
+  }, [loadingRhema, todayRhema])
 
 
   return (
@@ -254,19 +559,25 @@ const Home = () => {
               <div key={i} className="event-skeleton unified-rhema-card" />
             ))}
           </div>
+        ) : events.length === 0 ? (
+          <div className="events-empty-state">
+            <h3>No programs or events uploaded yet</h3>
+            <p>Scheduled programs and events will appear here.</p>
+          </div>
         ) : (
           <div className="events-grid">
             {events.map(event => (
               <div
-                key={event.id}
+                key={event.key}
                 className="unified-rhema-card"
-                onClick={() => setActiveEvent(event)}
+                data-program-event-key={event.key}
+                onClick={() => openProgram(event)}
               >
                 <div className="rhema-image-box small">
                   
-                  {event.image?.image_url ? (
+                  {getProgramImage(event) ? (
                   <img
-                    src={event.image.image_url}
+                    src={getProgramImage(event)}
                     alt={event.title}
                     loading="lazy"
                     onError={(e) => {
@@ -288,6 +599,7 @@ const Home = () => {
                 <div className="rhema-text">
                   <h4>{event.title}</h4>
                   <EventMeta event={event} />
+                  {renderProgramEngagement(event)}
                 </div>
               </div>
             ))}
@@ -307,6 +619,7 @@ const Home = () => {
         ) : todayRhema && (
           <div
             className="unified-rhema-cardhome"
+            data-home-rhema-key={todayRhema.key}
             onClick={() => setActiveRhema(todayRhema)}
           >
             <div className="rhema-image-box">
@@ -319,6 +632,8 @@ const Home = () => {
                 {new Date(todayRhema.created_at).toDateString()}
               </p>
               <p>{todayRhema.content?.substring(0, 180)}...</p>
+
+              {renderHomeRhemaEngagement(todayRhema)}
 
               <a
                 href="/rhema-meditations"
@@ -364,36 +679,38 @@ const Home = () => {
             </button>
 
             <div className="rhema-image-box">
-              {activeEvent.image?.image_url ? (
+              {getProgramImage(getActiveProgram()) ? (
                 <img
-                  src={activeEvent.image.image_url}
-                  alt={activeEvent.title}
+                  src={getProgramImage(getActiveProgram())}
+                  alt={getActiveProgram().title}
                   onError={(e) => {
                     e.target.style.display = "none"
                     const fallback = document.createElement("div")
                     fallback.className = "image-fallback"
-                    fallback.innerText = activeEvent.title
+                    fallback.innerText = getActiveProgram().title
                     e.target.parentNode.appendChild(fallback)
                   }}
                 />
               ) : (
                 <div className="image-fallback">
-                  {activeEvent.title}
+                  {getActiveProgram().title}
                 </div>
               )}
             </div>
 
-            <h3>{activeEvent.title}</h3>
-            <EventMeta event={activeEvent} />
+            <h3>{getActiveProgram().title}</h3>
+            <EventMeta event={getActiveProgram()} />
+
+            {renderProgramEngagement(getActiveProgram())}
 
             <div className="modal-actions">
               <button
                 className="btn-download"
                 onClick={() =>
-                  activeEvent.image?.image_url &&
+                  getProgramImage(getActiveProgram()) &&
                   downloadImage(
-                    activeEvent.image.image_url,
-                    activeEvent.title
+                    getProgramImage(getActiveProgram()),
+                    getActiveProgram().title
                   )
                 }
               >
@@ -403,7 +720,7 @@ const Home = () => {
               <div className="share-buttons">
                 <a
                   href={`https://wa.me/?text=${encodeURIComponent(
-                    shareText(activeEvent)
+                    shareText(getActiveProgram())
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -413,7 +730,7 @@ const Home = () => {
 
                 <a
                   href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                    activeEvent.image.image_url
+                    getProgramImage(getActiveProgram())
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -423,7 +740,7 @@ const Home = () => {
 
                 <a
                   href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
-                    shareText(activeEvent)
+                    shareText(getActiveProgram())
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -439,6 +756,7 @@ const Home = () => {
       {/* ================= RHEMA MODAL ================= */}
       {activeRhema && (
         <RhemaModal
+          engagement={renderHomeRhemaEngagement(todayRhema || activeRhema)}
           rhema={activeRhema}
           onClose={() => setActiveRhema(null)}
         />

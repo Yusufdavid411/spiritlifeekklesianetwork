@@ -1,6 +1,8 @@
 import React from "react";
 import { db } from "../../firebase/firebaseConfig";
-import { deleteDoc, doc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, writeBatch } from "firebase/firestore";
+
+const formatNumber = (value) => new Intl.NumberFormat("en").format(value || 0);
 
 const PostsList = ({ posts, department, refresh }) => {
   const getYoutubeId = (url) => {
@@ -26,6 +28,14 @@ const PostsList = ({ posts, department, refresh }) => {
 
     if (!confirmDelete) return;
 
+    const likesSnapshot = await getDocs(collection(db, department, id, "likes"));
+    const batch = writeBatch(db);
+
+    likesSnapshot.docs.forEach((likeDocument) => {
+      batch.delete(likeDocument.ref);
+    });
+
+    await batch.commit();
     await deleteDoc(doc(db, department, id));
     refresh();
   };
@@ -55,18 +65,33 @@ const PostsList = ({ posts, department, refresh }) => {
                   allowFullScreen
                 />
               </div>
+            ) : post.imageUrl ? (
+              <div className="admin-image-preview">
+                <img src={post.imageUrl} alt={post.title || "Post preview"} />
+              </div>
             ) : (
               <div className="admin-no-video">
-                <p>No video preview available</p>
+                <p>No media preview available</p>
               </div>
             )}
 
             <div className="admin-post-info">
               <h4>{post.title || "Untitled Post"}</h4>
 
+              <div className="admin-post-metrics">
+                <span>{formatNumber(post.watchCount)} views</span>
+                <span>{formatNumber(post.likeCount)} likes</span>
+              </div>
+
               {post.videoUrl && (
                 <a href={post.videoUrl} target="_blank" rel="noreferrer">
                   Open on YouTube
+                </a>
+              )}
+
+              {post.imageUrl && (
+                <a href={post.imageUrl} target="_blank" rel="noreferrer">
+                  Open image
                 </a>
               )}
 

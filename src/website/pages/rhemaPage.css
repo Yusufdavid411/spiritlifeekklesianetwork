@@ -94,6 +94,56 @@
   line-height: 1.7;
 }
 
+.rhema-engagement {
+  display: flex;
+  gap: 14px;
+  margin-top: 1rem;
+}
+
+.rhema-engagement-item {
+  align-items: center;
+  color: #ffffff;
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+}
+
+.rhema-engagement-item span:last-child {
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.rhema-icon-btn {
+  align-items: center;
+  background: #ffffff;
+  border: 0;
+  border-radius: 50%;
+  color: #15151f;
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  height: 42px;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+  width: 42px;
+}
+
+.rhema-icon-btn:hover {
+  transform: translateY(-2px);
+}
+
+.rhema-icon-btn.liked {
+  color: #e83f6f;
+}
+
+.rhema-icon-btn.static {
+  cursor: default;
+}
+
+.rhema-icon-btn.static:hover {
+  transform: none;
+}
+
 /* ============================================
    TODAY RHEMA
 ============================================ */

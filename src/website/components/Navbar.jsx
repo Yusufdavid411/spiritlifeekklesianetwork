@@ -1,117 +1,119 @@
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import "./navbar.css"
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { departments } from "../../data/departments";
+import "./navbar.css";
+
+const navLinks = [
+  { label: "Home", path: "/" },
+  { label: "About", path: "/about" },
+  { label: "Sermons", path: "/sermons" },
+  { label: "Rhema Meditation", path: "/rhema-meditations" },
+];
 
 const Navbar = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [departmentsOpen, setDepartmentsOpen] = useState(false)
-  const navigate = useNavigate()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [departmentsOpen, setDepartmentsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  // ✅ FIXED: Department paths now match App.jsx routes
-  const departments = [
-    { name: "Zoe Streams (Music)", path: "/departments/zoestreams" },
-    { name: "Spiritlife Kingdom Parables (Drama)", path: "/departments/drama" },
-    { name: "The Publishers (Media)", path: "/departments/media" },
-    { name: "Evangelism", path: "/departments/evan" },
-    { name: "Children", path: "/departments/child" },
-    { name: "Prayer", path: "/departments/prayer" },
-    { name: "Ushering/Sanctuary", path: "/departments/ushering" },
-    { name: "Protocol", path: "/departments/protocol" },
-    { name: "Welfare", path: "/departments/welfare" },
-  ]
+  const closeMenus = () => {
+    setMobileMenuOpen(false);
+    setDepartmentsOpen(false);
+  };
 
   const handleNavClick = (path) => {
-    navigate(path)
-    setMobileMenuOpen(false)
-    setDepartmentsOpen(false)
-  }
+    navigate(path);
+    closeMenus();
+  };
 
-  const toggleDepartments = (e) => {
-    e.stopPropagation()
-    setDepartmentsOpen(!departmentsOpen)
-  }
+  const isActive = (path) => {
+    if (path === "/") {
+      return location.pathname === "/";
+    }
+
+    return location.pathname.startsWith(path);
+  };
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
+        <button className="navbar-logo" onClick={() => handleNavClick("/")} type="button">
+          <img src="/img/logo.png" alt="SpiritLife Ekklesia Network" />
+        </button>
 
-        {/* Logo */}
-        <div className="navbar-logo">
-          <img src="/img/logo.png" alt="Spirit Life Ekklesia Network Logo" />
-        </div>
-
-        {/* Hamburger Menu Icon (Mobile) */}
-        <div
+        <button
+          aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           className={`hamburger ${mobileMenuOpen ? "active" : ""}`}
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          onClick={() => setMobileMenuOpen((isOpen) => !isOpen)}
+          type="button"
         >
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+          <span />
+          <span />
+          <span />
+        </button>
 
-        {/* Navigation Menu */}
-        <ul className={`nav-menu ${mobileMenuOpen ? "active" : ""}`}>
+        <div className={`nav-menu ${mobileMenuOpen ? "active" : ""}`}>
+          <div className="nav-links">
+            {navLinks.map((link) => (
+              <button
+                className={`nav-link ${isActive(link.path) ? "active" : ""}`}
+                key={link.path}
+                onClick={() => handleNavClick(link.path)}
+                type="button"
+              >
+                {link.label}
+              </button>
+            ))}
 
-          <li className="nav-item">
-            <a className="nav-link" onClick={() => handleNavClick("/")}>
-              Home
-            </a>
-          </li>
-
-          <li className="nav-item">
-            <a className="nav-link" onClick={() => handleNavClick("/about")}>
-              About
-            </a>
-          </li>
-
-          {/* Departments Dropdown */}
-          <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" onClick={toggleDepartments}>
-              Departments
-              <span className={`dropdown-icon ${departmentsOpen ? "open" : ""}`}>
-                ▼
-              </span>
-            </a>
-
-            {departmentsOpen && (
-              <ul className="dropdown-menu">
-                {departments.map((dept, index) => (
-                  <li key={index} className="dropdown-item">
-                    <a onClick={() => handleNavClick(dept.path)}>
-                      {dept.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-
-          <li className="nav-item">
-            <a className="nav-link" onClick={() => handleNavClick("/sermons")}>
-              Sermons
-            </a>
-          </li>
-
-          <li className="nav-item">
-            <a
-              className="nav-link"
-              onClick={() => handleNavClick("/rhema-meditations")}
+            <div
+              className={`nav-dropdown ${departmentsOpen ? "open" : ""}`}
+              onMouseEnter={() => setDepartmentsOpen(true)}
+              onMouseLeave={() => setDepartmentsOpen(false)}
             >
-              Rhema Meditation
-            </a>
-          </li>
+              <button
+                className={`nav-link dropdown-toggle ${
+                  location.pathname.startsWith("/departments") ? "active" : ""
+                }`}
+                onClick={() => setDepartmentsOpen((isOpen) => !isOpen)}
+                type="button"
+              >
+                Departments
+                <FontAwesomeIcon icon={faChevronDown} />
+              </button>
 
-          <li className="nav-item">
-            <a className="nav-link contact" href="tel:+2349094600075">
-              📞 Contact Us
-            </a>
-          </li>
+              <div className="departments-menu">
+                <div className="departments-menu-intro">
+                  <span>Ministry Arms</span>
+                  <strong>Explore Departments</strong>
+                </div>
 
-        </ul>
+                <div className="departments-grid">
+                  {departments.map((department) => (
+                    <button
+                      className="department-nav-card"
+                      key={department.value}
+                      onClick={() => handleNavClick(`/departments/${department.value}`)}
+                      type="button"
+                    >
+                      <span>{department.label}</span>
+                      <small>{department.badge}</small>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a className="nav-contact" href="tel:+2349094600075" onClick={closeMenus}>
+            <FontAwesomeIcon icon={faPhone} />
+            Contact Us
+          </a>
+        </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

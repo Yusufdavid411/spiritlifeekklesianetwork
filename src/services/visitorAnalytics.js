@@ -5,13 +5,14 @@ import {
   increment,
   runTransaction,
   serverTimestamp,
-  setDoc,
 } from "firebase/firestore";
 
 const VISITOR_ID_KEY = "sen_visitor_id";
 const LAST_TRACKED_DATE_KEY = "sen_last_tracked_date";
 const DAILY_VISITORS_COLLECTION = "visitorAnalyticsDaily";
 const VISITOR_LOG_COLLECTION = "visitorAnalyticsLogs";
+const PAGE_ANALYTICS_COLLECTION = "pageAnalytics";
+const PAGE_ANALYTICS_LOG_COLLECTION = "pageAnalyticsLogs";
 
 export const getLocalDateKey = (date = new Date()) => {
   const year = date.getFullYear();
@@ -39,6 +40,15 @@ const getVisitorId = () => {
   const visitorId = createVisitorId();
   localStorage.setItem(VISITOR_ID_KEY, visitorId);
   return visitorId;
+};
+
+const getPageId = (pathname) => {
+  const cleanPath = pathname || "/";
+
+  return cleanPath
+    .replace(/^\/+/, "")
+    .replace(/\/+$/, "")
+    .replace(/[^a-zA-Z0-9_-]/g, "_") || "home";
 };
 
 export const trackDailyVisitor = async (pathname = window.location.pathname) => {
@@ -91,17 +101,51 @@ export const recordPageView = async (pathname = window.location.pathname) => {
   }
 
   const dateKey = getLocalDateKey();
+  const visitorId = getVisitorId();
+  const pageId = getPageId(pathname);
   const dailyDocRef = doc(db, DAILY_VISITORS_COLLECTION, dateKey);
-
-  await setDoc(
-    dailyDocRef,
-    {
-      date: dateKey,
-      pageViews: increment(1),
-      updatedAt: serverTimestamp(),
-    },
-    { merge: true }
+  const pageDocRef = doc(db, PAGE_ANALYTICS_COLLECTION, pageId);
+  const pageVisitorLogRef = doc(
+    db,
+    PAGE_ANALYTICS_LOG_COLLECTION,
+    `${pageId}_${visitorId}`
   );
+
+  await runTransaction(db, async (transaction) => {
+    const pageVisitorLog = await transaction.get(pageVisitorLogRef);
+    const isNewPageVisitor = !pageVisitorLog.exists();
+
+    if (isNewPageVisitor) {
+      transaction.set(pageVisitorLogRef, {
+        pageId,
+        pathname,
+        visitorId,
+        createdAt: serverTimestamp(),
+      });
+    }
+
+    transaction.set(
+      dailyDocRef,
+      {
+        date: dateKey,
+        pageViews: increment(1),
+        updatedAt: serverTimestamp(),
+      },
+      { merge: true }
+    );
+
+    transaction.set(
+      pageDocRef,
+      {
+        pageId,
+        pathname,
+        pageViews: increment(1),
+        visitors: isNewPageVisitor ? increment(1) : increment(0),
+        updatedAt: serverTimestamp(),
+      },
+      { merge: true }
+    );
+  });
 };
 
 export const getDailyVisitorCount = async (dateKey) => {

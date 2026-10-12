@@ -7,7 +7,7 @@
 import React from "react"
 import "./rhemaModal.css"
 
-const RhemaModal = ({ rhema, onClose }) => {
+const RhemaModal = ({ engagement, rhema, onClose }) => {
 
   const getImageUrl = () => {
     return rhema?.image?.image_url || ""
@@ -55,6 +55,8 @@ ${window.location.origin}
         <p className="modal-date">
           {new Date(rhema.created_at).toDateString()}
         </p>
+
+        {engagement && <div className="modal-engagement">{engagement}</div>}
 
         <div className="modal-writeup">{rhema.content}</div>
 

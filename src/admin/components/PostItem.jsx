@@ -1,12 +1,20 @@
 import React from "react";
 import { db } from "../../firebase/firebaseConfig";
-import { deleteDoc, doc } from "firebase/firestore";
+import { collection, deleteDoc, doc, getDocs, writeBatch } from "firebase/firestore";
 import "./postItem.css";
 
 const PostItem = ({ post, department, refresh }) => {
 
   const deletePost = async () => {
 
+    const likesSnapshot = await getDocs(collection(db, department, post.id, "likes"));
+    const batch = writeBatch(db);
+
+    likesSnapshot.docs.forEach((likeDocument) => {
+      batch.delete(likeDocument.ref);
+    });
+
+    await batch.commit();
     await deleteDoc(doc(db, department, post.id));
 
     refresh();

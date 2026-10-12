@@ -1,22 +1,9 @@
-import React from "react"
-import { useNavigate } from "react-router-dom"
-import Nav from "./Nav";
-import "./child.css"
+import React from "react";
+import { getDepartmentByValue } from "../../../data/departments";
+import DepartmentPrograms from "./DepartmentPrograms";
 
-const Child = () => {
+const Child = () => (
+  <DepartmentPrograms department={getDepartmentByValue("child")} />
+);
 
-  return (
-    <div className="dept-page child-theme">
-
-      <Nav />
-
-      {/* HERO */}
-      <section className="dept-hero">
-        <h1>Children Ministry</h1>
-      </section>
-
-    </div>
-  )
-}
-
-export default Child
+export default Child;

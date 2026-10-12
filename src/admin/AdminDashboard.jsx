@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { auth, db } from "../firebase/firebaseConfig";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, orderBy, query } from "firebase/firestore";
 
 import PostForm from "./components/PostForm";
 import PostsList from "./components/PostsList";
+import { departments } from "../data/departments";
 
 import "./admin.css";
 
@@ -167,17 +168,81 @@ const VisitorAnalytics = ({ records }) => {
   );
 };
 
-const departments = [
-  { label: "Drama", value: "drama" },
-  { label: "Evangelism", value: "evan" },
-  { label: "Children", value: "child" },
-  { label: "Media", value: "media" },
-  { label: "Prayer", value: "prayer" },
-  { label: "Protocol", value: "protocol" },
-  { label: "Ushering", value: "ushering" },
-  { label: "Welfare", value: "welfare" },
-  { label: "Zoe Streams", value: "zoestreams" },
-];
+const getDepartmentPageId = (departmentValue) => `departments_${departmentValue}`;
+
+const DepartmentAnalytics = ({ stats, selectedDepartment }) => {
+  const selectedStats =
+    stats.find((department) => department.value === selectedDepartment) || stats[0];
+
+  if (!selectedStats) {
+    return null;
+  }
+
+  return (
+    <section className="department-analytics">
+      <div className="analytics-heading">
+        <div>
+          <span>Programs & Events</span>
+          <h3>Department Analytics</h3>
+        </div>
+        <p>Page visits, upload views, and likes for every department.</p>
+      </div>
+
+      <div className="department-focus-card">
+        <div>
+          <span>Selected Department</span>
+          <h4>{selectedStats.label}</h4>
+          <p>
+            Exact page analysis for /departments/{selectedStats.value}, plus the
+            social engagement from its uploaded programs.
+          </p>
+        </div>
+
+        <div className="department-focus-metrics">
+          <strong>{formatNumber(selectedStats.pageVisitors)} page visitors</strong>
+          <strong>{formatNumber(selectedStats.pageViews)} page views</strong>
+          <strong>{formatNumber(selectedStats.watches)} item views</strong>
+          <strong>{formatNumber(selectedStats.likes)} likes</strong>
+        </div>
+      </div>
+
+      <div className="department-analytics-grid">
+        {stats.map((department) => (
+          <article
+            className={`department-analytics-card ${
+              department.value === selectedDepartment ? "active" : ""
+            }`}
+            key={department.value}
+          >
+            <div>
+              <span>{department.label}</span>
+              <h4>{formatNumber(department.count)} uploads</h4>
+            </div>
+
+            <div className="department-mini-metrics">
+              <p>
+                <strong>{formatNumber(department.pageVisitors)}</strong>
+                Page visitors
+              </p>
+              <p>
+                <strong>{formatNumber(department.pageViews)}</strong>
+                Page views
+              </p>
+              <p>
+                <strong>{formatNumber(department.watches)}</strong>
+                Item views
+              </p>
+              <p>
+                <strong>{formatNumber(department.likes)}</strong>
+                Likes
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+};
 
 const AdminDashboard = () => {
   const [email, setEmail] = useState("");
@@ -190,6 +255,19 @@ const AdminDashboard = () => {
   const [departmentStats, setDepartmentStats] = useState([]);
   const [totalPosts, setTotalPosts] = useState(0);
   const [visitorRecords, setVisitorRecords] = useState([]);
+
+  const engagementTotals = useMemo(
+    () =>
+      departmentStats.reduce(
+        (totals, dept) => ({
+          watches: totals.watches + (dept.watches || 0),
+          likes: totals.likes + (dept.likes || 0),
+          pageVisitors: totals.pageVisitors + (dept.pageVisitors || 0),
+        }),
+        { watches: 0, likes: 0, pageVisitors: 0 }
+      ),
+    [departmentStats]
+  );
 
   // ================= LOGIN =================
 
@@ -232,12 +310,33 @@ const AdminDashboard = () => {
     const stats = await Promise.all(
       departments.map(async (dept) => {
         const snapshot = await getDocs(collection(db, dept.value));
+        const pageAnalyticsSnapshot = await getDoc(
+          doc(db, "pageAnalytics", getDepartmentPageId(dept.value))
+        );
+        const pageAnalytics = pageAnalyticsSnapshot.exists()
+          ? pageAnalyticsSnapshot.data()
+          : {};
+        const engagement = snapshot.docs.reduce(
+          (totals, postDocument) => {
+            const post = postDocument.data();
+
+            return {
+              watches: totals.watches + (post.watchCount || 0),
+              likes: totals.likes + (post.likeCount || 0),
+            };
+          },
+          { watches: 0, likes: 0 }
+        );
 
         total += snapshot.size;
 
         return {
           ...dept,
           count: snapshot.size,
+          watches: engagement.watches,
+          likes: engagement.likes,
+          pageVisitors: pageAnalytics.visitors || 0,
+          pageViews: pageAnalytics.pageViews || 0,
         };
       })
     );
@@ -326,16 +425,38 @@ const AdminDashboard = () => {
           <p>All department posts</p>
         </div>
 
+        <div className="summary-card">
+          <span>Total Item Views</span>
+          <h3>{formatNumber(engagementTotals.watches)}</h3>
+          <p>Program opens and video watches</p>
+        </div>
+
+        <div className="summary-card">
+          <span>Total Likes</span>
+          <h3>{formatNumber(engagementTotals.likes)}</h3>
+          <p>One like per device</p>
+        </div>
+
+        <div className="summary-card">
+          <span>Department Visitors</span>
+          <h3>{formatNumber(engagementTotals.pageVisitors)}</h3>
+          <p>Unique page visitors</p>
+        </div>
+
         {departmentStats.map((dept) => (
           <div className="summary-card" key={dept.value}>
             <span>{dept.label}</span>
             <h3>{dept.count}</h3>
-            <p>Uploaded posts</p>
+            <p>
+              {formatNumber(dept.watches)} views / {formatNumber(dept.likes)} likes
+            </p>
           </div>
         ))}
       </section>
 
       <VisitorAnalytics records={visitorRecords} />
+
+      <DepartmentAnalytics stats={departmentStats} selectedDepartment={department} />
 
       <section className="admin-control-box">
         <div>
