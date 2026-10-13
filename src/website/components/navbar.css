@@ -286,26 +286,50 @@
 
   .nav-menu {
     align-items: stretch;
+    align-content: start;
     background: #14001f;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.26);
     display: none;
     gap: 14px;
+    height: calc(100dvh - 78px);
+    max-height: none;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     left: 0;
-    padding: 18px;
-    position: absolute;
+    padding: 14px 14px max(28px, env(safe-area-inset-bottom));
+    position: fixed;
     right: 0;
     top: 78px;
+    scrollbar-color: #c084fc #1b0026;
+    scrollbar-width: thin;
+  }
+
+  .nav-menu::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .nav-menu::-webkit-scrollbar-track {
+    background: #1b0026;
+  }
+
+  .nav-menu::-webkit-scrollbar-thumb {
+    background: #c084fc;
+    border-radius: 999px;
   }
 
   .nav-menu.active {
     display: grid;
+    grid-auto-rows: max-content;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .nav-links {
     align-items: stretch;
     display: grid;
     gap: 8px;
+    min-height: 0;
   }
 
   .nav-link,
@@ -319,19 +343,34 @@
   .nav-dropdown {
     display: grid;
     gap: 8px;
+    min-height: 0;
   }
 
   .departments-menu {
+    background: #ffffff;
+    border: 0;
+    border-radius: 0;
+    bottom: 0;
     box-shadow: none;
     display: none;
-    left: auto;
+    gap: 14px;
+    grid-template-rows: auto 1fr;
+    left: 0;
+    max-height: none;
     min-width: 0;
-    max-height: 58vh;
     opacity: 1;
-    padding: 12px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: 14px 14px max(28px, env(safe-area-inset-bottom));
     pointer-events: auto;
-    position: static;
+    position: fixed;
+    right: 0;
+    top: 78px;
     transform: none;
+    scrollbar-color: #c084fc #f7f3fa;
+    scrollbar-width: thin;
+    z-index: 1001;
   }
 
   .nav-dropdown.open .departments-menu {
@@ -339,11 +378,40 @@
     transform: none;
   }
 
+  .departments-menu::before {
+    display: none;
+  }
+
   .departments-grid {
-    grid-template-columns: 1fr;
+    gap: 8px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .departments-menu-intro {
     padding: 14px;
+    position: static;
+  }
+
+  .departments-menu-intro strong {
+    font-size: 1.08rem;
+  }
+
+  .department-nav-card {
+    min-height: 68px;
+    padding: 11px;
+  }
+
+  .department-nav-card span {
+    font-size: 0.86rem;
+  }
+
+  .department-nav-card small {
+    font-size: 0.68rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .departments-grid {
+    grid-template-columns: 1fr;
   }
 }

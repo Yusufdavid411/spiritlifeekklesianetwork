@@ -28,6 +28,16 @@ const Navbar = () => {
     closeMenus();
   };
 
+  const handleMobileToggle = () => {
+    setMobileMenuOpen((isOpen) => {
+      if (isOpen) {
+        setDepartmentsOpen(false);
+      }
+
+      return !isOpen;
+    });
+  };
+
   const isActive = (path) => {
     if (path === "/") {
       return location.pathname === "/";
@@ -46,7 +56,7 @@ const Navbar = () => {
         <button
           aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           className={`hamburger ${mobileMenuOpen ? "active" : ""}`}
-          onClick={() => setMobileMenuOpen((isOpen) => !isOpen)}
+          onClick={handleMobileToggle}
           type="button"
         >
           <span />
@@ -67,12 +77,9 @@ const Navbar = () => {
               </button>
             ))}
 
-            <div
-              className={`nav-dropdown ${departmentsOpen ? "open" : ""}`}
-              onMouseEnter={() => setDepartmentsOpen(true)}
-              onMouseLeave={() => setDepartmentsOpen(false)}
-            >
+            <div className={`nav-dropdown ${departmentsOpen ? "open" : ""}`}>
               <button
+                aria-expanded={departmentsOpen}
                 className={`nav-link dropdown-toggle ${
                   location.pathname.startsWith("/departments") ? "active" : ""
                 }`}
